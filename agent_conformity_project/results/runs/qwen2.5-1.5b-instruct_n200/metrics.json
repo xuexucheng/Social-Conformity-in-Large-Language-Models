@@ -1,0 +1,19 @@
+{
+  "run_name": "qwen2.5-1.5b-instruct_n200",
+  "clean": {
+    "total": 200,
+    "clean_accuracy": 0.69
+  },
+  "attack": {
+    "total": 1000,
+    "attack_accuracy": 0.464,
+    "conformity_rate": 0.397,
+    "wrong_conformity_rate": 0.238,
+    "beneficial_revision_rate": 0.034
+  },
+  "defense": {
+    "total": 1000,
+    "defense_accuracy": 0.691,
+    "defense_recovery_rate": 1.0
+  }
+}
