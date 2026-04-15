@@ -4,10 +4,13 @@ import shutil
 
 from src.config import RESULT_DIR, RUN_DIR, RUN_NAME
 from src.metrics import (
+    build_attack_comparison,
+    build_defense_comparison,
     compute_clean_metrics,
     compute_attack_metrics,
     compute_defense_metrics,
 )
+from src.social_experiment import INPUT_MODES
 
 
 def load_jsonl(path):
@@ -27,18 +30,22 @@ def main():
     os.makedirs(RUN_DIR, exist_ok=True)
 
     clean_path = os.path.join(RESULT_DIR, "results_clean.jsonl")
-    attack_path = os.path.join(RESULT_DIR, "results_attack.jsonl")
-    defense_path = os.path.join(RESULT_DIR, "results_defense.jsonl")
-
     clean_rows = load_jsonl(clean_path)
-    attack_rows = load_jsonl(attack_path)
-    defense_rows = load_jsonl(defense_path)
+    attack_metrics = {}
+    defense_metrics = {}
+    for input_mode in INPUT_MODES:
+        attack_path = os.path.join(RESULT_DIR, f"results_attack_{input_mode}.jsonl")
+        defense_path = os.path.join(RESULT_DIR, f"results_defense_{input_mode}.jsonl")
+        attack_metrics[input_mode] = compute_attack_metrics(load_jsonl(attack_path))
+        defense_metrics[input_mode] = compute_defense_metrics(load_jsonl(defense_path))
 
     metrics = {
         "run_name": RUN_NAME,
         "clean": compute_clean_metrics(clean_rows),
-        "attack": compute_attack_metrics(attack_rows),
-        "defense": compute_defense_metrics(defense_rows),
+        "attack": attack_metrics,
+        "attack_comparison": build_attack_comparison(attack_metrics),
+        "defense": defense_metrics,
+        "defense_comparison": build_defense_comparison(defense_metrics),
     }
 
     latest_metrics_path = os.path.join(RESULT_DIR, "metrics.json")

@@ -67,3 +67,41 @@ def compute_defense_metrics(rows):
         "defense_accuracy": safe_div(defense_correct, total),
         "defense_recovery_rate": safe_div(recoveries, recoverable),
     }
+
+
+def build_attack_comparison(metrics_by_mode):
+    first = metrics_by_mode.get("single_input")
+    second = metrics_by_mode.get("sequential_input")
+    if not first or not second:
+        return {}
+
+    return {
+        "conformity_rate_delta_sequential_minus_single": (
+            second["conformity_rate"] - first["conformity_rate"]
+        ),
+        "wrong_conformity_rate_delta_sequential_minus_single": (
+            second["wrong_conformity_rate"] - first["wrong_conformity_rate"]
+        ),
+        "attack_accuracy_delta_sequential_minus_single": (
+            second["attack_accuracy"] - first["attack_accuracy"]
+        ),
+        "beneficial_revision_rate_delta_sequential_minus_single": (
+            second["beneficial_revision_rate"] - first["beneficial_revision_rate"]
+        ),
+    }
+
+
+def build_defense_comparison(metrics_by_mode):
+    first = metrics_by_mode.get("single_input")
+    second = metrics_by_mode.get("sequential_input")
+    if not first or not second:
+        return {}
+
+    return {
+        "defense_accuracy_delta_sequential_minus_single": (
+            second["defense_accuracy"] - first["defense_accuracy"]
+        ),
+        "defense_recovery_rate_delta_sequential_minus_single": (
+            second["defense_recovery_rate"] - first["defense_recovery_rate"]
+        ),
+    }

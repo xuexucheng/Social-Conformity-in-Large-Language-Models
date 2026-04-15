@@ -9,7 +9,7 @@ DATA_SPLIT = os.getenv("DATA_SPLIT", "validation")
 DATA_PATH = os.getenv("DATA_PATH", "data/dataset.json")
 RESULT_DIR = os.getenv("RESULT_DIR", "results")
 
-N_SAMPLES = int(os.getenv("N_SAMPLES", "500"))
+N_SAMPLES = int(os.getenv("N_SAMPLES", "1000"))
 N_ATTACK_AGENTS = int(os.getenv("N_ATTACK_AGENTS", "5"))
 SEED = int(os.getenv("SEED", "42"))
 
