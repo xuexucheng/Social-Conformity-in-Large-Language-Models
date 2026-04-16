@@ -33,3 +33,25 @@ def call_llm(messages):
         return data["choices"][0]["message"]["content"]
     except Exception:
         return ""
+
+
+def call_llm_with_logprobs(messages, max_tokens=1, temperature=0.0, top_logprobs=20):
+    data = post_chat_completion(
+        {
+            "messages": messages,
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+            "logprobs": True,
+            "top_logprobs": top_logprobs,
+        }
+    )
+    if not data:
+        return {"text": "", "top_logprobs": [], "raw": {}}
+
+    try:
+        choice = data["choices"][0]
+        text = choice["message"]["content"]
+        top = choice["logprobs"]["content"][0]["top_logprobs"]
+        return {"text": text, "top_logprobs": top, "raw": data}
+    except Exception:
+        return {"text": "", "top_logprobs": [], "raw": data}
