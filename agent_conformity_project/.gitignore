@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+results/
+data/
+.venv/
+venv/
+env/
+*.log
+results_runs.zip
