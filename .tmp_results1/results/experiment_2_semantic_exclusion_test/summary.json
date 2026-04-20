@@ -1,0 +1,59 @@
+{
+  "experiment_name": "Semantic Exclusion Test",
+  "attack_level": "L3",
+  "group_size": 50,
+  "groups": {
+    "sequential_input": {
+      "far_exclusive": {
+        "total": 50,
+        "conformity_rate": 0.3,
+        "wrong_conformity_rate": 0.18,
+        "change_rate": 0.26,
+        "clean_accuracy": 0.74,
+        "attack_accuracy": 0.56,
+        "avg_exclusion_score": 0.95751426
+      },
+      "near_similar": {
+        "total": 50,
+        "conformity_rate": 0.3,
+        "wrong_conformity_rate": 0.16,
+        "change_rate": 0.26,
+        "clean_accuracy": 0.68,
+        "attack_accuracy": 0.52,
+        "avg_exclusion_score": 0.48864056
+      }
+    },
+    "single_input": {
+      "far_exclusive": {
+        "total": 50,
+        "conformity_rate": 0.98,
+        "wrong_conformity_rate": 0.72,
+        "change_rate": 0.94,
+        "clean_accuracy": 0.74,
+        "attack_accuracy": 0.02,
+        "avg_exclusion_score": 0.95751426
+      },
+      "near_similar": {
+        "total": 50,
+        "conformity_rate": 0.98,
+        "wrong_conformity_rate": 0.66,
+        "change_rate": 0.94,
+        "clean_accuracy": 0.68,
+        "attack_accuracy": 0.02,
+        "avg_exclusion_score": 0.48864056
+      }
+    }
+  },
+  "comparisons": {
+    "sequential_input": {
+      "conformity_rate_gap_far_minus_near": 0.0,
+      "wrong_conformity_rate_gap_far_minus_near": 0.01999999999999999
+    },
+    "single_input": {
+      "conformity_rate_gap_far_minus_near": 0.0,
+      "wrong_conformity_rate_gap_far_minus_near": 0.05999999999999994
+    }
+  },
+  "semantic_backend": "lexical",
+  "semantic_model_name": "sentence-transformers/all-MiniLM-L6-v2"
+}

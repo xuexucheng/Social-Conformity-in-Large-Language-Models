@@ -1,0 +1,26 @@
+[
+  {
+    "input_mode": "sequential_input",
+    "dimension": "input_mode_comparison",
+    "condition_name": "target_consensus_n5",
+    "total": 500,
+    "conformity_rate": 0.264,
+    "wrong_conformity_rate": 0.138,
+    "change_rate": 0.212,
+    "attack_accuracy": 0.6,
+    "avg_target_vote_count": 5.0,
+    "avg_correct_vote_count": 0.0
+  },
+  {
+    "input_mode": "single_input",
+    "dimension": "input_mode_comparison",
+    "condition_name": "target_consensus_n5",
+    "total": 500,
+    "conformity_rate": 0.94,
+    "wrong_conformity_rate": 0.692,
+    "change_rate": 0.886,
+    "attack_accuracy": 0.046,
+    "avg_target_vote_count": 5.0,
+    "avg_correct_vote_count": 0.0
+  }
+]

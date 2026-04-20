@@ -1,0 +1,1001 @@
+id,question,correct_answer,correct_text,target_option,target_text,similarity_score,contradiction_score,antonym_signal,exclusion_score,backend
+1afa02df02c908a558b4036e80242fac,"A revolving door is convenient for two direction travel, but it also serves as a security measure at a what?",A,bank,B,library,0.363636,0.636364,False,0.636364,lexical
+a7ab086045575bb497933726e4e6ad28,What do people aim to do at work?,A,complete job,B,learn from each other,0.30303,0.69697,False,0.69697,lexical
+b8c0a4703079cf661d7261a60a1bcbff,Where would you find magazines along side many other printed works?,B,bookstore,D,train station,0.272727,0.727273,False,0.727273,lexical
+e68fb2448fd74e402aae9982aa76e527,Where are  you likely to find a hamburger?,A,fast food restaurant,C,ground up dead cows,0.25641,0.74359,False,0.74359,lexical
+2435de612dd69f2012b9e40d6af4ce38,James was looking for a good place to buy farmland.  Where might he look?,A,midwest,C,estate,0.461538,0.538462,False,0.538462,lexical
+a4892551cb4beb279653ae52d0de4c89,What island country is ferret popular?,C,great britain,B,north carolina,0.37037,0.62963,False,0.62963,lexical
+118a9093a30695622363455e4d911866,In what Spanish speaking North American country can you get a great cup of coffee?,B,mexico,A,mildred's coffee shop,0.296296,0.703704,False,0.703704,lexical
+05ea49b82e8ec519e82d6633936ab8bf,What do animals do when an enemy is approaching?,D,listen to each other,A,feel pleasure,0.30303,0.69697,False,0.69697,lexical
+c0c07ce781653b2a2c01871ba2bcba93,Reading newspaper one of many ways to practice your what?,A,literacy,E,money bank,0.222222,0.777778,False,0.777778,lexical
+1d24f406b6828492040b405d3f35119c,What do people typically do while playing guitar?,C,singing,A,cry,0.0,1.0,False,1.0,lexical
+57f92025d860e32c4e780c0d51c1c20c,What would vinyl be an odd thing to replace?,E,wallpaper,A,pants,0.285714,0.714286,False,0.714286,lexical
+81eb4b2ee66edd8bc91ee944697c4e9f,"If you want harmony, what is something you should try to do with the world?",D,make peace,A,take time,0.526316,0.473684,False,0.473684,lexical
+d807e7ae60976324920c8d29eb42dad6,Where does a heifer's master live?,A,farm house,C,stockyard,0.210526,0.789474,False,0.789474,lexical
+7ea9f721ffc662918bb0c0937a487f04,Aside from water and nourishment what does your dog need?,D,lots of attention,B,charm,0.090909,0.909091,False,0.909091,lexical
+fc1d33a2301a30214523c12573f81aba,Janet was watching the film because she liked what?,C,being entertained,A,erection,0.4,0.6,False,0.6,lexical
+3b8e1d236f5169b6c833a994d6d9c39a,What are you waiting alongside with when you're in a reception area?,D,people,B,chair,0.0,1.0,False,1.0,lexical
+c5c4166f2ed3c2b3517b79e6848e9ae2,When drinking booze what can you do to stay busy?,D,examine thing,E,suicide,0.1,0.9,False,0.9,lexical
+6dc5b2884737e66543ce65f8dc40c992,A fencing thrust with a sharp sword towards a person would result in what?,E,puncture wound,B,small cuts,0.166667,0.833333,False,0.833333,lexical
+8af63d58cc35061dec38e5448c325988,"Unlike a spider and his many sight seers, people only have what?",E,two eyes,D,feelings,0.375,0.625,False,0.625,lexical
+768fb09deab56046e1565b6a2556ad5c,Where do adults use glue sticks?,D,office,C,at school,0.133333,0.866667,False,0.866667,lexical
+cd639cf3ff82f825ace7dd2b087562bd,What could go on top of wood?,D,carpet,A,lumberyard,0.25,0.75,False,0.75,lexical
+8d79cc5e4eea11f50fab18fdea20fd4f,"The artist was sitting quietly pondering, then suddenly he began to paint when what struck him?",C,inspiration,B,anxiety,0.222222,0.777778,False,0.777778,lexical
+e5ad2184e37ae88b2bf46bf6bc0ed2f4,"Though the thin film seemed fragile, for it's intended purpose it was actually nearly what?",D,indestructible,E,unbreakable,0.4,0.6,False,0.6,lexical
+b8b287b6277fccd4b7c9c72577177328,Where could you find a toilet that only friends can use?,D,apartment,C,stadium,0.25,0.75,False,0.75,lexical
+f646f3e064f06423fc25b98500796cf0,"What is someone who isn't clever, bright, or competent called?",E,stupid,C,dull,0.2,0.8,False,0.8,lexical
+b0f7d7978ac41c465108a92660d70e84,When wildlife reproduce we often refer to what comes out as what?,D,offspring,B,have children,0.181818,0.818182,False,0.818182,lexical
+54075de8b8b89ecef2e4eb4eaee2713d,"The weasel was becoming a problem, it kept getting into the chicken eggs kept in the what?",B,barn,C,public office,0.117647,0.882353,False,0.882353,lexical
+65435b996ce9d1685bebb74b49c1ba7f,Blue read material outside of his comfort zone because he wanted to gain what?,A,new perspective,D,hunger,0.285714,0.714286,False,0.714286,lexical
+9889e5389917d812c09d6e5d382d333d,After he got hired he hoped for success at his what?,B,new job,A,vocation,0.133333,0.866667,False,0.866667,lexical
+a651ffa44ac5febf0aede6748899b981,Committing perjury is a serious what?,B,crime,A,indictment,0.4,0.6,False,0.6,lexical
+bdcfbe2132295d437e4c5701085f19c0,If you are prone to postpone work what will you have to do in order to finish on time?,B,hasten,E,advance,0.307692,0.692308,False,0.692308,lexical
+8d3dc21a53523850ec80771daaa5ff20,James wanted to find an old underground map from the 50s.  Where might he look for one?,A,library,B,subway station,0.095238,0.904762,False,0.904762,lexical
+a80ee7775e934c423012fe98e20ba28b,"Sean was in a rush to get home, but the light turned yellow and he was forced to do what?",E,slow down,C,go slowly,0.444444,0.555556,False,0.555556,lexical
+48a315cfa3ce11f7a9d615bc854331d5,Where would a person be doing when having to wait their turn?,D,stand in line,C,sing,0.352941,0.647059,False,0.647059,lexical
+4acd496cc78d96c2431279a5fd87de7c,"She was always helping at the senior center, it brought her what?",E,happiness,C,feel better,0.1,0.9,False,0.9,lexical
+91e0f4ab62c9d2fd440d73a3f5308d96,"The lock kept the steering wheel from moving, but the thief still took his chances and began to work on the what?",C,ignition switch,A,keep cloesd,0.153846,0.846154,False,0.846154,lexical
+b61e849e44db16a581f0b65e28ab95dc,Who is a police officer likely to work for?,C,city,E,president,0.307692,0.692308,False,0.692308,lexical
+ba6bd1bdef02d0ebfe5370f92365ae18,"If you have leftover cake, where would you put it?",B,refrigerator,A,quandry,0.105263,0.894737,False,0.894737,lexical
+dc55d473c22b04877b11d584f9548194,"A human wants to submerge himself in water, what should he use?",A,whirlpool bath,E,puddle,0.1,0.9,False,0.9,lexical
+113aaea2b1a27a976547f54e531d99bb,Where is a doormat likely to be in front of?,B,front door,A,facade,0.25,0.75,False,0.75,lexical
+ba640b9634ad6b4ad98b17b4f152e562,Bob the lizard lives in a warm place with lots of water.  Where does he probably live?,B,tropical rainforest,D,new mexico,0.206897,0.793103,False,0.793103,lexical
+750ebdf36a0b3b407be0fe2163e3700b,August needed  money because he was afraid that he'd be kicked out of his house.  What did he need money to do?,B,pay bills,D,buy food,0.235294,0.764706,False,0.764706,lexical
+8f01273422a370a8dbda6bf473a395a0,"He needed more information to fix it, so he consulted the what?",E,manual,B,google,0.166667,0.833333,False,0.833333,lexical
+e6586bba9fe96d38792e6e6d4f2703dc,Where can you put a picture frame when it's not hung vertically?,E,table,A,art show,0.153846,0.846154,False,0.846154,lexical
+6e433471d0e2590b8c73ceef275022b1,James knew that he shouldn't have been buying beer for minors.  He didn't even get paid for it.  Why was this bad?,D,broken law,A,lose money,0.3,0.7,False,0.7,lexical
+1bc986f8aea88d6927d8a45367855a94,What is the result of applying for  job?,E,being employed,B,increased workload,0.375,0.625,False,0.625,lexical
+8d1563697d751a364d688d6701ebdb39,What must someone do before they shop?,A,get money,D,go to market,0.285714,0.714286,False,0.714286,lexical
+91f512273a2da7ae796919069b20d6cf,"Because John was first violin, he had to bring something important to work ever day. What did he need to bring to work?",E,violin case,A,music store,0.272727,0.727273,False,0.727273,lexical
+49cda7eedbf63b3f38e59ba72f1ee1f9,What is a place that usually does not have an elevator and that sometimes has a telephone book?,E,house,B,kitchen,0.333333,0.666667,False,0.666667,lexical
+a588407ecaecf0f30c2241c30b470fe2,Who is likely to be excited about a crab?,C,fishmongers,A,fish market,0.545455,0.454545,False,0.454545,lexical
+011096bcfff30fd38046cf9db3a411c5,Where can a human find clothes that aren't pants?,C,dress shop,E,train wreck,0.190476,0.809524,False,0.809524,lexical
+435a728f45d32faa4b3c4553c966fd6b,"If I was getting drunk, and people couldn't understand me, what might I be having?",B,slurred speech,D,forgetfulness,0.148148,0.851852,False,0.851852,lexical
+e953dee48c70159ad879143a319ec607,"When a person is beginning work, what are they building?",D,momentum,E,tiredness,0.235294,0.764706,False,0.764706,lexical
+9c784727afd7176b54764055df7a7927,"A child wants to play, what would they likely want?",C,play tag,D,be dismembered by a chainsaw,0.166667,0.833333,False,0.833333,lexical
+b47d912136e3304cb5e5890b6b879551,Talking to the same person about the same thing over and over again is something someone can what?,D,get tired of,B,friendship,0.181818,0.818182,False,0.818182,lexical
+49b4c9e1bd7946a819e173ce8fa4c7c9,The teacher doesn't tolerate noise during a test in their what?,E,classroom,C,factory,0.25,0.75,False,0.75,lexical
+950af0b765c298960ce3dada66df8db1,"The freeway had no traffic and few buildings, where is it?",B,countryside,D,florida,0.444444,0.555556,False,0.555556,lexical
+63cf1adb5fe302b9867ead8bc8103d0b,Where would you go if you wanted to have fun with a few people?,D,friend's house,B,good,0.111111,0.888889,False,0.888889,lexical
+ede4d302fc2ffe07703158f83c1493f2,"If there is a place that is hot and arid, what could it be?",B,lifeless,D,neutral,0.133333,0.866667,False,0.866667,lexical
+74ad13a03634e79c85382f1b90969b74,What is likely to satisfy someone's curiosity?,A,hear news,B,read book,0.333333,0.666667,False,0.666667,lexical
+49e466b1782aa4837dae53ff891fcdee,If you are in a bar in a glove shaped state where are you?,B,michigan,C,new york city,0.095238,0.904762,False,0.904762,lexical
+a8a8ae7792901c7179ff5538c701af1f,Where would a computer user be using their own computer?,E,house,B,school,0.363636,0.636364,False,0.636364,lexical
+2ffa3808ce26181926990b454e429c85,Crabs live in what sort of environment?,C,saltwater,B,bodies of water,0.5,0.5,False,0.5,lexical
+4319eaa36d256a92b72445c0392f9c94,Where can you find a snake in tall grass?,D,feild,E,tropical forest,0.2,0.8,False,0.8,lexical
+ec79ef747bb89281923edb89ba26786d,What is a place that has a bench nestled in trees?,A,state park,E,train station,0.347826,0.652174,False,0.652174,lexical
+2d33cde5e3987adc8fa2bca0af4dd3dd,Where is a human likely to go as a result of being hungry?,A,eat in restaurant,D,cook dinner,0.285714,0.714286,False,0.714286,lexical
+cc46d936bf69d69a3863b0cb85d75c17,He was beginning to regret taking the fight when he saw how what his opponent was?,D,confident,B,joy,0.166667,0.833333,False,0.833333,lexical
+46bc1a50eeead10509a43a048e01194e,Where would you find a single shower curtain being used?,A,bathtub,D,shower stall,0.105263,0.894737,False,0.894737,lexical
+4336a8c55b7cb17275d1c60206cd2f18,Where is a good idea but not required to have a fire extinguisher?,C,house,A,school bus,0.533333,0.466667,False,0.466667,lexical
+a287575d3ba4b9f958536fc14a1f5b5a,What continent has the most castles?,D,europe,B,edinburgh,0.4,0.6,False,0.6,lexical
+f481dc35b0a97a20dc5cdfe1a59746e2,If you have to read a book that is very dry and long you may become what?,E,bored,A,have time,0.142857,0.857143,False,0.857143,lexical
+c1c7a9efa379b8a7024a71cf364a144c,Sally used a clipboard to hold her papers while she read off names at the beginning of the day.  Where might she work?,E,school,C,office supply store,0.16,0.84,False,0.84,lexical
+821b32d39f57396979069b948030afe9,The kids didn't clean up after they had done what?,D,play with toys,E,talking,0.190476,0.809524,False,0.809524,lexical
+c68b4082a6872cf8198502651d0f3352,"Despite the name a pawn can be quite versatile, all the parts are important in a what?",A,chess game,D,checkers,0.444444,0.555556,False,0.555556,lexical
+dd11fea36d89aa09f9a6069545ba4c9c,What would not be true about a basketball if it had a hole in it but it did not lose its general shape?,C,full of air,A,punctured,0.2,0.8,False,0.8,lexical
+7792b2c6518ecf9775efba6d41253312,"If you are awaking multiple times throughout the night because a lot is on your mind, what is a likely cause?",B,depression,C,getting out of bed,0.071429,0.928571,False,0.928571,lexical
+1feb4c2a0e8ed638259f5d27b16eae9a,Where does a wild bird usually live?,C,countryside,D,desert,0.235294,0.764706,False,0.764706,lexical
+2de08c7a518b7c226e19bdc8fc10ef1d,Where would you expect to find white mice?,E,laboratory,B,bush,0.142857,0.857143,False,0.857143,lexical
+ea8664e77205224154f8519f922220e1,John felt that his actions were fate.   Harry said that he could have always made a different what?,B,choice,E,freedom,0.153846,0.846154,False,0.846154,lexical
+a64d45cecde84fdcf5f0a79805a0c6fe,What could committing murder prevent someone from doing?,C,find god,E,problems,0.125,0.875,False,0.875,lexical
+60e92cd2f35c345872d1a898e1718d55,"George didn't have a car, but he still had his two feet.   His socks were smelly and his soles were blistered, but that didn't matter.  He could still do what?",B,walk,E,hands,0.222222,0.777778,False,0.777778,lexical
+08f3c187908646997b9080c7e9ea7da4,A crane uses many a steel cable when working a what?,D,construction site,B,ship,0.190476,0.809524,False,0.809524,lexical
+9aff72f0c480c2b4edde45bd2e7e4870,What is the main purpose of farmers?,E,supply food,C,farm land,0.2,0.8,False,0.8,lexical
+fd243c96edec5b1b8520d5bfeddc6622,Where can I put this penny to save for later?,A,piggy bank,C,toy,0.153846,0.846154,False,0.846154,lexical
+f5ec4fdfd0e37e733bfc1606b986f1e2,Where would you put uncooked crab meat?,E,stew pot,B,red lobster,0.315789,0.684211,False,0.684211,lexical
+e3c6d147f8a727d314046e70e9579ba0,"The man had a fear of illness, so he never visited friends who were a what?",A,sick person,D,graveyard,0.2,0.8,False,0.8,lexical
+8ce13c6e08bf38d4cd4af756b661e47c,Where would you put pans if you want to bring them with you?,D,backpack,E,drawer,0.142857,0.857143,False,0.857143,lexical
+0f4159e80f8dbf682819215bbf0f5b5a_1,"If you're remembering something, it's because of your what of it to begin with?",B,knowing,E,depression,0.117647,0.882353,False,0.882353,lexical
+1a8b3c2a46efabcbd506f9cf70886ed0,Which large land mass is home to the most monkeys?,E,african continent,C,lift number 3,0.2,0.8,False,0.8,lexical
+db0cfd52ca6b2bbfcf26d1a898fd929b,Friday was James's 5th Anniversary.  They planned on going to bed early so that they could spend a long time doing what?,C,making love,B,insomnia,0.315789,0.684211,False,0.684211,lexical
+400fb2e196e71abb70e5b3f9aab4b9ee,"The teens were trying to hide that they get drink, but when they walked in the door their what gave it away?",C,stagger,B,fall down,0.125,0.875,False,0.875,lexical
+3fb36127a61903029a363911a1d2b1e9_1,You'll find a landing at the top of what?,C,stairwell,E,room,0.153846,0.846154,False,0.846154,lexical
+8494b0b95533dcedbd76ae2916c481d4,"Anybody could be hired in the kitchen, what was needed of them?",D,wash dishes,A,forget,0.117647,0.882353,False,0.882353,lexical
+1531f1523f5fd24bbdb42c311dbf90e8,Where can you find a number of wind instruments together in public?,E,symphony,A,music store,0.210526,0.789474,False,0.789474,lexical
+716ce4404a84b42dd64e561390c4b53b,A mountie got off at a subway stop.  What city might he be in?,E,toronto,A,urban area,0.235294,0.764706,False,0.764706,lexical
+5169f7ae0781b15161551de3a189ebef,What do you want someone to do when you illustrate point?,E,understanding,B,accepting,0.454545,0.545455,False,0.545455,lexical
+ef22ef7aeec70aaa688720f805c1cf38,Billy set aside a block of time for having fun after work. Why might he do this?,B,stress relief,C,pleasure,0.285714,0.714286,False,0.714286,lexical
+514310637fb43a252bfadc8cbf79b277,"The man in the white suit was very lazy.  He did nothing useful.  Meanwhile, the ban in the blue had put in effort and was very what?",D,productive,E,hard work,0.210526,0.789474,False,0.789474,lexical
+9370b2b0897b796dec4a40f107854c8d,What would you be unable to do if you have too much greed?,B,make friends,A,keep things,0.521739,0.478261,False,0.478261,lexical
+49902e768c45aa41a0f9f95be81114e5,"It was a long trip from the farm, so he stayed in a hotel when he arrived at the what?",E,city,D,las vegas,0.0,1.0,False,1.0,lexical
+e1f90cd664a6b150291e6d8444d85c54,I did not need a servant.  I was not a what?,B,rich person,E,busy,0.133333,0.866667,False,0.866667,lexical
+320ec9b68fdefe13d59cc8b628083790,How would you get from one side of a canal to another?,D,bridge,E,barges to travel on,0.32,0.68,False,0.68,lexical
+964185aed0e381853332bca1a4d91f46,"When learning about the world and different cultures, what is important if you are committed to eliminating preconceived notions",D,open mind,C,enlightenment,0.363636,0.636364,False,0.636364,lexical
+db8e010754c532d78635e5b7cf81a147,"An underrated thing about computers is how they manage workflow, at one time it was a big deal when they could first do what?",E,multitask,A,share files,0.2,0.8,False,0.8,lexical
+998381f854f51da2a6ccde45909e5168,Obstructing justice is sometimes an excuse used for police brutality which causes what in people?,D,getting hurt,A,committing perjury,0.533333,0.466667,False,0.466667,lexical
+bc38ad28e99cff7a65771233f734a007,While washing clothes they became what when caught on the sharp object?,D,torn,C,wear out,0.166667,0.833333,False,0.833333,lexical
+e3949997bf9d02048cfa5d8dd0f287aa,Seafood restaurants are used to draw tourists where?,E,coastal cities,C,city,0.333333,0.666667,False,0.666667,lexical
+a7d51b753c2113d8b2dbd0ebb5375855,James's nice asked him about her grandfather. She was interested in learning about what?,A,family tree,B,family reunion,0.72,0.28,False,0.28,lexical
+3e4b326aff96e9adbb52ba18cfa877b2,James looked up and saw the start twinkling in the black yonder.  He marveled the sheer number of them and the size of what?,A,universe,D,outer space,0.526316,0.473684,False,0.473684,lexical
+5ac83e9e6fa9851ad3cccb0d57c1d88f,What would encourage someone to continue playing tennis?,E,victory,D,hunger,0.153846,0.846154,False,0.846154,lexical
+2c0030cc14a27be2401dcfdaa501f0fc,James found the sound relaxing.   It was so relaxing he almost did what despite his efforts?,C,fall asleep,B,worried,0.111111,0.888889,False,0.888889,lexical
+feb83263e6be392351db0794004efc3f,What regions of a town would you have found a dime store?,C,small neighborhood,E,mall,0.363636,0.636364,False,0.636364,lexical
+80697d599280d994d8a584c95824ef1f,Where might an unused chess set be stored?,E,cupboard,A,toy store,0.235294,0.764706,False,0.764706,lexical
+3c1800e7dd96d37fdd3c51b9fe502342,"james told his son to settle down and be careful.  There were many frogs mating in the area, and James didn't want his son to do what to them?",D,disturb,C,scare,0.333333,0.666667,False,0.666667,lexical
+4da33e6f4b789776acb1bc10195baa83,"A man wants air conditioning while we watches the game on Saturday, where will it likely be installed?",B,house,C,offices,0.333333,0.666667,False,0.666667,lexical
+ae038e9af9d5a511ada7456b5e73b15e,What could be playing a balailaika?,B,orchestra,A,movie dr,0.235294,0.764706,False,0.764706,lexical
+a400b9fd1e319f901471c4b42d401c52,"Sailors drive many different types of boats, what type of boat involves their namesake.",E,sail boat,C,board ship,0.315789,0.684211,False,0.684211,lexical
+9dffd2021771e0ecddb19031acf3701b,Where could a person avoid the rain?,C,synagogue,B,tunnel,0.266667,0.733333,False,0.733333,lexical
+3730c646fdf54472ab873aac9ff7852e,Why would a person like to have a large house?,E,lots of space,B,mentally challenged,0.25,0.75,False,0.75,lexical
+175e7dcdded13d5adafaebf2264c3abd,Where will a cheap book be found?,C,discount store,D,school room,0.4,0.6,False,0.6,lexical
+11d7db1d8e1cff2f40d4184f15cf7ae7,John and James are idiots. They bought two tickets to the Falcons vs the Jets even though neither wanted to see the what?,B,sporting event,C,pressing wrong buttons,0.388889,0.611111,False,0.611111,lexical
+08db69edf0ec5848c1a53dca8fc1601a,James noticed that his penis was bigger. .  How might he act toward his plastic surgeon?,C,effusive,A,accidental,0.111111,0.888889,False,0.888889,lexical
+855ab6ba47f6311104c4d29e24ef0234,Who do professors work with?,D,school students,C,wear wrinkled tweed jackets,0.190476,0.809524,False,0.809524,lexical
+7ec11eeca4221795c117943ca2639e86,Colorful anemone look somewhat like what object you find on window sills?,D,flower bed,E,florida keys,0.363636,0.636364,False,0.636364,lexical
+e9389b08fdd17f14b148d498d6ff4dfe,From where do aliens arrive?,A,outer space,B,weekly world news,0.214286,0.785714,False,0.785714,lexical
+afa2899cc21e204fa64e63e7839e8c1e,"The hikers stopped to have a drink, simply put they what?",B,were thirsty,A,had a party,0.26087,0.73913,False,0.73913,lexical
+f898eb5b789d2dc6804edba269f051f0,When you get up in the morning before you begin work you should do what?,D,shower,C,concentrate,0.352941,0.647059,False,0.647059,lexical
+7ed7379fc51fd35a47be022f6c56ce51,"The kitten had nothing to dig it's claws into, so when it tried to stop it slid across what?",B,floor,D,carpet,0.181818,0.818182,False,0.818182,lexical
+15798a23ee6952fedd6d202064069126,If a person is trying to keep something in their hand what should they do?,E,have to hold,B,own house,0.380952,0.619048,False,0.619048,lexical
+273d0134e8ce53d4ebcf41ca7fde02af,Where could you find hundreds of thousands of home?,D,city or town,A,field,0.117647,0.882353,False,0.882353,lexical
+2f0931adc3d0d422d9ab6264395e89d8,"Playing baseball is a lot like any other sport, there is always a risk of what?",D,injury,B,errors,0.166667,0.833333,False,0.833333,lexical
+d00d3ba777cb3889a45799d72fca0a50,If I want to watch a movie without leaving my home what might I use?,C,television,A,drive in movie,0.25,0.75,False,0.75,lexical
+b1f36d1c8ab7e5a28783cb38e8709c27,"The victim was to take stand today, they were going to do what?",A,testify,B,runaway,0.142857,0.857143,False,0.857143,lexical
+a5e76dd088aab4f89e2fe93f6de6e46d,What does a successful dog grooming session likely to make a owner feel?,D,satisfaction,E,late,0.25,0.75,False,0.75,lexical
+ac6f0e24dd6203cda43e1089dcf081d6,"The runner was in third place, but he pushed harder and thought he might be able to reach second.  What was beginning to do?",D,gain ground,A,near finish line,0.37037,0.62963,False,0.62963,lexical
+1ab746bcd100ccf513055fe93c61010b,"The tourist entered Mammoth cave, what state were they in?",B,kentucky,C,rocky hills,0.315789,0.684211,False,0.684211,lexical
+af836abc58e0daf36df1d8d6830b70c5,What does someone typically feel when applying for a job?,B,anxiety and fear,C,rejection,0.08,0.92,False,0.92,lexical
+2ed66cfd206723a006b37599b516ad6e,"He was on trial for obstructing justice, during which he made a questionable comment and was also found guilty of what?",E,committing perjury,D,steam,0.086957,0.913043,False,0.913043,lexical
+e89a2762d578cb7bc2cc0a5b2a16d933,What kind of feelings does buying presents for others create?,E,make happy,B,please,0.25,0.75,False,0.75,lexical
+43cec0fff43a976fade9112d02b66021,What green area is a marmot likely to be found in?,A,countryside,D,jungle,0.352941,0.647059,False,0.647059,lexical
+30e66db11e0257a14a17108b90cd69fb,"Jan tested the current, and noticed that it was high.  He thought that the wires might have too much what?",D,resistance,E,now,0.153846,0.846154,False,0.846154,lexical
+f21ef67b31bd36a3174b6b4c7b4bbc7b,What does a kindergarten teacher do before nap time?,E,tell story,B,encourage,0.315789,0.684211,False,0.684211,lexical
+e476e2c8c278eaecfe1a8b884b6aeb8e,"Sam was a stranger.  Even so, Mark treated him like what?",B,family,C,known person,0.0,1.0,False,1.0,lexical
+191e3c676f05a11d6b2565d8c27d2001,"Bob's only light source was a small bulb.  There were four walls, if there was a door he couldn't see it.  What was Bob in?",A,closed room,D,his grave,0.2,0.8,False,0.8,lexical
+99098375c7b651d524eebac72e358238,James thought of criminal justice like a computer program.  It need to work right.   What ideas might James not like?,D,control model,E,reason exists,0.230769,0.769231,False,0.769231,lexical
+290fac9f881a83d8bfb34355f8e71044,With the card slot lit up he knew how to get started finding his balance with what?,E,automated teller,C,bank machine,0.285714,0.714286,False,0.714286,lexical
+6c36226b23377a0dd0188bf56840e22a,To play sports professionally you must do what very often?,C,practice,E,stretch,0.266667,0.733333,False,0.733333,lexical
+aa5aa36557a5fbb93391506182f1025c,Some people prefer releasing energy through work while others prefer to release it through what?,C,exercise,E,muscles,0.266667,0.733333,False,0.733333,lexical
+a38df3e750b1edd30f905e17af803c61,What will a person going for a jog likely be wearing?,C,comfortable clothes,A,grope,0.166667,0.833333,False,0.833333,lexical
+dba51270f789c75a2e38a5201b124d99,"The child pretended he was reading newspaper, he couldn't actually do it without what?",E,knowing how to read,B,falling down,0.387097,0.612903,False,0.612903,lexical
+1be8ec824eb0c7218b6bc160fd191428,Jenny enjoyed helping people.  It brought her a great deal of what?,A,satisfaction,C,train,0.352941,0.647059,False,0.647059,lexical
+0e80f2afe5c4f652e8720b52d7c06c87,What might someone believe in if they are cleaning clothes?,B,sanitation,A,feminism,0.222222,0.777778,False,0.777778,lexical
+b67971747e95ba425a5b81e0ba8d0b28,Where would you find a basement that can be accessed with an elevator?,D,office building,C,church,0.190476,0.809524,False,0.809524,lexical
+fcd39cfa321728fea069a6ae4285b06f,In order to learn to program from another person you can do what?,D,take class,A,learn how to,0.090909,0.909091,False,0.909091,lexical
+cb6766fb25daee911fc8e9816b98938c,"He was at the gym trying to build muscle, what is it called that he is trying to build muscle on?",E,human body,B,arm,0.153846,0.846154,False,0.846154,lexical
+54231f875bb7fe4d3e4afb6eae64387c,What part of plants is pretty?,D,flowers on,B,no neurons in,0.521739,0.478261,False,0.478261,lexical
+7d7f7d7a8ae3b20ca9fc0da6efe467b4,"The man was going fishing instead of work, what is he seeking?",B,relaxation,A,food,0.142857,0.857143,False,0.857143,lexical
+31b72d4e4ae7c672c20e27e42499ec79,What could you get an unsmooth pit from?,E,peach,A,backyard,0.307692,0.692308,False,0.692308,lexical
+26ce83b8e9a263079aa8cdbd5258d667,"The man tried to reply to the woman, but he had difficulty keeping track of conversations that he didn't do what to?",A,initiate,B,ignore,0.428571,0.571429,False,0.571429,lexical
+30138608d4934a75cf0911a06b021374,"I couldn't find anybody who recalled the event, what were they adroit at doing?",E,forget,B,act fool,0.285714,0.714286,False,0.714286,lexical
+01abce8c4964371d85a5be2019f75827,Where would you find a large dining room containing a fancy chandelier?,A,mansion,B,every house,0.111111,0.888889,False,0.888889,lexical
+3e2222c99e11fca2ad4af2d470eb8ea2_1,"The extremely large cargo plane could only land at a specialized runway, these were only located at a what?",D,military base,A,back yard,0.181818,0.818182,False,0.818182,lexical
+847dbf5b73c3e8d49bb9a36491d95e79,"The carpet was smelly and discouraged the league from playing there, where was this smelly carpet installed?",C,bowling alley,D,church,0.0,1.0,False,1.0,lexical
+fa031cff8e11e75c68d6a99ef0e5ca3a,How can someone be let into a brownstone?,B,ring,A,brooklyn,0.333333,0.666667,False,0.666667,lexical
+c592258c88295756833e9796e881057b,Where would someone purchase an upright piano?,C,music store,B,college,0.333333,0.666667,False,0.666667,lexical
+e1403a7c581bc263aea2ed8d179826d1,Where would you keep an ottoman near your front door?,A,living room,D,basement,0.105263,0.894737,False,0.894737,lexical
+15c38f66e811d6ed68cde931bc31d93c,Diving into backyard pools can be very dangerous and can lead to serious head and what?,E,spinal injuries,D,getting wet,0.307692,0.692308,False,0.692308,lexical
+1ac54dbf6b67f27daa3d456416047584,Where would one find a snake in a cage?,D,pet store,B,oregon,0.4,0.6,False,0.6,lexical
+21763a65765b5405c9a54484c2e54a72,Where are people likely to become impatient?,A,end of line,C,apartment,0.2,0.8,False,0.8,lexical
+c492b8b9754a181c924c1df19998cbc7,"When you fail to finish something, you failed at doing what to it",C,completing,E,succeeding,0.5,0.5,False,0.5,lexical
+fff554fffa1a0adc64b8d1e21d55534b,John didn't care about style.  He felt that form was less important than what?,C,function,B,quality,0.266667,0.733333,False,0.733333,lexical
+8ea5720718c0e122efa6277edb511569,"When you get together with friends to watch film, you might do plenty of this?",D,have fun,E,interesting,0.210526,0.789474,False,0.789474,lexical
+23e4257a49972efd8a97672f060be1c1,A supermarket is uncommon in what type of collection of shops?,A,strip mall,E,vermont,0.117647,0.882353,False,0.882353,lexical
+a018d65a74b9e77d81014fd8f6d78f77,"Bill puts meat on the scale, where does Bill work?",D,butcher shop,B,assay office,0.166667,0.833333,False,0.833333,lexical
+24ceaf5c10863e73919b5f1b0f2db38e,"I'm having some food at my party, what will I need to serve it?",E,spoon,A,zoo,0.5,0.5,False,0.5,lexical
+900492bd731f8f615ed7c08155737d44,Before racers start to run they must do what at the starting line?,E,stand still,A,learn to walk,0.25,0.75,False,0.75,lexical
+4e3f85dc92eaad4ae6bc6529d62e382c,What does an actor do when they are bored of their roles?,B,branch out,E,sing songs,0.3,0.7,False,0.7,lexical
+fa1f17ca535c7e875f4f58510dc2f430,What is a person called who doesn't have immortality?,E,mortal,C,death,0.181818,0.818182,False,0.818182,lexical
+76b6f0765a3b2fba71021f902142edc0,Why would you be watching tv instead of doing something else?,C,laziness,E,wasting time,0.4,0.6,False,0.6,lexical
+f1368ab1d4ee05d72d555474fcd737d7,"If chewing food is difficult for you, what is a possible reason?",B,sore mouth,E,avoiding choking,0.230769,0.769231,False,0.769231,lexical
+3dee8fc7f0a3fbf4de111b6686fca157,"He had to wear a tuxedo while playing the keyboard instrument, so did the other hundred members of the what?",D,orchestra,E,piano store,0.3,0.7,False,0.7,lexical
+ea0e7771afd86a59fd9f7764b77e3fa4,Where do you find the most amount of leafs?,C,forrest,A,floral arrangement,0.48,0.52,False,0.52,lexical
+2c845646032bbf27fb3904330d59d324,Where can children play with animals?,E,fairgrounds,A,meadow,0.235294,0.764706,False,0.764706,lexical
+bc08c354e5bead6863ea4a29cb8fa359,What kind of tale might feature a talking weasel?,E,children's story,A,mulberry bush,0.275862,0.724138,False,0.724138,lexical
+fb35c7aa5694bab2cde4b7257bfae003,What kind of status is the bald eagle given?,C,protection,E,america,0.235294,0.764706,False,0.764706,lexical
+e2a9f0041d17a9944377a91bef5e0d0d,Why do most people take a quick rest during the day?,C,feel more energetic,D,weak,0.086957,0.913043,False,0.913043,lexical
+ae56eff01d05422ddbcb26be7181356a,What could suddenly stop someone when he or she is running?,B,falling down,A,mushroom,0.1,0.9,False,0.9,lexical
+895aa97bb84d874d71b2aed572cebfdd,Where would you find a monkey in the wild?,E,thailand,B,barrel,0.285714,0.714286,False,0.714286,lexical
+9d625e948e9c3777e7cc54ed8ffea135,Where could a sloth live?,A,tropical jungle,C,work,0.105263,0.894737,False,0.894737,lexical
+d107d67d525a686fbd8282314d2ea33c,"A gentleman is carrying equipment for golf, what is he likely to have?",A,club,C,meditation center,0.095238,0.904762,False,0.904762,lexical
+fee5ff19811750ad019665af7b36b3c4,"If you have a home with a courtyard, what's one thing you probably don't have to care for any longer?",A,lawn,E,office complex,0.111111,0.888889,False,0.888889,lexical
+e69da59cbcf2a302e4523571eba8186b,"The computer was difficult for he to understand at the store, so what did she sign up for to learn more?",E,demonstration,B,facebook,0.285714,0.714286,False,0.714286,lexical
+2dd138a63b5895cf737ced793cc668e7,"If you take the risk buying a used car, you still hope it can what?",E,last several years,D,look good,0.148148,0.851852,False,0.851852,lexical
+b33047f46db680a9b630c13e8ca115cc,"Dan was ditting quietly on the couch with a book in his hand.  Laurie thought that he was just focused on what he was doing, but he actually did what?",E,fall asleep,B,think,0.0,1.0,False,1.0,lexical
+f20d40bc4af588223e880e0bb58b27b8,What is the primary purpose of cars?,C,move people,D,turn right,0.095238,0.904762,False,0.904762,lexical
+b6b66d4519a84b8331ea55f84767e9df,"Alabama is full of different people, but they are all citizens of what?",A,united states,E,florabama,0.090909,0.909091,False,0.909091,lexical
+952cf4b2f7a434b2eeae9f4c7ed89c0a,They were hoping their campaign would create a rise in awareness of the problem and hopefully do what to its effect?,E,reduce,B,fall,0.0,1.0,False,1.0,lexical
+b63e5cd88bfe75d29ff9fdc6dd97fed6,What do airplanes do as they are arriving at the gate?,A,slow down,B,crash,0.142857,0.857143,False,0.857143,lexical
+ec5a336080e37fbe95d72ad5f9c65ba7,If a person with mental illness stops treatment what will likely happen?,C,recur,E,cause suffering,0.1,0.9,False,0.9,lexical
+6386bcf080633bc3eeb3317a5435b7b7,The gimmicky low brow TV show was about animals when they what?,E,attack,A,sick,0.4,0.6,False,0.6,lexical
+43ab0ff711e60d51f943bbd2cdd6515a,"A loud machine is irritating, but many are expected where?",E,industrial area,A,museum,0.285714,0.714286,False,0.714286,lexical
+11c4c78d61e8212f0984fd07eb22b669,What part of a table would you put a ruler in?,A,drawer,B,desk,0.4,0.6,False,0.6,lexical
+e61891746aa94ab57aaa754614034aef,What happens if someone kisses too long?,C,shortness of breath,A,strong feelings,0.294118,0.705882,False,0.705882,lexical
+97da9aa4ea4b22744ec51cba49f35bfc,"If I have a modern light source in my living room, what is it likely to be?",C,lamp,B,house,0.0,1.0,False,1.0,lexical
+46241bc83e8d81196ae5783b2b9854a4,"The person saw the mess his children made, what was his following reaction?",E,look angry,B,cross street,0.272727,0.727273,False,0.727273,lexical
+18844d3aa4e52b331b5382c8244cf4db,Who might wear dark glasses indoors?,A,blind person,E,glove compartment,0.137931,0.862069,False,0.862069,lexical
+056b33c7050c167b0d4348d40d169358,Where would stones not be arranged in a path?,B,field,E,made from rocks,0.1,0.9,False,0.9,lexical
+31d7dd1d00aabe411568df3e72d5b5e0,A bald eagle is likely to be found on what kind of work?,D,painting,E,aviary,0.285714,0.714286,False,0.714286,lexical
+cbf3dd48b4d591fc872a53cd4b9dd3af,"The hostess was good at her job, she always had a smile when she would what?",C,welcome guests,B,ready parlor for guests,0.540541,0.459459,False,0.459459,lexical
+60e8f1a86d4063895f340cd1e3c55f50,What is likely to happen to someone who is learning?,C,knowing more,E,growth,0.222222,0.777778,False,0.777778,lexical
+eee8cb7a0d806a62d2de24831f82e3e1,"The inspector was agreeing with the factory protocols, what was the status of the factory?",A,compliance,B,eligible,0.333333,0.666667,False,0.666667,lexical
+9a23a7f04e63bf9f4c7dfe50c58abfd2,"After standing up I had to sit right back down, why would I feel like this?",C,balance,B,effort,0.153846,0.846154,False,0.846154,lexical
+e3426e4f60c142aa3d813479f79d6305,Where do you go on a night out before going to the bar?,C,restaurant,E,park,0.142857,0.857143,False,0.857143,lexical
+3526550b02d9594abd4fc43553010fc6,"The dad wanted to protect his house, where did he put his gun?",D,drawer,A,police station,0.1,0.9,False,0.9,lexical
+e567c94d88829fb07a30e3d46c02e664,What instrument can be played with an air of happiness?,E,fiddle,D,play games,0.25,0.75,False,0.75,lexical
+cf5a710c931779fb3dde198e0ace3b6a,What to kids do for boredom on a ramp?,E,skateboard,C,hang out at bar,0.4,0.6,False,0.6,lexical
+0f2377604e628c55ba588366139396b9,What animal has quills all over it?,E,hedgehog,D,porcupine,0.117647,0.882353,False,0.882353,lexical
+ada088b7c97de80336ad043757c2db16,Why would you go to an office?,A,work,D,city,0.0,1.0,False,1.0,lexical
+beef0aa2058297904bb4acc1dc340c85,When is the worst time for having food?,B,not hungry,E,feeling of fullness,0.137931,0.862069,False,0.862069,lexical
+ba9a05bd2086c0d37733e26479d6630f,If you spend all your time buying and not saving what is is likely to happen?,E,go broke,D,losing money,0.3,0.7,False,0.7,lexical
+6b0bf501aa68b06ddc5ad72ac5ff68fc,"Though a mouse might prefer your house, you might also see him where?",C,garden,B,department store,0.363636,0.636364,False,0.636364,lexical
+926298bbdd03ce96acfeb4408b888b61,What is performing a type of?,B,act,C,feat,0.571429,0.428571,False,0.428571,lexical
+faa0aa438b94c19be8ff52ee80d9e298,"The car was going from Alabama to New York, what was its goal?",A,head north,D,go fast,0.235294,0.764706,False,0.764706,lexical
+9310c39a0752f28640c3a05cba1d5ca7,What do they call the trash in Australia?,E,dustbin,B,subway,0.307692,0.692308,False,0.692308,lexical
+fee5f4e9d8e37f0183e36eb9b8dbcbb9,"Joan wants to cook a potato, where should she place it?",A,boiling water,B,paper bag,0.272727,0.727273,False,0.727273,lexical
+5392af3f1c4665e95ff3354e5115de42,Writers with a great what can amass a large fortune?,D,imagination,A,cookie,0.117647,0.882353,False,0.882353,lexical
+4c5c74b3287492d6ddb2da4c8c0fd51a,Where do all animals live?,C,surface of earth,D,meadow,0.181818,0.818182,False,0.818182,lexical
+52f3eb6c9a6b9671050fc769d465ed03,How are the conditions for someone who is living in a homeless shelter?,A,sometimes bad,B,happy,0.111111,0.888889,False,0.888889,lexical
+03ee30b5801b61aee791a551a9d9a49f,You can do knitting to get the feeling of what?,A,relaxation,B,arthritis,0.315789,0.684211,False,0.684211,lexical
+6d1d483745bc0aae0f4dd04e851ceffb,What might a very large table be?,B,conference,E,demonstration,0.347826,0.652174,False,0.652174,lexical
+bf10bfda7328c8671e15adf8546b64d7,John got his tax refund back.  He treated it like it was what?,C,free money,B,death and,0.315789,0.684211,False,0.684211,lexical
+0b3a3ee40dd25be9735ac5e3342ca4dd,A person with an allergy might be doing what if they awake suddenly?,E,sneezing,A,have fun,0.125,0.875,False,0.875,lexical
+77e2a0b469b56bea81921a4a945ffcb5,Where is a ferret unlikely to be?,A,classroom,B,outdoors,0.235294,0.764706,False,0.764706,lexical
+dc964e4f6df6b70815e81e466d0ff717,If you jump in any of the oceans you will get?,B,wet,C,wide,0.571429,0.428571,False,0.428571,lexical
+6b9221c1af583ffb43580857d6fde38a,"Immediately after peeing, a person's bladder is what?",B,empty,A,collapsed,0.142857,0.857143,False,0.857143,lexical
+4dc2c4596b08e9bfd893174e67bff40a,"The lady would eat and eat, and because of mental issues would then make herself what?",D,throw up,A,wash dishes,0.210526,0.789474,False,0.789474,lexical
+8ae24d3ff199077a59e0d970feb665b7,"A car was hailed to chauffeur someone to the opera house, where was it heading?",A,go downtown,C,go fast,0.444444,0.555556,False,0.555556,lexical
+d64a676e9d22e7edd12e7f4ce267a9f0,What do you go to see for live entertainment?,B,show,E,theatre,0.181818,0.818182,False,0.818182,lexical
+54ecb521df1d0f5b130a393c42b4126d,The teacher thought that a ferret can be very mischievous and probably wouldn't make a great pet for the entire what?,C,classroom,A,bad mood,0.352941,0.647059,False,0.647059,lexical
+b7276bb9139ec25c98c7e3822404eb6c,A creek is a body of water found in what low land?,B,valley,C,outdoors,0.0,1.0,False,1.0,lexical
+ecb8758b0d088f9aedc182a516dd1190,"If I have a pet bird, what does it likely live in?",E,cage,A,forest,0.2,0.8,False,0.8,lexical
+f2645d0ee8662b6553954cee7e77979e,Joe and Mac were playing basketball. They did it every day in their back yard.  Why were they playing basketball?,B,have fun,A,study,0.153846,0.846154,False,0.846154,lexical
+ea6d1a739ea841be282e13789270651e,What makes someone a nomad?,C,have no home,E,schizophrenia,0.16,0.84,False,0.84,lexical
+c82ed0c2a2e115452b4d596c5faafbcf,What is a treat that you dog will enjoy?,D,bone,C,affection,0.307692,0.692308,False,0.692308,lexical
+163d83851ecd4a4144b31b8738e4c335,Women used to be expected to wear a dress but it's now acceptable for them to wear what?,B,pants,D,action,0.363636,0.636364,False,0.636364,lexical
+095767956c500ca1af7cf7671556de5b,The fact that Joe was able to memorize the list in spite of his apparent  state proved that part of his brain was what?,A,awake,C,sleeping,0.153846,0.846154,False,0.846154,lexical
+d31ee38f67d1173275e120b8ad36039c,What is a wet person likely to do?,C,catch cold,D,suicide,0.235294,0.764706,False,0.764706,lexical
+c410a4626dfce4b4cfd3e5937602cd77,"After recovering from the disease, what did the doctor call the patient?",A,healthy,C,cure,0.181818,0.818182,False,0.818182,lexical
+14d760e43728e9e4643c414627f2b596,"The painter started to edge the room with tape, he always took extra care to make the lines clean and crisp when working with an what?",E,interior,C,corner,0.428571,0.571429,False,0.571429,lexical
+abcf1b550b4d44f46d4f68b8e1d98ec8,"After high tide, where on the coast can you look to find a sea anemone?",D,tide pool,E,intertidal zone,0.333333,0.666667,False,0.666667,lexical
+5b8af6f26335dbd501b0104c71e26d9e,What could a driving car do to a pedestrian?,B,wreak,C,pollution,0.0,1.0,False,1.0,lexical
+4364b4b342fb7b44434bd6694bf8fd51,People do many things to alleviate boredom.  If you can't get out of the house you might decide to do what?,D,listen to music,C,meet interesting people,0.263158,0.736842,False,0.736842,lexical
+3ffe67fb009529d9b0c49ccd7141ee4a,"At a grocery store they sell individual potatoes, where does the grocery clerk likely put the potato?",D,paper bag,E,underground,0.3,0.7,False,0.7,lexical
+f372587fa4c99d5bebf0d0eb987c44e2,What room is a rubber bath mat usually kept?,E,bathroom,C,sand,0.166667,0.833333,False,0.833333,lexical
+d35a8a3bd560fdd651ecf314878ed30f,What would you put meat on top of to cook it?,E,frying pan,A,oil,0.153846,0.846154,False,0.846154,lexical
+0542414710025f56b0c26e1bae5c4d06,Minerals can be obtained in what way for a person who avoids leafy greens?,A,multivitamin,B,farm,0.125,0.875,False,0.875,lexical
+1875f70cf736c68c7a9df3ef870224a1,What could you be a few hours after you finish cashing in due to your cash?,A,happy,E,selling out,0.0,1.0,False,1.0,lexical
+83250ae2dfeb2e3886ead4cde8e1290f,"The smelly man was having a bath, but what is he pursuing?",C,personal cleanliness,A,hydration,0.206897,0.793103,False,0.793103,lexical
+70c39372c0d50566554fd72c768b75f6,What might a couple have a lot of when they are deciding on stopping being married to each other?,E,fights,A,pleasure,0.142857,0.857143,False,0.857143,lexical
+c21ec5b367f409a0288d616f626555ae,"If a person is working a lot, what are they likely trying to earn?",A,much money,C,creativity,0.3,0.7,False,0.7,lexical
+a2cd03ed068f6d613e85f3a60f4db0a1,"The traveling business man was glad his credit card had perks, it offset the high prices for travel from a what?",C,airport,D,hotel,0.333333,0.666667,False,0.666667,lexical
+d2871dc28c82471e5d7f71f79e49c257,"Billy hated using other people's toilets. He was only comfortable on his own.  So whenever he needed to poop, he would go back to his what?",D,house,B,motel room,0.266667,0.733333,False,0.733333,lexical
+94770e75c4e2000e717b4218ddff19e8,"The forest experienced a cold winter, where is it located?",D,temperate zone,C,amazon basin,0.384615,0.615385,False,0.615385,lexical
+08ad17d3ca1838b8724d21cf5921ec52,How can you let someone know about your anger without hurting him or her?,D,write letter,A,release energy,0.461538,0.538462,False,0.538462,lexical
+21fb76bd8349628b441c76f47c33e77b,Where is one likely to find a brownstone?,A,new york city,C,ring,0.117647,0.882353,False,0.882353,lexical
+e151b44e0a7bf08a1dd3c861eef09161,What may I place the telephone on?,C,desktop,D,party,0.166667,0.833333,False,0.833333,lexical
+46351b3a6beb694c5f623583a3b1473d,What language type is someone from Iran likely to use?,B,dard,D,closed room,0.266667,0.733333,False,0.733333,lexical
+db75e16788cf56d5dfb9773eaf91fe7e,"John went to a party that lasted all night.  Because of this, he didn't have time for what?",E,studying,B,blowing off steam,0.24,0.76,False,0.76,lexical
+ffd89796a9b09bef56c5803f188764c6,"The child wasn't allowed in the kitchen but still wanted to help, what could it do to help in the dining room?",A,set table,E,gather flowers,0.086957,0.913043,False,0.913043,lexical
+5622e49306bb82ec1cec817ad0506c60,"He was having a hard time expressing himself in a healthy way, the psychologist said he was mentally what?",C,suffering,D,embarrassment,0.272727,0.727273,False,0.727273,lexical
+6efaeb796307036719635242fa5ad0f3,When someone is physically competing what does their body do?,E,sweat,A,tension,0.166667,0.833333,False,0.833333,lexical
+114d310d1198abffaf8b88dab5a55aa7,How would you express information to a deaf person?,C,write down,D,may disagree,0.181818,0.818182,False,0.818182,lexical
+0f79faf5337706f2e0e39c15bbd2e99a,Printing on a printer can get expensive because it does what?,B,use paper,A,explode,0.375,0.625,False,0.625,lexical
+b62d7d1b5eec31be0b65146a9fc069e0,What will god never do according to religion?,B,judge people,C,work miracles,0.24,0.76,False,0.76,lexical
+1342c6aec9f5179d6ea6fa5fefbe5188,One of the potential hazards of attending school is what?,D,colds and flu,C,boredom,0.2,0.8,False,0.8,lexical
+c74ae684ba6c76e2a913493483678c9d,What has a surface with many sides?,A,tetrahedron,B,object,0.117647,0.882353,False,0.882353,lexical
+411e50225637b76187cc36b24fe3127c,What could bring a container from one place to another?,C,cargo ship,A,food,0.142857,0.857143,False,0.857143,lexical
+2a0e82bbf1471290c93c8f2a11af197f,The old style pop ups literally let you see the story when you did what?,C,open book,B,visualize,0.111111,0.888889,False,0.888889,lexical
+eaadd7a4b18cb48c00f85c3975750fe7,What is it called when you are talking to someone?,A,communication,D,persuaded,0.181818,0.818182,False,0.818182,lexical
+403c9b067ef7363efffa822bb08c5426,"The family finished dinner, the child's chore was to load the dirty dishes where?",B,dishwasher,D,cabinet,0.235294,0.764706,False,0.764706,lexical
+adf228312401c9ff421a4da1b46bb70a,Where could you find a bureau as well as many politicians?,E,washington dc,B,office building,0.214286,0.785714,False,0.785714,lexical
+57c85e4c7ea2501ef9d8f304b524e2e4,"Dad wanted to hide the check in his office, where did he put it?",B,desk drawer,D,bank,0.133333,0.866667,False,0.866667,lexical
+c22f30eee57f7191ee07e9a916460f68,"For some reason she was devoid of regular emotions, buying products was the only way she could feel what?",A,pleasure,C,debt,0.166667,0.833333,False,0.833333,lexical
+026cb9c07a583ec933f2c4c67ae73836,Where are horses judged on appearance?,B,fair,D,in a field,0.285714,0.714286,False,0.714286,lexical
+c57ed32566a2db1ec3d6e4fd595b9d05,Why do people read non fiction?,C,learn new things,E,falling asleep,0.333333,0.666667,False,0.666667,lexical
+93b52e7ea1acf10db891e9355e234123,While knitting you can do what using a radio?,A,listen to music,D,eat,0.111111,0.888889,False,0.888889,lexical
+dbdad44029098d4b1d202d6d857d6092,Where are you likely to set papers while working on them?,A,table,B,meeting,0.166667,0.833333,False,0.833333,lexical
+69d0f70c173dda17934836d618ca7093,"John had a massive debt to 50 million dollars.  Compared to that, Leo's 2000 dollar debt seemed what?",C,insubstantial,A,dwarf,0.111111,0.888889,False,0.888889,lexical
+e5697a25935c5249d2108f55e245f3e4,"The man flew his airplane over the city and saw pollution visibly in the sky, what was polluted?",C,air,E,car show,0.363636,0.636364,False,0.636364,lexical
+99af85081085e6228c6d78c95be01968,What is a very unlikely side effect of becoming inebriated?,E,paralysis,C,staggering,0.315789,0.684211,False,0.684211,lexical
+235094c966bcbdc94701b41b969f9c75,when communicating with my boss what should i do,B,transfer of information,A,misunderstandings,0.25,0.75,False,0.75,lexical
+99789083502af9bf111876a00fae44ac,If not in a stream but in a market where will you find fish?,C,refrigerator,A,stream,0.333333,0.666667,False,0.666667,lexical
+1d44fb5f4b7f1e23ff6c1c083db81ba1,What are people likely to want to do with their friends?,E,spend time,C,talk to each other,0.214286,0.785714,False,0.785714,lexical
+194b66240f6fab75749c1e30ed09ea09,During a shark filled tornado where should you not be?,E,outside,B,pool hall,0.125,0.875,False,0.875,lexical
+83dad4fe630fddbdcd5b18ef890c66f2,What is the likely result of buying products in excess?,E,overstocking,C,poverty,0.526316,0.473684,False,0.473684,lexical
+3ebc5ddd2e97fe37fcb52aa2a9e2e1a7,What is a person trying to accomplish when taking analgesics?,B,avoid pain,C,acknowledgment,0.333333,0.666667,False,0.666667,lexical
+9ed019338a48216de9eadf64faaf1ce0,Where would you put a glass after drinking from it?,D,dishwasher,E,dining room,0.285714,0.714286,False,0.714286,lexical
+d1d2585e0ba1160948b7c5822a99b7a1,Where would you buy food?,B,store,E,kitchen,0.333333,0.666667,False,0.666667,lexical
+e34a0d1331c6bd4574ffe308e3fbd389,"When a person admits his mistakes, what are they doing?",E,act responsibly,A,accident,0.26087,0.73913,False,0.73913,lexical
+4858669d0193e5d9384dc37d4bb5c00c,Where do play a game for money?,A,casino,B,football ground,0.190476,0.809524,False,0.809524,lexical
+8fd82cdc253835814153fe7222e9967c,When you travel you should what in case of unexpected costs?,E,have money,A,go somewhere,0.272727,0.727273,False,0.727273,lexical
+66458bf8599c3ef1e7b50fa527531882,"Donald is a prominent figure for the federal government, so in what city does he likely spend a lot of time?",E,washington d.c,B,capitol building,0.266667,0.733333,False,0.733333,lexical
+879239b8a788f3c9e3dfdd0862f3d7c5,"There was more than one bum asking for change or a ticket, it was the cheapest way to travel so it was no surprise sight at the what?",C,bus depot,A,train station,0.181818,0.818182,False,0.818182,lexical
+8a69e6df5e8ad6c9e6828aa66c59d046,John and Joe like planning games but Joe  was hit by a ball and fell down. What might have happened to Joe.,D,injury,C,enjoying,0.285714,0.714286,False,0.714286,lexical
+8d275acea05fd16295c659c504576a9b,Where can you buy jeans at one of may indoor merchants?,B,shopping mall,C,bedroom,0.2,0.8,False,0.8,lexical
+91629c6f9e4af3e6acf385eb23fd8068,What do you write letter in in America?,D,english alphabet,E,word,0.0,1.0,False,1.0,lexical
+59eb56f366407ac7db72996be265883b,Joe owned back taxes as well as what other type of taxes?,E,current,B,front,0.5,0.5,False,0.5,lexical
+4ab069f2e979d51f2c5929f590d09982,Where is a broadcast studio likely to be heard?,C,radio station,A,microphone,0.347826,0.652174,False,0.652174,lexical
+d6bb990e8c409d2b3af37a2da198e01f,Kramer wrote a self-referential book.  What might that book be about?,B,coffee table,D,backpack,0.2,0.8,False,0.8,lexical
+c5ad166ab5c5f5f067aa02b20f482523,"Of all the sports, Billy enjoys football, but what does his concerned mother think of the sport?",E,violent,C,slow,0.181818,0.818182,False,0.818182,lexical
+ceafca2445b1b974d085a8cce38e8e44,What city will likely have many parking structures?,A,chicago,B,big city,0.266667,0.733333,False,0.733333,lexical
+2ef2ae21a2d3a9ecbd5c45ff378d10e3,Sally was afraid of danger and always double checked what?,D,safety,C,being safe,0.5,0.5,False,0.5,lexical
+793672da43fbc609e8c5760630c7e239,What is the habitat of the fox?,E,mountains,B,burrow,0.133333,0.866667,False,0.866667,lexical
+558cb0bc25387ce38d71f64ef6f1fa57,"People are very much like the animals, but one thing has secured or dominance over the planet.  We're better at doing what?",B,make tools,C,eat dosa,0.444444,0.555556,False,0.555556,lexical
+2c9f4a98ce774cd734b6e384d95051a7,"They children loved having a back yard, and the parents loved that it was a safe what?",B,neighborhood,A,suburb,0.222222,0.777778,False,0.777778,lexical
+33c84708785f88c19737ef5b0e31a64b,"While people just throw coins down them now, what originally had a pail to be lowered for it's intended use?",D,wishing well,C,slide,0.235294,0.764706,False,0.764706,lexical
+d867f76d000bdb59b9b4cb982bd7f0a0,Joe was thrown from his boat into the water.  The water was cold because it was the middle of winter and he cried out to his crew for help.  They couldn't hear him over the sound of the what?,D,typhoon,E,motor,0.333333,0.666667,False,0.666667,lexical
+8c607d2e2e897d74048fcc794137b683,"When a human is earning money, where are they often found?",D,place of work,B,park,0.470588,0.529412,False,0.529412,lexical
+5215e26c99b2a9b376fb1c70096a388a,"They passed a apple tree on their way to the racetrack, the were going to watch the biggest motorsport spectacle in the world where?",B,indiana,C,on tv,0.166667,0.833333,False,0.833333,lexical
+668dc6bce771b10cbf6336f3ec76520a,Why do people play chess on the weekends?,B,have fun,C,thrilling,0.235294,0.764706,False,0.764706,lexical
+a339fe08f1f50463ee180b797e99ebcc,What do you need energy to do in gym class?,D,play sports,B,tacos,0.25,0.75,False,0.75,lexical
+526cd34f5b2afefbbb7830434785f298,Sarah dropped the marble because she wanted to do what?,A,game,E,jar,0.285714,0.714286,False,0.714286,lexical
+6c1c1c282cebe8917f607f0dbc1c102e,"We are all human, and we all what?",E,die,A,write,0.5,0.5,False,0.5,lexical
+b5baf77d3855935c87f01f5fb2216667,"If a person were going to bed, what would be their goal?",D,falling asleep,B,insomnia,0.272727,0.727273,False,0.727273,lexical
+83808e92381b2e5f4cdf55d1391645ae,What are candles good for eliminating?,E,dark,C,church,0.2,0.8,False,0.8,lexical
+1a86310d7279097205a3403752c3b914,WHat leads to an early death?,B,homicide,E,cyanide,0.533333,0.466667,False,0.466667,lexical
+b4130d1790948134f3aeab9d3d79c181,What room would you find many bookcases and is used for contemplation?,A,study,C,homw,0.0,1.0,False,1.0,lexical
+a5097b7f56d20217679f28201801476f,Where do you head to travel to a star?,C,outer space,D,hollywood,0.1,0.9,False,0.9,lexical
+bcc5dd6292a64d8fa17cd07c360b335d,"The player lifted his cornet and walked in rhythm, what was the player a member of?",C,marching band,B,high school band,0.482759,0.517241,False,0.517241,lexical
+cfc7fccb8449a2a950c9d2a50991420e,What happens at soon as a living being is born?,B,growing older,A,expiration,0.26087,0.73913,False,0.73913,lexical
+2e83c5989a018bec6d5f5ac7d3b72f49,"When someone is talking and you missed something, what can you do to get them to repeat it?",B,ask question,E,sneeze,0.222222,0.777778,False,0.777778,lexical
+34b2d6aecdb5af8efacf0b0aa7e3989f,Where does one store fabric in their own home?,A,sewing room,B,clothing store,0.4,0.6,False,0.6,lexical
+2ec7f8fe7948f9997e73f9bff7ba6e05,What do most companies not want to have relative to demand?,A,oversupply,E,busy,0.285714,0.714286,False,0.714286,lexical
+651785ed4f7b0bd2e7ca9f70a42acea5,What is happening while he's playing basketball for such a long time?,A,sweating,C,having fun,0.444444,0.555556,False,0.555556,lexical
+ee46995407eb6357bb5410d49d378629,A traveler laments the fact that mass transit is limited in his city when his groceries get soaked by the rain as he waits where?,A,bus stop,C,motel,0.153846,0.846154,False,0.846154,lexical
+303aedda3a5ab8d853cbe4edc4b914c6,"The person was in physical distress, where should he go?",C,hospital,E,building,0.25,0.75,False,0.75,lexical
+720b98fbc365736597147c984f6bd301,"The cancer patient was expecting to die, so he made out his what?",B,write will,D,seek help,0.315789,0.684211,False,0.684211,lexical
+c611875b43b67b91030b889b267bbcb3,"There was a toll road that meandered from Maine to New Hampshire, where was it?",B,new england,D,new jersey,0.47619,0.52381,False,0.52381,lexical
+0547da29ffab9b441bae8870cd0f9dab,"If you partied all night you could find yourself already what, even when just beginning work?",A,getting tired,C,procrastination,0.357143,0.642857,False,0.642857,lexical
+21e312c7fd1a52341ce35b66457eab36,"The cat carefully navigated the area, they do everything they can to avoid what?",A,get wet,C,falling,0.142857,0.857143,False,0.857143,lexical
+82e26bc22af89c38d54aa2d00dcb8a2b,What is someone usually doing if someone else is talking to him or her?,A,listening,B,language,0.352941,0.647059,False,0.647059,lexical
+f75357e48c3026cfa4da3dba9f91bb21,What does the sky do before a rain?,E,cloud over,B,appear blue,0.285714,0.714286,False,0.714286,lexical
+64931f9097155672bfe3e16f03b2c195,"Pens, computers, text books and paper clips can all be found where?",B,university,E,work,0.142857,0.857143,False,0.857143,lexical
+5de3248caa2e5ed83dd0ec45a15eae18,What geographic area is a lizard likely to be?,B,west texas,D,garden,0.125,0.875,False,0.875,lexical
+0611dfbf5114084723d75f59b4f67412,What do you use to carry your briefcase?,E,hand,C,courtroom,0.0,1.0,False,1.0,lexical
+5b8d76889510384b38b72945e8d28f53,"He picked up his pace to a run, he wanted to do what?",E,go faster,A,learn to walk,0.272727,0.727273,False,0.727273,lexical
+d81f5c49bc060dc799681bf4cacac73a,What would a person do if they do not have any friends?,D,stand alone,C,fall asleep,0.454545,0.545455,False,0.545455,lexical
+aaf4fa38433c84b3bd0a86551259ce62,"As a result of dying, what happens to organic material?",D,death and decay,C,wake up,0.181818,0.818182,False,0.818182,lexical
+33ea932a876ac0361c9eefeff1d24e92,What does everyone have in relation to other people?,A,feelings,E,values,0.285714,0.714286,False,0.714286,lexical
+aead08289ca9abfcd169f935ea228ee5,What do you ask a child to do when you first meet her?,D,state name,C,costume,0.470588,0.529412,False,0.529412,lexical
+adbddc80b10bf25f09c6c2bee4e3c59b,"Where can you buy a clock, clothing and wrenches?",E,department store,A,counter,0.26087,0.73913,False,0.73913,lexical
+1caf93d6a22dc8190e19c14bbe1fafda,What do you do when you're in a new place and want to see new things?,B,look around,A,interesting,0.181818,0.818182,False,0.818182,lexical
+0bf4d64ad0eee7224acb3a4eb85accb2,What happens when to ice when it is in the sun?,B,melted,D,antarctica,0.125,0.875,False,0.875,lexical
+b93532cae23e505628dd88568da3337e,Where can you store your dishes in your dwelling?,B,shelf,C,pantry,0.0,1.0,False,1.0,lexical
+2d3c9d3dff1a7a8253180cb3de1ceeea,"The man laid on the soft moss and looked up at the trees, where was the man?",B,forest,D,ground,0.166667,0.833333,False,0.833333,lexical
+70701f5d1d62e58d5c74e2e303bb4065,What is someone doing if he or she is sitting quietly and his or her eyes are moving?,A,reading,B,meditate,0.4,0.6,False,0.6,lexical
+eacd87f297193033669a93160ae3776f,Where can I find a stapler in many places?,B,office building,A,desk drawer,0.230769,0.769231,False,0.769231,lexical
+8e1b0792e441a5d54ae47a4b24f48977,"A man takes a seat at a museum outside of Barcelona, where is he likely?",B,martorell,E,airplane,0.352941,0.647059,False,0.647059,lexical
+b4cde6a56fb19afc84876ebf2fb9e71a,Where would you find a toy soldier that is being played with?,C,child's hand,D,toybos,0.111111,0.888889,False,0.888889,lexical
+095c5bc5fbaf12b384e9f7df47fdec16,Where are you when you're about to use your plane ticket?,C,airport,D,sea ship,0.4,0.6,False,0.6,lexical
+494c501dbbfd36c602aae9e5b8e0cfff,"Flowers make a good center focal point, just one of many arrangements that look good on a what?",B,table,E,vase,0.444444,0.555556,False,0.555556,lexical
+5a7f6fd97b2c9ad05f773bc8b2ecf441,How can a human cross a river and not mess up their hair?,D,bridge,A,wisconsin,0.133333,0.866667,False,0.866667,lexical
+5279a2ea333ba8a5bf3a7637a7279da1,Batman bought beer.  There were no bottles available.  He had to settle for what?.,D,can,E,refrigerator,0.133333,0.866667,False,0.866667,lexical
+42c46e28baf0fc617a07419286178c0a,You can find a monkey in what West African region on the Gulf of Guinea,E,nigeria,B,rain forest,0.222222,0.777778,False,0.777778,lexical
+c76304b4962f94ab9f20f09cf4a1a7c1,Surprising an angry person could lead to what?,B,fight,D,laughter,0.461538,0.538462,False,0.538462,lexical
+8b23cd355ffc8b6e7aa5459ffb21b4e0,Where is a dining area likely to be small?,B,home,A,cruise ship,0.133333,0.866667,False,0.866667,lexical
+c35f7de9e9005fcf654cb0b23f17acd6,Killing people should not cause what emotion?,C,joy,E,terrible,0.0,1.0,False,1.0,lexical
+d910859b9d1acae40456dbeaa8334bc0,"James slamed into someone playing football, and not for the first time.  He was concerned about the consequences of many what?",C,head injuries,A,exhilaration,0.32,0.68,False,0.68,lexical
+6ca8439d062de4d43d7d471c508b78db,"More people should lower the guard and just have fun, we don't got long just what?",A,enjoy living,C,enjoyable,0.571429,0.428571,False,0.428571,lexical
+ddd8c62ec94b4f94eeefdd05b9208a71,Where can you get a lizard to keep in your home?,C,pet shop,D,tropical areas,0.272727,0.727273,False,0.727273,lexical
+72b638200414a526b598de0e01a044df,What would use a musical instrument?,C,orchestra,E,movie,0.285714,0.714286,False,0.714286,lexical
+c770870c88f35f9d110217049c5a7334,"She was in an affair, what did that end upon discovery by her husband?",B,marriage,A,relationship,0.2,0.8,False,0.8,lexical
+1d8d9e3504c8c58a3b923ddc155c19b0,What is the most famous constellation out of earth?,B,milky way,D,stars,0.142857,0.857143,False,0.857143,lexical
+95acebea992a26c3a7c3bfb45845fa83,"If a reception is held with hotel guests walking by, what is the likely venue?",C,lobby,D,large room,0.266667,0.733333,False,0.733333,lexical
+c2c2a387fd9a6a26cff636008de21f71,What is a place that is far away from your house and where you could consume beer?,B,friend's house,A,refrigerator,0.384615,0.615385,False,0.615385,lexical
+57e96118fee6e2bbac5f59790fc833c0,"If a court case is dismissed after hearing testimony, what would be a likely cause?",A,change of heart,D,boredom,0.181818,0.818182,False,0.818182,lexical
+b9b82aa4c236cd342ff95455b8516a42,Sitting down quickly after eating beans could lead to what?,A,flatulence,D,fall asleep,0.571429,0.428571,False,0.428571,lexical
+41fac392c6a5827c1b6682d5d3798e59,"John was my neighbor, it was easy to talk to him. He was never what?",B,distant,E,foe,0.0,1.0,False,1.0,lexical
+5c224410a40c9269b1e542cfcb430d35,Where do people want to have a lot of coffee?,B,office,D,kitchen,0.461538,0.538462,False,0.538462,lexical
+0b90c6710a65eb55fea4cc92895bf601,"You stop and have food all around you, what are you?",E,full,D,grew,0.0,1.0,False,1.0,lexical
+70af2b5df22ec96901350dfa3c9ee74f,James was meeting a friend.  They had planed a slow day. They didn't want to do much.  They just wanted what?,A,relaxation,D,joy,0.153846,0.846154,False,0.846154,lexical
+f9243ef9f0037657c337d3c6a9832f05,"The car's steering seem quite loose, but he still considered purchasing it because he needed something small and what?",D,compact,B,faithful,0.266667,0.733333,False,0.733333,lexical
+27f2074270ea8a5e8f5ec2a017ec4a50,"Dan was a farmer with just one heifer.  But that was okay, he only kept her for milk, and he didn't think he'd find good farmland in a place as cold as where?",C,michigan,B,farm yard,0.235294,0.764706,False,0.764706,lexical
+63b3652d54c8c0e571f6bb50de318bf0,It's Friday night and Alice puts off going to bed because she plans on doing what Saturday?,B,sleeping in,E,insomnia,0.315789,0.684211,False,0.684211,lexical
+0843c51212a3c2eee660fab5648c9e19,"His phone was dead and they couldn't find the expressway, he opened up the glove compartment and handed his passenger the what to navigate?",C,map,E,american city,0.25,0.75,False,0.75,lexical
+1b3d286458a7e7f069222de0376d06da,What would someone use a personal key for?,C,own home,B,at hotel,0.5,0.5,False,0.5,lexical
+86e2aabfb9d401567f04d87a648ff776,"The cat kept pestering it's owner, it was that time of the day and it was what?",C,hungry,D,feline,0.166667,0.833333,False,0.833333,lexical
+092c24369367b3c7457198f3ce160fe3,"Her voice lent her to the alto section, what group did she join?",C,choir,E,marching band,0.333333,0.666667,False,0.666667,lexical
+cab9eea2a91b1bd5c0a01b11f594f154,Where are you likely to find a Japanese restaurant not run by people from Japan?,A,california,B,downtown,0.222222,0.777778,False,0.777778,lexical
+6e77de03bee86d6c20780e14f00944d0,Animals who have hair and don't lay eggs are what?,C,mammals,D,attack,0.307692,0.692308,False,0.692308,lexical
+7f25dbab26165b3c8800c2733ca759d6,John was an aristocratic fox hunter.  Where might he live?,B,new hampshire,D,arkansas,0.285714,0.714286,False,0.714286,lexical
+9024493a3edbaf555fda5b477e835bf5,Where is a grape likely to be being fed to someone else?,E,painting,B,bathroom,0.25,0.75,False,0.75,lexical
+fc59ab1a9e6d2b51126dd828d30e9167,"Some food can be stored at room temperature until you open it, then you should keep it in what?",D,refrigerators,E,kitchen,0.1,0.9,False,0.9,lexical
+5a50ea4bb2d13dc4f620ebd45025d445,Sam couldn't get back to sleep because of a dream he had.  It was a what?,E,nightmare,C,dreamworker,0.2,0.8,False,0.8,lexical
+8becd2ee4e86258566a9c2b0e6d9544e,If you're going to a party in a new town what are you hoping to make?,B,making new friends,E,set home,0.153846,0.846154,False,0.846154,lexical
+2a21820a135e1a49883525c055c74a0b,How is riding a bike getting it to move?,E,pedalling,D,good balance,0.380952,0.619048,False,0.619048,lexical
+e5adfec0b5ba691ec752f9b5e0fb8084,Where does one usually keep literature?,D,shelf,E,meeting,0.166667,0.833333,False,0.833333,lexical
+406e15b76269d20b5448a91648094291,WHat type of keyboard is made up of one or more pipe divisions?,E,organ,B,typewriter,0.133333,0.866667,False,0.866667,lexical
+9c596382ea15768f95b5ef9ceec191dc,"The bell rang, and the congregation began to what in to the church?",C,funnel,E,associated with telephones,0.125,0.875,False,0.875,lexical
+7a3d0c94438a5c8a09364aaebb848a2c,"James needed smooth sandpaper, but instead he got what type?",A,rough,C,uneven,0.181818,0.818182,False,0.818182,lexical
+1ef68db97654f30cd3701b942fadc934,Where would you borrow furniture if you do not have any?,B,neighbor's house,A,sewer,0.190476,0.809524,False,0.809524,lexical
+abb090bbc572be1016bcd5f261f28e76,What must happen for an animal to and it's offspring to continue livng?,C,reproducing,D,food consumed,0.25,0.75,False,0.75,lexical
+91f2532a832a35cba1b08a3c767be6da,"I want my wine stored in darkness, where should it go?",E,cellar,C,moon,0.0,1.0,False,1.0,lexical
+f8544c9679d27b747dfad3b8d7aac87a,"If I want to open a steakhouse, what should I get first?",E,building,A,michigan,0.375,0.625,False,0.625,lexical
+a7f423c1636ba9e36d18e381928c5dcc,"Sarah didn't like to play but she didn't want to be sedentary and bored, either, so she took up what?",C,musical,B,longplay,0.133333,0.866667,False,0.866667,lexical
+e1d354cbfcd620e5dacf83c17746c4b3,Joe found spiders while checking something outside.  What might that be?,D,mail box,C,storage bag,0.315789,0.684211,False,0.684211,lexical
+53e1e50d204f6ad5a0f69429eadae82e,What would you do if your date does not show up?,A,wait for,C,go for haircut,0.363636,0.636364,False,0.636364,lexical
+48205cc84aab5e455b22e17c3cc7277d,What did the adult do before the job interview?,B,dress himself,C,marry,0.111111,0.888889,False,0.888889,lexical
+0f7419d25337e0a75503a015ae777905,Most items in retail stores are what even when they are on sale?,A,overpriced,C,expensive,0.210526,0.789474,False,0.789474,lexical
+5cac4da628f0a58db980649079bd5784,John farms anemone in what type of facility?,D,nursery,A,michigan,0.133333,0.866667,False,0.866667,lexical
+78d1218aeff70a70904767349e3c4c53,Brawn opened the curtains so that the sun could do what?,C,warm room,A,dry clothes,0.3,0.7,False,0.7,lexical
+cce13a32fedb997c017d3fac87c34912,How might releasing energy that has built up feel?,B,wonderful,C,exhaustion,0.210526,0.789474,False,0.789474,lexical
+6714487b839f648e348ac972ed114af3,What would you do if you have curiosity but are blind and paralyzed?,B,analyse,E,see favorite show,0.166667,0.833333,False,0.833333,lexical
+3e536d9253bfac45de83e8ee291ca143,Where might it be hard to get furniture to?,B,loft,A,apartment,0.153846,0.846154,False,0.846154,lexical
+9f830faa0f8e3d7fb3a658c15a5fbe63,A great teacher can be what when you are attending school?,D,inspiration,E,boredom,0.222222,0.777778,False,0.777778,lexical
+bbcef409e0acb71b515acc144d5b402c_1,Where would you get jeans and other wearable items to take home with you?,D,clothing store,E,bedroom,0.190476,0.809524,False,0.809524,lexical
+cbb0c9a69ca0922371a48177087ef407,In what substance do clouds float?,C,air,B,top of mountain,0.222222,0.777778,False,0.777778,lexical
+b92f786638796fc028947ac0e9a44fef,Where is the large area location of the empire state building?,E,new york city,D,fifth avenue,0.16,0.84,False,0.84,lexical
+5abeb4a2126597d4ef7b5a32e9e22abf,Where do most people make coffee?,E,kitchen,D,washing,0.285714,0.714286,False,0.714286,lexical
+8d4b0312f02be445e09a9462873d02bb,What kind of service is my body a part of when I'm no longer here?,D,funeral,E,graveyard,0.25,0.75,False,0.75,lexical
+f7140f00ddd8d1c5d93b05ea32ad1fff,"Many people wanted to leave their country estates for row houses, what did they need to move to?",D,city,B,england,0.0,1.0,False,1.0,lexical
+8b3b598a647dfd2d63fcedce5f461040,Where can someone get a new saw?,A,hardware store,C,logging camp,0.076923,0.923077,False,0.923077,lexical
+7a900bc3a373806b6c56f0e19534005f,What would you do to a crime scene before asking a question?,E,analyse,A,express information,0.153846,0.846154,False,0.846154,lexical
+3d79c10ddf26a5ed7dc0bb168fb0b3ed,"The man didn't do great in college, all his best memories were late night with his brothers at the what?",B,fraternity house,A,big city,0.25,0.75,False,0.75,lexical
+b7091d2bfcea421d787ce9e7982f104a,In a horror movie victims usually trip when the run in order to do what in regards to the killer?,C,get away from,E,go faster,0.363636,0.636364,False,0.636364,lexical
+d060ab71d0efff3cab5960089a6bb3a2,"The coach decided to make a lineup change, the team's effort was suffering from what?",B,stagnation,C,tradition,0.631579,0.368421,False,0.368421,lexical
+b399f6008d90dbd92bcce5abed4c1fd1,Where would you go if you want to buy some clothes?,A,mall,C,grocery store,0.0,1.0,False,1.0,lexical
+80c19c62338edae0e8a1f5c6fec0d29a,Where is food likely to stay dry?,B,cupboard,E,fridge,0.285714,0.714286,False,0.714286,lexical
+1a4e83b433620cb2d7d806882f8d57e4,What is it called when a person with mental illness is able to lead a relatively normal life?,A,managed,B,effectively treated,0.230769,0.769231,False,0.769231,lexical
+b9e04a53c0ee7325b901de4d12d56884,Where do you keep musical instrument so it doesn't get scratched?,C,case,B,orchestra,0.307692,0.692308,False,0.692308,lexical
+7490aa460f66000555a8a94008179cbb,"The woman is watching television and trying to forget her day, what is her goal?",E,relaxation,A,entertainment,0.26087,0.73913,False,0.73913,lexical
+ad8ee2965a33ff4b0e3d2ac732676594,"While John Candy and Dan Aykroyd didn't run into a gazelle, you'd have to go where to see one?",E,great outdoors,D,television program,0.1875,0.8125,False,0.8125,lexical
+64d2310eff6b661baeb41b4ccc392e35,When we are running what are we doing?,D,go quickly,B,running from police,0.344828,0.655172,False,0.655172,lexical
+6b1f5ebd9d0dbc7e34a598456a6091a8,It's dangerous to let pet birds free so it's better to keep them what?,C,caged in,E,prisoner,0.125,0.875,False,0.875,lexical
+080ef6941410139d6869e78122bc741e,"A beaver is know for building prowess, their supplies come from where?",C,wooded area,D,pay debts,0.2,0.8,False,0.8,lexical
+6c70d98cfb8e97fda8caefcee761a229,Zane doesn't like answering questions.  He's not good at it because he suffers from what?,D,confusion,E,satisfaction,0.380952,0.619048,False,0.619048,lexical
+75ac594b4fdbfba006e61315d1b2c815,Going public about a common problem can gain what for a celebrity?,A,wide acceptance,E,press coverage,0.275862,0.724138,False,0.724138,lexical
+5a8e7d2f97f76adb23fbd59a009d16f0,"The electricity went out and everyone was shrouded in darkness.  They all remained in their seats, because it would have been dangerous to try to find there way out.  Where mihgt they have been?",A,opera,E,grand canyon,0.235294,0.764706,False,0.764706,lexical
+178cb8153123716aa94f286b615149d4,Where could you find hundreds of beauty salon?,D,city,B,mall,0.0,1.0,False,1.0,lexical
+cc917ca0e03c91a5141920f5a902a36c,If it is Chrismas time what came most recently before?,A,halloween,E,give gift,0.111111,0.888889,False,0.888889,lexical
+a7d51b753c2113d8b2dbd0ebb5375855_1,"If someone found out their brother was having a daughter, they would have to add a niece limb to the what?",D,family tree,E,baby shower,0.363636,0.636364,False,0.636364,lexical
+e71da9e95b321763c86e879a47bbd327,"The criminal insisted he must do the crime to the bank teller, but she tried to convince him there were other ways in life and this was what?",E,unnecessary,C,should not,0.190476,0.809524,False,0.809524,lexical
+ec86900559a0faf2aef066e511a4cfa6,what do you fill with ink to write?,B,fountain pen,C,pencil case,0.26087,0.73913,False,0.73913,lexical
+d312741df1b14bcbe358f4f30aff3994,"He walked into the room and had a great shock, his friends had what him?",E,surprised,C,calm,0.0,1.0,False,1.0,lexical
+0df3f58645b4bc306093845fb297a50e,"He wasn't the hugging type, even when he meet friend he'd just do what?",E,handshake,D,conversation,0.190476,0.809524,False,0.809524,lexical
+27d9b4df2ca50112d282331df4923e96,"If you were lost you might need a map, the best place to find one on the road is at any what?",E,gas station,B,amusement park,0.32,0.68,False,0.68,lexical
+ab755203f41a2e241f0ee8a53c54f287,Where would you put a net if you wanted to use it?,D,fishing boat,C,soccer game,0.26087,0.73913,False,0.73913,lexical
+f13efb91090dd28fd2b3c1f4dde680fd,Sage loved communicating  He liked doing what with his peers?,A,exchanging ideas,E,learning,0.5,0.5,False,0.5,lexical
+e98031901c815e55040d9fe28c4d9387,Where would a cat snuggle up with their human?,D,comfortable chair,A,floor,0.272727,0.727273,False,0.727273,lexical
+fb64149cf01c5b496d986f56852273e9,What is a place that has large cable hanging overhead?,D,substation,C,shower,0.25,0.75,False,0.75,lexical
+2ac72eaf30a633c410b1bd658bbef0ba,Where do cars usually travel at very high speeds?,C,race track,B,road,0.285714,0.714286,False,0.714286,lexical
+22fc45d9e6d0baea4a5b0526504225b8,What might a person be watching if they see a man with a suitcase full of money?,B,movie,D,airplane,0.307692,0.692308,False,0.692308,lexical
+4ef3d70648ee3cea028bc5ed0fdfda28,Eating breakfast in bed while seeing a homeless person shivering outside your window may cause you to what?,C,feel guilty,D,indigestion,0.181818,0.818182,False,0.818182,lexical
+059155c50d1b04da7373e309868e67d2,"If I put in my key and open a hinged door, where am I likely entering?",C,own house,D,building,0.117647,0.882353,False,0.882353,lexical
+33d023a6806390eb8195380331e17404_1,"If somebody is working at a reception desk, they are located at the front entrance of the what?",C,building,A,motel,0.153846,0.846154,False,0.846154,lexical
+63f7ad481a63fc8c6dffe00519d4a167,If you're reading a newspaper from another country what are you doing?,A,learning about world,C,get angry,0.344828,0.655172,False,0.655172,lexical
+a2daf73d33541af0846673afd8e49abe,"They wanted to recognize his accomplishment, where should they put his name?",A,certificate,C,phone book,0.095238,0.904762,False,0.904762,lexical
+7d70208061ae3185bcfc9e912ee9e141,What is it called when a person tends to leave things to the last minute?,A,procrastinate,C,headache,0.190476,0.809524,False,0.809524,lexical
+9003c4748b08d5a734747e499599ff20,What will you do if you do not want to settle in one place?,C,wander,E,disturb,0.307692,0.692308,False,0.692308,lexical
+28aac6d39cdd270d2a6a28e1985484cb,Where would a person live that isn't in the metro area but still has good schools?,C,suburbs,B,bed,0.2,0.8,False,0.8,lexical
+8bdbb8caefcc607a9ec7579aa0c87cba,"Jane works for the government as a senator, where does she spend a lot of time?",A,capitol building,C,washington d.c,0.266667,0.733333,False,0.733333,lexical
+95a85df48902d23eb3fda25a99fca1a0,What is it called when two people in love have children?,B,procreate,A,take oath,0.333333,0.666667,False,0.666667,lexical
+79c3378b7660d328902d7c0ad442a37f,What did the policemen do when they heard a cry from a distance?,E,help,D,direct traffic,0.111111,0.888889,False,0.888889,lexical
+8c12e5864463cfcd03f4d0ab67949d01,"It takes ambition to complete a job, but the first step is to what?",B,begin work,E,go to school,0.272727,0.727273,False,0.727273,lexical
+e145618c2062eb9ea8928fdb0d42185e,Where would I not want a fox?,A,hen house,D,outside bedroom window,0.258065,0.741935,False,0.741935,lexical
+35872be88df5f6c4a6600020266a5458,What type of building has the most top floor?,C,tall building,E,cabin,0.444444,0.555556,False,0.555556,lexical
+055817d8d703d3c2802545e3fccdcde3,What do humans do to other humans after death?,B,burial,E,decomposition,0.105263,0.894737,False,0.894737,lexical
+5ef6cdb85468df482e3aa6fa339d6e41,Where can you find a restaurant's phone number?,A,yellow pages,B,town,0.25,0.75,False,0.75,lexical
+1e939cc6fef999953d692b57caab254b,What would you put coins into to make it work?,B,water fountain,C,desk,0.111111,0.888889,False,0.888889,lexical
+3a3b5d4a517ef70d25eb558f1a622937,"A patriotic guy with a camera is looking for a bald eagle, what is he likely to do with the eagle if he finds one?",E,photograph,D,thermal,0.352941,0.647059,False,0.647059,lexical
+a943522f7d407cef369d5d3f1bf48589,Where can you go to use a piano in your neighborhood if you don't have one?,C,neighbor's house,E,drawing room,0.285714,0.714286,False,0.714286,lexical
+57a343d72031b668e5eb91868420e915,Where would you get a shower curtain if you do not have one?,A,department store,B,restaurant,0.384615,0.615385,False,0.615385,lexical
+c4b1a57e7880b9cb367f9c67abf5605f,Kissing is normally an activity reserved for your romantic what?,B,partner,E,cooperation,0.333333,0.666667,False,0.666667,lexical
+e313d7967f72c2b880213daaaf4b7181,What does a child learn to do before school?,C,dress herself,E,socialize,0.090909,0.909091,False,0.909091,lexical
+3c7992df7fda23bcdeacb1f1f6b73448,"He was getting advice for the job interview, they told him when talking to the interviewer always make what?",C,eye contact,A,get tired of,0.347826,0.652174,False,0.652174,lexical
+d6644eacdb543a60545d2eb1ac7e6dbd,According to what book did an apple tree lead to the downfall of man?,A,bible,D,new york,0.153846,0.846154,False,0.846154,lexical
+d1ad9b79f54205b6b9ac19a27f9c2be5,"The neighborhood had a great sense of community, there was always a crowd at the landing of the what?",E,apartment building,C,ocean,0.173913,0.826087,False,0.826087,lexical
+f116ee6620c0f171e5db54bc03a5f2e2,What might a kind person do?,C,open doors,E,study greek,0.095238,0.904762,False,0.904762,lexical
+ea82f9e938cbfce85fb498ce46264253,What will a person do at work?,C,make money,E,come home,0.526316,0.473684,False,0.473684,lexical
+edbb57ac2f476679ae547f75ec2bef3e,John saw a fox running along the beach and was glad to be on the east coast.  Where might he have been?,B,south carolina,C,louisiana,0.434783,0.565217,False,0.565217,lexical
+07a99d5f2ca7028febeb9f09604b36c8,Name a location where you would not want to find mice.,B,attic,E,laboratory,0.266667,0.733333,False,0.733333,lexical
+b42ef8be1748c19fa5938de5396f8fad,"The man started to learn jogging, what was he hoping to do?",B,getting in shape,C,fitness,0.173913,0.826087,False,0.826087,lexical
+236691d38665d7bcdd0c9b9834252a51,Where do most people turn to get information on their phones?,D,google,C,online,0.5,0.5,False,0.5,lexical
+8ef78abb86fc282ccb02bbc495f13030,What happens to a body after death?,D,decomposition,E,obesity,0.4,0.6,False,0.6,lexical
+313d033c33ec475e04e628f87c5686bd,What type of non-vegetarian soup is one likely to find a potato?,C,clam chowder,E,pantry,0.222222,0.777778,False,0.777778,lexical
+d581e0ad6a4c89465dc1a527bd2d3f77,"Though she had a disability, what did her encouraging and positive coach see in her?",E,potential,A,qualification,0.181818,0.818182,False,0.818182,lexical
+f232bfea2a7611999688a252e476c040,"They had a theory of what they could do in t he big game, so over and over they would what?",B,practice,E,practise,0.875,0.125,False,0.125,lexical
+91756d8e475d8d59fa0a4e35f408e366,"When you see something rise, you are where in relation to it?",D,below,C,fall,0.222222,0.777778,False,0.777778,lexical
+866ea9c668c0b42df19fa20865e31f77,"They were getting ready for a really long hike, he put the food can in his what?",D,backpack,E,make person sick,0.25,0.75,False,0.75,lexical
+22015315e7ff79386877828b4fa27799,Where would you keep a rug near your front door?,D,living room,B,desk,0.0,1.0,False,1.0,lexical
+484f6e4fb8e6431b010c299490b72e3c,When you slip from a ladder propped on anything what will you do?,B,fall down,E,surprise,0.0,1.0,False,1.0,lexical
+7322d0dcf2e27c7032626a3639f5696b,What do you do when you need to get food?,E,shop,B,disneyland,0.142857,0.857143,False,0.857143,lexical
+0519b0b0869681c2884f53dbfa43e538,"Brad tried to arise from bed but he could not.  Instead, he just continued to do what?",C,lie down,A,go down,0.666667,0.333333,False,0.333333,lexical
+1ab04c0501b815b2a48f2581f04215a8,"If a heifer is really high quality, you might take her where?",C,cattle show,E,corral,0.352941,0.647059,False,0.647059,lexical
+7776b10c7bb96f3fe5e026678673634d,What do people want to acquire from opening business?,B,wealth,A,home,0.2,0.8,False,0.8,lexical
+f7c005244d406b9bde48dc8c22003af1,What has someone who had finished their undergraduate done?,A,graduated,B,masters,0.375,0.625,False,0.625,lexical
+88501d528c855e2b533b3fea2f86183d,Where are bus stops more common in what parts?,D,urban area,E,towns,0.133333,0.866667,False,0.866667,lexical
+3d9c3253e24fb108cea9083e8a853cf2,"Bill wanted to pick up a stranger, preferably a responsible one with kids.  Where might he look for one?",D,park,B,paradise,0.5,0.5,False,0.5,lexical
+9808782b2e2e1bfbfa27c41e605bfffe,Where might a lemur frolic in the market?,C,india,E,rain forest,0.25,0.75,False,0.75,lexical
+c432b860fcd7297751ff5254ec4a7956,What might I place under the furniture?,A,rug,C,toy,0.0,1.0,False,1.0,lexical
+732af155f677a51d05d0c9e080d598b6,Everybody began performing once their director stated what?,D,action,A,fear,0.2,0.8,False,0.8,lexical
+48abc2c113623fd72f758502529f93a5,"By learning about the world, many poor college students gain what?",C,desire to travel,D,global warming,0.066667,0.933333,False,0.933333,lexical
+03f06f77aaf80b5f5e296ffbd11e9d82,Where are required to carry books all day?,B,university,E,table,0.133333,0.866667,False,0.866667,lexical
+e7084c166ec67d0f983a26e055e845c6,where is seaweed from?,C,ocean,D,water,0.2,0.8,False,0.8,lexical
+c55c31b5a2aa996f3b75ad88c017a6b9,how can i store cooked steak?,B,freezer,C,plate,0.166667,0.833333,False,0.833333,lexical
+463521a93ae71e93bea8b97cdf7a6792,John wanted to clean all of the dust out of his place before settling down to watch his favorite shows.  What might he hardest do dust?,D,attic,E,most buildings,0.210526,0.789474,False,0.789474,lexical
+c036ce033bc429ac1aba0a6ac8d057e1,"Something had the nerve to break into the garbage last night, what did it?",B,animal,D,brainstem,0.4,0.6,False,0.6,lexical
+db7f2bfdabcf53d6778fd7af80b603d2,Where would you go to get some pamphlets if you want to own them?,A,bookstore,D,mail box,0.235294,0.764706,False,0.764706,lexical
+8605fd2affc796d79073d0f3ef0761c9,"The audience cheered when a goal was scored, what were they spectating?",B,sporting event,E,television,0.333333,0.666667,False,0.666667,lexical
+ad37795fd9e3a65553683ff305b5113d,What western state has thousands of miles of shore?,D,california,C,beach,0.133333,0.866667,False,0.866667,lexical
+bcd51af35d691f5c3b6b548096ab1559,"Everybody seemed to be crying at the holy site, the tour guide explained that this was what?",D,common,E,halibut,0.0,1.0,False,1.0,lexical
+b5345f15d5b451562ab9e0851e7f394f,The smile gave away that the what was one of happiness?,C,cry,D,frown,0.25,0.75,False,0.75,lexical
+6a884d5d8febfdd86fcf68ff1a904d9b,Where is a public monument likely to be erected by a city?,A,municipal park,B,office,0.2,0.8,False,0.8,lexical
+a1303b5177df0a5b653c9abd7d5f5e08,Where would a person live if they wanted no neighbors?,D,woods,E,suburbs,0.166667,0.833333,False,0.833333,lexical
+315baf79f8dd3673f67a90de0758240e,Where is the control room that controls a PWR located?,E,nuclear power plant,A,building,0.074074,0.925926,False,0.925926,lexical
+01f01cc3ad152773ef42b30e926912bf,What happens to a dog before someone puts up posters of them?,A,get lost,B,require water,0.190476,0.809524,False,0.809524,lexical
+f192cfacbaa2f7e0e879f673c8e076a7,Where are the most famous BBQ steakhouses in america?,A,texas,D,maine,0.2,0.8,False,0.8,lexical
+ab8d5e21a2cf34b60a04768b01f1f8e9,"He kept plugging away in his cubicle, it seemed he was the only person not called into the what?",B,conference,C,assessment,0.3,0.7,False,0.7,lexical
+5d1df1daa886efb78db2103ddc1398eb,If you're attending school and are falling asleep you're likely experiencing what?,A,boredom,B,malaria,0.142857,0.857143,False,0.857143,lexical
+2f8b35d352097cc9277599be49fab0b3,"I want to buy a gong, where should I look for one?",E,music store,A,orchestra,0.4,0.6,False,0.6,lexical
+18eb6a3b54ccf4989e268cfb9ea90f9c,What would friends do if they need each others' help?,B,group together,A,call each other,0.344828,0.655172,False,0.655172,lexical
+3e12400bc5a2038a747edf2605787fe8,"When people are playing a game, what is their motivation to play?",C,desire to win,B,dance,0.222222,0.777778,False,0.777778,lexical
+72baf6ca5c4daa01c2cc7fda22183db8,Where could there be a battle that involves words?,A,court room,C,video game,0.3,0.7,False,0.7,lexical
+9bac07574c966cae34c85e9f25538cba,"John didn't mind getting in line.  It was what game after that he hated.  The time, the sore feet. He did not like doing what?",B,standing in line,A,have to wait for,0.25,0.75,False,0.75,lexical
+fe2a21ddb1bde76025a961126044a9a3,What is the process of going somewhere?,D,transporting,B,energy,0.222222,0.777778,False,0.777778,lexical
+d03e09b22927542d6b0d5ebe233e467c,"The old man needed to have rest multiple times a day, he would do what on the couch and catnap?",E,lie down,B,lay in bed,0.444444,0.555556,False,0.555556,lexical
+e63a210053cf7f961ca0b5a7e6eb355d,The end of the barrel of what primitive firearm is bell shaped?,C,blunderbuss,B,funnel,0.352941,0.647059,False,0.647059,lexical
+a4b4242fab25e86a9d7ffedcaecdcdbe,Where is a good place to store pamphlets in your home or office?,D,drawer,E,bookstore,0.266667,0.733333,False,0.733333,lexical
+ec8797b12e3c6666ebe70b2a7680b66f,"Many humans enjoy fishing and enjoy another relaxing activity at the same time, what activity is it?",D,drink beer,A,getting tied up lure.,0.322581,0.677419,False,0.677419,lexical
+4536489e5d8e02aadc3fcc7a55effe20,Where would you get some maps that you own?,D,cabinet,B,library,0.142857,0.857143,False,0.857143,lexical
+0854478d174c9127064f0d4b58df7e62,Where is a good place to put a hamburger?,C,mouth,E,pizza,0.0,1.0,False,1.0,lexical
+4b7d1b70060cd1f1a7321795f62a7325,Where is a handy place to store a steel pen in your office?,B,desk drawer,D,warehouse,0.3,0.7,False,0.7,lexical
+0e6a005eec5e6746f3facf4d608bfd8b,A story about World War II would be set when?,D,past,C,newspaper,0.307692,0.692308,False,0.692308,lexical
+2d2b69ad187b7c40273ab13caab7dc19,What type of geographic area will you find a marmot?,A,mountainous area,C,jungle,0.272727,0.727273,False,0.727273,lexical
+fde1f9bfc33da302449c0b950d16c0ea,Most people make stupid assumptions that are based on their prejudices.  What might they do instead to achieve better outcomes?,B,think,A,set table,0.142857,0.857143,False,0.857143,lexical
+3c90a632f46aeab11fbb73aa59a33892,What is something children can do while traveling in a car?,A,listen to music,C,play chess,0.24,0.76,False,0.76,lexical
+1f3ccb722600da7d862531416934949a,Where would you hear a trumpet along with other instruments made from the same material?,C,brass band,D,orchestra,0.210526,0.789474,False,0.789474,lexical
+46ba5d2b8cfc6708e5e2618568d8730e,"The audience listened to the orchestra play, where were they watching the performance?",A,concert hall,B,museum,0.111111,0.888889,False,0.888889,lexical
+f8a2cbc7189b92a809ce9cd857030621,Stabbing to death of a person is what sort of way to die?,B,gruesome,A,pool of blood,0.095238,0.904762,False,0.904762,lexical
+225287e06c993feee34e0f06b25f6ba8,What are you getting from you boss at the end of the week?,B,money,D,work,0.222222,0.777778,False,0.777778,lexical
+e211b1a3f3401d164c8b0bfc10160caa,"If you have a ticket and you are planning to eat hot dogs, where would you go?",C,baseball stadium,E,kitchen,0.086957,0.913043,False,0.913043,lexical
+fce1c5d069758aea57a787fc98dcf7a9,Where is a great place to buy fresh fruit?,E,market,D,tree,0.4,0.6,False,0.6,lexical
+c0d75f9fbf30aa3a612f16edb20d6b8d,"The man took paperwork to other people to consult over it, where was he heading?",B,meeting,C,office,0.153846,0.846154,False,0.846154,lexical
+d07f149d8d953dcc45dda432194c375e,"Stark was just having fun, and he wasn't hurting anyone.  What might have he been doing?",B,playing marbles,A,painting his nails,0.545455,0.454545,False,0.454545,lexical
+080a9cf2d6447a9a4d98b0af311e10da,"The church was giving assistance, what were they hoping to accomplish?",D,helping others,B,hardship,0.181818,0.818182,False,0.818182,lexical
+111501a49dd41ceed9c2073eed5d2b72,"I you believe in god, where will you go when you die?",A,heaven,B,church,0.166667,0.833333,False,0.833333,lexical
+7bb87c6d8eab57d4e983f60025b1f0dc,What can eating hamburger cause immediately after eating it?,D,indigestion,C,eat cake,0.210526,0.789474,False,0.789474,lexical
+5c2bc4335c8860342ec2d568ceb6ac6b,Where is a shelf likely to be hidden behind a door?,C,cupboard,A,refrigerator,0.2,0.8,False,0.8,lexical
+083861fc5ebb9226fff70544f3f83d2b,"The man got a pail to catch the draining motor oil, where was he likely doing this at home?",A,garage,B,hardware store,0.4,0.6,False,0.6,lexical
+520b0eea9148e3cb4d45aa69a55491eb,What kind of cold storage could you find in your house?,E,refrigerator,C,laboratory,0.454545,0.545455,False,0.545455,lexical
+ef6ede0af827ddd1dc7bbeb36a6fdd22,Where could you go to between 1000 and 10000 restaurant?,A,big city,E,yellow pages,0.1,0.9,False,0.9,lexical
+d47986deb91d64b2b15d385da3d2f483,"The pitcher stepped on the mound ready to throw, where was he located specifically?",E,baseball diamond,C,golf course,0.148148,0.851852,False,0.851852,lexical
+c3b7f4196b12714940ac1b9417194df4,Where is a statute found on a platform?,D,museum,A,below,0.181818,0.818182,False,0.818182,lexical
+5d03ad171fd661a28da5b6eb79967a6b,If it's not used for hair a round brush is an example of what?,C,art supplies,D,shower,0.111111,0.888889,False,0.888889,lexical
+7c95d753943c58757fe6e1ccff8aea14,"His parents thought he was suffering from boredom, but the teen loved to lay in bed and just do what?",C,listen to music,A,meet interesting people,0.263158,0.736842,False,0.736842,lexical
+88d8bfb9dc8e77ef642acbe1a129f3db,"At the picnic she was stuck eating hamburger, she was worried because she forgot her chewables to prevent what?",D,heartburn,E,gain weight,0.2,0.8,False,0.8,lexical
+b1a9b20793b46e46e1beedadbf852f84,"The electrode wouldn't spark, it turned out that the what hadn't been connected?",A,battery,E,tube,0.363636,0.636364,False,0.636364,lexical
+81e016974d33fe383c848b6c819791cd,For what entity should the government work?,A,country,B,democracy,0.375,0.625,False,0.625,lexical
+7cf54544d54818d53e7088c0749a3eca,What must a student in engineering do?,C,do mathematics,E,begin to study,0.214286,0.785714,False,0.785714,lexical
+6acd88b9b5dd15e23bbcc3fd679100a8,"The teacher knew her students understood division, what was she hoping they would learn next?",A,multiplication,D,unity,0.210526,0.789474,False,0.789474,lexical
+c96a86957a9ab1d8ca0aeeb7f040d87a_1,"There were times where kids wanted to know a definition, so there was a nice big dictionary in the what?",B,classroom,E,shelf,0.142857,0.857143,False,0.857143,lexical
+6a1bf527af9ed0685ac5e2bf0bd76647,Riding a bike for a long time can cause what?,B,fatigue,C,falling down,0.421053,0.578947,False,0.578947,lexical
+094fe91b20b03c647325fa2ee94470b3,What could happen to a cat other than wanting food?,B,thirsty,E,hungry,0.461538,0.538462,False,0.538462,lexical
+bee2a6eadfaf7a4fa0a214e341ddbe5b,If you turn off the music in a room with no other noise that room would be what?,A,silent,C,silence,0.769231,0.230769,False,0.230769,lexical
+2f97a77d155cb99092e8a7c055737b03_1,In what country are the most fast food restaurants?,D,america,C,center of town,0.190476,0.809524,False,0.809524,lexical
+bc268cd19e2c95c78967fd6b9092fb90,"I want to use string to keep something from moving, how should I do it?",A,tie around,E,ball up,0.235294,0.764706,False,0.764706,lexical
+060cad0d3c007ceb151db9907bfcb214,Where would walk through a central passage to catch an elevator?,D,public building,E,house,0.1,0.9,False,0.9,lexical
+29c2cc0ba85b4afb9c9d29801469a68f,"A potato is kept in the cellar, where is likely to be stored?",D,bushel basket,E,fridge,0.105263,0.894737,False,0.894737,lexical
+6cb895ce89995f6be422f7c4167c7638,What do people do when networking?,A,build trust,D,believe in god,0.24,0.76,False,0.76,lexical
+839f3c37622c1ed5eebc9cd0b9d658e8,Where can you store you spare linens near your socks?,D,dresser drawers,C,home,0.105263,0.894737,False,0.894737,lexical
+3957ac6bab96fc9d4f173ada4692d16b,What do people do when they think too quickly?,A,jump to conclusions,C,build trust,0.333333,0.666667,False,0.666667,lexical
+a4f5e5412f0f8ac9190db1730db07a90,What is someone likely to want as a result of sex?,D,procreation,A,sexploiter,0.190476,0.809524,False,0.809524,lexical
+cb5b39878be0e05a3ffe783801adbc3b,What might someone do after they finish creating art?,B,relax,D,enlightenment,0.222222,0.777778,False,0.777778,lexical
+985a4f1a3f31f1ba6654f4fc48f504df,To get clean clothes you to what to them?,D,launder,E,soap,0.181818,0.818182,False,0.818182,lexical
+5d687fe9c95436ce84230c996d34382d,"The person tried to reduce his weight with a shrink ray, but he got it backwards and only did what?",C,make larger,B,gain weight,0.272727,0.727273,False,0.727273,lexical
+af11faa29097b71141fe192ad019d1dd,"Christine couldn't be having a baby at her age, she thought to herself. What was Christine?",A,old person,E,girl,0.142857,0.857143,False,0.857143,lexical
+07fd8b0aed06406fedb137d11b07a890,Joe plays a percussion instrument in something.  What might be play in?,D,orchestra,E,party,0.285714,0.714286,False,0.714286,lexical
+7044d82a456d0fa6f0210abb03cbf2c4,"If I'm playing ball, I'm mostly trying to do what?",C,having fun,D,win,0.307692,0.692308,False,0.692308,lexical
+e53ba4c7d2a818bdb6001e6924bc8896,What do the terms need to be in order to compete against someone?,B,fair,A,cheat,0.222222,0.777778,False,0.777778,lexical
+ecbc1ab06ad1ed6c53e5293d7a90ebd3,"If you wanted to show off silk, what item could it be on?",D,expensive clothing,E,parachutes,0.142857,0.857143,False,0.857143,lexical
+9a356ff463c042d04ba45bfd627bac20,Where is known to be a wealth of information?,D,library,C,meeting,0.142857,0.857143,False,0.857143,lexical
+0a5c069836784c3d574828d85a20a074,"I saw the receptionist carelessly toss my resume into the drawer, where did I want it to end up?",D,office desk,B,nightstand,0.190476,0.809524,False,0.809524,lexical
+f996430ce208606452868fd2e739d409,What will happen if you inject water into yourself?,B,thin blood,E,move mountains,0.25,0.75,False,0.75,lexical
+26c854d933d2115e7636fdcde57eb463,Athletes soak in hot tubs to relieve what after playing baseball?,E,sore muscles,B,errors,0.333333,0.666667,False,0.666667,lexical
+83c25b9a5db5f9b3fd1ff6c7453d23d0,What does a gambler do that causes him or her to be unhappy?,C,lose money,D,play poker,0.3,0.7,False,0.7,lexical
+a0d02fc32878efdf0b0d420972943492,"There's one obvious reason to eat vegetables, they're plain what you?",B,good for,D,chewing,0.133333,0.866667,False,0.866667,lexical
+73fbd2caac2c3786ca810adfe7030273,"John was a bit think in the head, but he knew that he never saw the lady before.  They were what?",C,unacquainted,D,free flowing,0.166667,0.833333,False,0.833333,lexical
+6c515b068b4d3aa88a5382224d9b866d,Where would you hear a violin along side many string and wind instruments?,C,orchestra,D,kitchen,0.375,0.625,False,0.625,lexical
+0af371b94fb414860b13eea6009ccc31,What is the sun ultimately responsible for?,D,life on earth,C,light,0.333333,0.666667,False,0.666667,lexical
+38e61d4be0da46b3cbbd76dc20bce677,Mandy lived in a train station.  She longed to see distant places. Where might she imagine going?,D,europe,A,downtown area,0.105263,0.894737,False,0.894737,lexical
+cebc07bd5080cc72862cb333b10d782d,"Joe is a  squirrel, which is an animal. He probably lives in what sort of place.",C,woodland,B,outside,0.266667,0.733333,False,0.733333,lexical
+de0386024f32cdf277a785a851b97544,Where could a personal ficus live?,C,front yard,A,cabin in the woods,0.142857,0.857143,False,0.857143,lexical
+9b62cd7f89716f393239e6c6ff3e11d5,"The shark actually counted as evidence, so where did the legal team bring it?",A,court room,C,poker game,0.4,0.6,False,0.6,lexical
+8b25332de2894ab38784235838d38cec,"If the president wanted to ban snakes, where would he issue such a decree?",E,white house,D,new mexico,0.285714,0.714286,False,0.714286,lexical
+dd4a811d18549f1ae1954cf938b28536,"They were searching for rocks, so they missed the birds overhead as they stared at the what?",A,ground,E,waterfall,0.133333,0.866667,False,0.866667,lexical
+e2ff952c17faf1c56a970502630d4c86,"Her son scraped his knee, she fetched a bottle of peroxide from the what?",E,medicine cabinet,B,diaper bag,0.384615,0.615385,False,0.615385,lexical
+3a6140e475cbbd3ee1da5ba9a6953597_1,Where would you expect to find a dictionary along side other writings you can borrow?,E,library,D,table,0.166667,0.833333,False,0.833333,lexical
+e75e0c11e2d5a7b634455a1b4b76856c,What would be necessary for getting in shape?,B,exercise,E,feel better,0.315789,0.684211,False,0.684211,lexical
+3b9ccdcb1c932c46a38e040d3e6c7f5b,A statue that shoots liquid is called a what?,A,water fountain,E,central park,0.307692,0.692308,False,0.692308,lexical
+6a29b657b29e1506284d8328dffbbd21,If you have a child who gets in trouble for being hyperactive you may need to teach them how to what down?,B,calm,A,park,0.25,0.75,False,0.75,lexical
+96cb628fb7ed2f53245598f707ed2b80,John loved to paint houses.  How did he usually do it?,B,with brush,A,clothes get stained,0.275862,0.724138,False,0.724138,lexical
+bd4e80fa6642a76c064d0bc924411fb0,When you wipe you feet on the door mat and walk through the door where do you enter?,C,living room,D,doorway,0.222222,0.777778,False,0.777778,lexical
+05490e6c191fbc3c2fe0033ed0bd8aa0,What can you use to store a book while traveling?,D,suitcase,B,pocket,0.142857,0.857143,False,0.857143,lexical
+6abd34442438509b4a00c69d6fd24764,Where would you find gazelle under a G?,E,encyclopedia,D,steppe,0.333333,0.666667,False,0.666667,lexical
+e58eb0ec4197c29e961a7bdd4d67de4e,"Competing can lead to great highs, and also great lows when suffering what?",D,defeat,B,aggression,0.125,0.875,False,0.875,lexical
+597d2a1c9df7962218d8b807df1f8212,What blocks sunshine?,E,moon,C,desktop,0.181818,0.818182,False,0.818182,lexical
+68f6ac445cc008d93f931b999b44b0ba,When you feel too much heat in your home you can turn on what?,E,air conditioning,C,get wet,0.173913,0.826087,False,0.826087,lexical
+aa4c5d2d348796b8d7fa324f27f4c34f,Where would you store a pillow case that is not in use?,D,drawer,E,bedroom,0.307692,0.692308,False,0.692308,lexical
+7400e9c4a2c8e600a0f7e2d162a07837,"If the kitten was going to grow up to be a mouser like it's mother, where should it spend most of it's time?",D,farmhouse,C,warm place,0.421053,0.578947,False,0.578947,lexical
+fad197409a977126c9587eccd240ceea,Where is that man buying silk from?,C,china,E,bar,0.25,0.75,False,0.75,lexical
+f09038444aeb1a048f04dedd5b97b769,Where is a teacher likely to keep her clavichord?,D,music room,C,music hall,0.6,0.4,False,0.4,lexical
+0aa23ad1ba9f28bc3e0185237a7ce1cc,Where are you if your bieifcase is going through an x-ray machine?,C,airport,D,office building,0.090909,0.909091,False,0.909091,lexical
+06be29539ad3e1fbd7b53b05243f4bd7,"They were kissing each other good bye, they had no worries because their relationship had a strong foundation of what?",B,trust,E,herpes,0.363636,0.636364,False,0.636364,lexical
+bbe0a1ad733e5699f991ff91b3712a6f,Why would you take a bus to work?,A,commute,D,travel,0.307692,0.692308,False,0.692308,lexical
+9e5ce2b7d9eb404cdf8c7317dd0b5a59,"If you are hungry and going fishing, why would you be going fishing?",C,catching fish,D,wet clothes,0.333333,0.666667,False,0.666667,lexical
+ffde211723f55e9744f94cbc14488a23,"Dogs are very loyal if they have a good owner, they will always what them?",D,defend,C,attack,0.0,1.0,False,1.0,lexical
+5ff8b0deed53b9ff91d58bd5b6f85bdf,What does a farmer need to do to make  a maze on his farm in the fall?,D,grow corn,B,plant seeds,0.1,0.9,False,0.9,lexical
+36f1ceeecde7abf99dab635239e12442,"For many males hair is a concern as they get older, it begins to what, causing a receding hairline?",C,fall out,A,thin out,0.5,0.5,False,0.5,lexical
+e3c9e83c0c62d842de2dfe229f5e6d41,What happens someone who is bad play poker?,E,losing money,B,ante up,0.210526,0.789474,False,0.789474,lexical
+c0e4d0118c9cdfe2edc49ef954572b31,"John loved his snake.  It was the only ting he loved. He hated everyone else and was abrasive to most people, but he loved his snake.   How might you describe the snake?",C,pet,D,rude,0.285714,0.714286,False,0.714286,lexical
+4423c006f2a43f222d4c4e97360c25d3,"The fresh herbs, flowers, and vegetables will shrivel up if people don't do this?",A,water plants,B,believe in god,0.230769,0.769231,False,0.769231,lexical
+9382bc51ba092f55a494eff8615899de,"I picked from an apple tree outside of Fort Wayne, where am I?",C,indiana,B,illinois,0.4,0.6,False,0.6,lexical
+dec1c42628a7448aa364cdada6e82f98,"The janitor never had much to clean after services, but there was still always a paper or two to pick up where?",A,synagogue,C,classroom,0.222222,0.777778,False,0.777778,lexical
+07ea8ff6ee916f2bf9aceab1e19ff99a,If you're celebrating with too many cocktails what may you have in the morning?,D,hang over,B,have fun,0.470588,0.529412,False,0.529412,lexical
+a328285c6212c899e335c45db3c49ffd,Danny found an old film in a sealed what?,D,cabinet,E,movie,0.333333,0.666667,False,0.666667,lexical
+e248968fec422e1fab0f0561fedff76e,Where are you likely to find much more than a drop of blood on the floor?,D,slaughter house,C,blood bank,0.16,0.84,False,0.84,lexical
+2067720531fc03c017af941cec2f6f40,Where is the first place someone leaving the planet ends up?,C,outer space,D,orbit,0.25,0.75,False,0.75,lexical
+70d3ebc00b165d9d08f9491a1dd85034,"The town house went right to the curb, a slot effectively made a mailbox of the what?",B,front door,A,apartment building,0.357143,0.642857,False,0.642857,lexical
+41bab71fea3fa04e5a4e10a2f86996df,"The architect thought that a mezzanine would look good, but the planning committee rejected it.  They told the architect that they felt it was a potential hazard given the ages of the people who would be using it.  What might they be designing?",E,school,B,theater,0.153846,0.846154,False,0.846154,lexical
+e18dd9ffc7b7934c39f2b5e9dee5a8c2,"The person wasn't bothered by the weather, she had remembered to bring her what?",E,warm coat,C,apartment,0.444444,0.555556,False,0.555556,lexical
+449de58e919975867255218484a9fc89,"If you want to learn about the world and understand the real reasons behind cultural norms and mores, you have achieved a sense of what?",A,enlightenment,C,confusion,0.272727,0.727273,False,0.727273,lexical
+9698232e3599157431c9dc8f2fe179cd,What is the hopeful result of going to see a play?,B,being entertained,D,meet,0.285714,0.714286,False,0.714286,lexical
+0b5d0c3bafbe06dd5334c20cd8ea7fe2,A person would join a trade school for finding information related to what?,D,gaining knowledge,B,degree,0.26087,0.73913,False,0.73913,lexical
+7fe53bf68ec57a52a508611acf5b279e,"Joan was a baby, so there were many things she couldn't do, which caused problems for her parents.  Name one thing that makes raising a baby difficult.",E,talk nonsense,C,boy or girl,0.083333,0.916667,False,0.916667,lexical
+68c41ec8415eab50620eb9ecf6f35a6a,Where would you put some ham if you want to cook it?,B,pizza,A,hamshackle,0.133333,0.866667,False,0.866667,lexical
+6c4b2c93a4bdafb6cbf2b2ef2439b06f,Running errands with screaming kids will likely cause what?,C,aggravation,B,insanity,0.210526,0.789474,False,0.789474,lexical
+51e2da7396ab7045533e885dbb98a424,"Sam wasn't lying, but he left out important details. He was being what?",B,deceitful,D,deceptive,0.555556,0.444444,False,0.444444,lexical
+3f6157968fcf50d257ec3d8c729b7443,what does someone have that causes them committing murder?,A,problems,B,distress,0.375,0.625,False,0.625,lexical
+4768aa28fa14569d830f8947565296c1,What kind of place has a leader?,D,country,A,army,0.363636,0.636364,False,0.636364,lexical
+5516b1c93f94aaa0bf9a4c7b124788d4,How is a person likely to communicatewith others?,A,say words,D,thank god,0.444444,0.555556,False,0.555556,lexical
+96ea2c3174229c4a6a0e2ffaed2df378,Where may you be if you're buying pork chops at a corner shop?,E,iowa,B,town,0.5,0.5,False,0.5,lexical
+7905b9f4ba503b0ce13b576808e99c42,Where is a well used toy car likely to be found?,A,child's room,E,house,0.235294,0.764706,False,0.764706,lexical
+e0a7d1df3ce14b27888e785e6636d5f0,Where can fisherman store their rods when on a fishing trip?,C,fishing camp,A,hardware store,0.076923,0.923077,False,0.923077,lexical
+3eb397b96b6c3a245c81ab30205943f1,Danny is having fun just dancing and singing with his friends. He wasn't concerned with things that weren't fun. For him having fun is the same as what?,C,being happy,A,injuries,0.210526,0.789474,False,0.789474,lexical
+536c9af0fae0aa75b32874dfcac66353,Where would you find an office worker gossiping with their colleagues?,A,water cooler,D,bus stop,0.2,0.8,False,0.8,lexical
+dc36293f603cf230f8059fc6f2e5660d,Where would you put nails if they are already packaged?,C,cabinet,E,store,0.166667,0.833333,False,0.833333,lexical
+1510f5183095466e4fe41b82501a9dd0,What is a person who is good at sports considered?,C,talented,E,reproduce,0.235294,0.764706,False,0.764706,lexical
+1fcc547e4e6813afc1a66717248d6c62,"The man acted ridiculous at the funeral, what attitude should he have taken?",C,solemn,E,funny,0.181818,0.818182,False,0.818182,lexical
+68a911b64dc943b5f81c0f8dec7faed7,"The pencil sharpener was broken in the classroom, where did the teacher recommend the student go?",B,library,D,cabinet,0.142857,0.857143,False,0.857143,lexical
+92f423de9a556a66c3eb73e9ddf9399a,Where does a child likely sit at a desk?,B,schoolroom,C,patio,0.133333,0.866667,False,0.866667,lexical
+1cd94405124031e8681cd12bd25e2d61,"He was trying to procreate with many individuals, this led to a what?",D,std,A,moaning,0.0,1.0,False,1.0,lexical
+64ab884bd870f6f68146636b4cce921c,What does playing soccer and winning lead to?,A,excitement,D,anger,0.133333,0.866667,False,0.866667,lexical
+66275550d64d16339c944e6a6d63eb5b,What attraction is sometimes so large that you need a map to find your way around?,A,amusement park,E,classroom,0.173913,0.826087,False,0.826087,lexical
+9b26329d74a6159ab9af4f899303de39,"If my husband never helps me doing housework, what might that lead to?",B,arguments,A,boredom,0.25,0.75,False,0.75,lexical
+f74b7f268d3c190a13f99ede6d2359e1,"The advertisement came in the form of a pop-up, where did it appear?",A,web page,B,store,0.153846,0.846154,False,0.846154,lexical
+22458fdcead20e2def0df0d92d5806f6,WHere do people live?,E,surface of earth,D,football stadium,0.125,0.875,False,0.875,lexical
+f7b96f195a7adfe0c74924a165cfd055,People are what when you're a stranger?,B,strange,E,dangerous,0.5,0.5,False,0.5,lexical
+9b631734e72a0e559da153492c1e7894,"The juror was quite bored and zoning out but wanted to convey he was hearing testimony, so he just sat there doing what?",B,nodding,A,take notes,0.235294,0.764706,False,0.764706,lexical
+caccaa51ee960a92d44e5b949fc35a66,"They wanted to try blowfish, so they went to get some where?",E,fish market,A,atlantic ocean,0.24,0.76,False,0.76,lexical
+def936fda9f6ccee01f57c0f804fabd0,When a main artery is used to expedite travel what would it be referred to as?,D,thruway,B,busy city,0.25,0.75,False,0.75,lexical
+761b0f6c68b1540949b70f76a9e67c78,If someone rules the universe of what are they in charge?,C,everything,B,football game,0.086957,0.913043,False,0.913043,lexical
+8c11546468a2595b29a1297e73334fc4,"The butt was bare, and Sam couldn't stop staring at it.  It was very what?",B,ample,D,bareword,0.307692,0.692308,False,0.692308,lexical
+a5dcac512870e79f5aa2b22dbd662404,Where can many stores with clothing be found?,B,mall,A,shop,0.0,1.0,False,1.0,lexical
+870b07a1c5af2e956673a9680da99852,"After working on the car, what did it end up doing?",E,start running,B,last several years,0.258065,0.741935,False,0.741935,lexical
+f48528156632b9c5b18af9ce2095509b,"When an elderly person needs help performing daily tasks, who might they call?",C,caregiver,A,creativity,0.526316,0.473684,False,0.473684,lexical
+5496c7293f653120e5a5213db2d7b103,Where is beer drank by people watching sticks and pucks?,C,hockey game,E,bar,0.142857,0.857143,False,0.857143,lexical
+9d97e2bb458d93a8bafe4380b08727e3,Where is there a telephone book in almost every room?,A,at hotel,C,library,0.133333,0.866667,False,0.866667,lexical
+26d7d59ef7b9f2e0c2d47419fa5bca91,Where might you see a green field while driving?,D,countryside,E,rural area,0.285714,0.714286,False,0.714286,lexical
+c6f10fd07348bf2cf5488b0d9f38d806,"Some people got escorted out of the library, they were probably what?",B,talking loudly,E,believe in god,0.428571,0.571429,False,0.571429,lexical
+8ebf9d24719649a0b041aea02a6e46af,"If there is a pond with trees around it, where it it likely located?",C,forest,E,rural area,0.25,0.75,False,0.75,lexical
+c961578f4c5768b67b843e5d2ce18452,Blowfish require what specific thing to live?,A,sea water,D,body of water,0.545455,0.454545,False,0.454545,lexical
+cce1b59f7c4f540a84a1a7d6d88548c4,What is the least likely immediate side effect of eating hamburger?,B,death,E,gain weight,0.25,0.75,False,0.75,lexical
+60848ce50295fc745756fbe960e78b88,What would I be doing while going to work and walking?,A,listen to radio,D,walk,0.105263,0.894737,False,0.894737,lexical
+3fdc0c422c524c994b9911a17f1f1834,"A showroom feature washers and refrigerators, where is this showroom located?",A,appliance store,B,vegas,0.2,0.8,False,0.8,lexical
+cc8eac9956f645533b8d7b99702e3507,"The man often made smart remarks, like that any restaurant is a mexican restaurant where?",E,mexico,A,city,0.2,0.8,False,0.8,lexical
+c0e7fa3e39a2d9af2c323416015729dc,"I am looking for honey right from the source, where should I look?",B,beehive,C,farmer's market,0.181818,0.818182,False,0.818182,lexical
+335b51bd3a8ada014bbe6754dcbd425f,Where are there likely to be a variety of flats to choose from?,C,city,B,apartment building,0.090909,0.909091,False,0.909091,lexical
+c7327a1a7d12b6cc0740fc9446270e02,A weasel has a thin body and short legs to easier burrow after prey in a what?,E,rabbit warren,C,chicken coop,0.24,0.76,False,0.76,lexical
+2729d8502208c25d8e9293cd4e8ecbb5,What can disease destroy?,C,human body,A,rug,0.153846,0.846154,False,0.846154,lexical
+7ea57ee4580042b0a6a40479c8ace3e4,What does a person from Avalon live in?,C,english house,B,meaningful work,0.428571,0.571429,False,0.571429,lexical
+65432eb6e617514d863a465f38865fde,Where is one likely to find a fan for their stove?,A,appliance store,C,dress emporium,0.206897,0.793103,False,0.793103,lexical
+316a8dee8a4dde7d95cf503a715104be,Jodie felt a tightness in her chest. She was worried but didn't want to go to the hospital. Where might she go instead?,C,bedroom,B,concert,0.285714,0.714286,False,0.714286,lexical
+520972425aed0e532fa28a91c9b55b30,If you're buying beer for a float trip what are you preparing to do?,B,have fun,A,get arrested,0.2,0.8,False,0.8,lexical
+4d67cdb4ba1b0058e383c212303a9f4e,Piece of land in Canada where you can find marmot?,C,vancouver island,B,united states,0.206897,0.793103,False,0.793103,lexical
+95d1d968ee66b6054cbb16b58a7c6455,"The surgeon's clients had begun to reduce, it seemed girls no longer want to what?",C,augment,A,reduction,0.25,0.75,False,0.75,lexical
+c43b60be106662de1863097ee3ddb4d2,"While waiting for this appointment, people often read magazines.",A,doctor,E,table,0.181818,0.818182,False,0.818182,lexical
+456f2fb41cac8c028dcfe2f48637e473,Where would you find a fox that is made up?,A,storybook,E,back yard,0.111111,0.888889,False,0.888889,lexical
+a5d853d1c2fb3ef160218fb91110fbe5,"In basic training they build you up only to do what, all in hopes of building you up even stronger the next time?",B,tear down,E,demolition,0.315789,0.684211,False,0.684211,lexical
+3df1b88da6a90c9526be2c8a6cc736dc,Billy saw a dog running from him and did his best to get away from it.  The leaped up to where the dog couldn't reach and was stuck.  Where might he have been trapped?,B,table,D,backyard,0.153846,0.846154,False,0.846154,lexical
+f912bcd7479b76db9b1c57a612b90f00,"John and Judy were parents.  They had two wonderful kids who weren't always well behaved.  They were light tough, though.  They felt it was a parent's job to do what?",B,guide children,A,control children,0.6,0.4,False,0.4,lexical
+94f34cc1e6aa9eefe06563cce8225658,What are you playing if you're fiddling on a violin?,A,bluegrass music,C,drop,0.105263,0.894737,False,0.894737,lexical
+bb503ece4eac41dfe608a1dcb654e6bf,"If somebody buys something and gives it to me as a free gift, what is the cost status of the gift?",C,paid for,D,expensive,0.235294,0.764706,False,0.764706,lexical
+5502dc807d4921679ae1abd0dc9570d6,Why does someone flirt with many people at once?,D,attract attention,C,were lonely,0.285714,0.714286,False,0.714286,lexical
+a7e3de0719fe30e7048f67426e29fdd1,James tore the antenna off of his boat due to bad reception as he was crossing the channel from France.  Where was he going?,D,england,E,europe,0.153846,0.846154,False,0.846154,lexical
+d6107d454181b701ddcaa449a1e422a3,Why would a band be performing when there are no people nearby?,A,record album,B,play music,0.090909,0.909091,False,0.909091,lexical
+ab2eb930b29bb6d5e94a6cd3b04ba01e,The dogs were protecting their own when they decided to what the bad man?,E,attack,B,defend,0.0,1.0,False,1.0,lexical
+92869fc0be5dc45f407700692ffd80a0,What is used to grind wheat for bread?,E,mill,C,cereal packets,0.111111,0.888889,False,0.888889,lexical
+6a0177586d506cb7b741f4207b428e42,If you have a large satchel with you when you fly you'll be asked to store it where?,B,luggage compartment,C,with the pilot,0.242424,0.757576,False,0.757576,lexical
+584188da9a429f1bc319abda5e5c7a76,Where would someone keep their nylon leggings?,E,drawer,D,clothing,0.0,1.0,False,1.0,lexical
+e480d4a672af0194e0a6ccdb8c37499b,If you spend a long time running after a ball how are you likely to feel?,E,tiredness,A,laughter,0.235294,0.764706,False,0.764706,lexical
+275c859994f7d3acd3c8863be591ab2c,When you need to rest it's often because you have been doing what?,E,using energy,B,sleep,0.352941,0.647059,False,0.647059,lexical
+32758ab86d888be680845b0dfe7de35e,Boredom and hunger led to a wandering waste of time and a cart full of unhealthy snacks during her trip to where?,E,grocery shop,B,play cards,0.272727,0.727273,False,0.727273,lexical
+69335eb9bc5b7b5df840c38a086bf8b2,"He was beginning to worry they wouldn't get on the ride before closing, they had been standing in queue for a long what?",D,time,C,hair,0.25,0.75,False,0.75,lexical
+4396cb65629672723c7b184424e139bb,This is an unavoidable physiological consequence of running.  What is it?,B,increased heart rate,C,falling down,0.1875,0.8125,False,0.8125,lexical
+2a58e81a9c4ce095d099e0d785fc2da4,"Sometimes a person has a fear of water or a dislike of being wet, it is still important to make sure they are having a bath why?",E,rash,A,flooding,0.0,1.0,False,1.0,lexical
+07f108d5321a66f460685f5c7499ecb2,Where would there be an auditorium with only a single person speaking?,C,university campus,A,lights,0.173913,0.826087,False,0.826087,lexical
+69bef3eb55463d040bdf98e2c97bfe1f,"To get out of there the person had to keep on walking, they had to keep on what?",A,moving forward,C,blisters,0.181818,0.818182,False,0.818182,lexical
+912676495cceefadccbbf8c604486f97,What very large group of western citizens has bees everywhere?,A,united states,D,field of flowers,0.344828,0.655172,False,0.655172,lexical
+bdf92566f14599f1606109677206001f,Miss Grady took a stick from Bob because he was playing with it during class.  She wanted to make sure that he couldn't get to it so she put it where?,A,desk drawer,D,pocket,0.117647,0.882353,False,0.882353,lexical
+0df042743128b57e874bd5d79b7aae7a,How does a person begin reproducing?,B,have sex,E,going on a date,0.173913,0.826087,False,0.826087,lexical
+866ef7266d34c11e5a1b3df49fab96a4,Joe and Jill didn't want their children to be sedentary.  They might limit the time they children spend doing what?,D,watch tv,A,play sports,0.210526,0.789474,False,0.789474,lexical
+67ffcb4c3f2c6a1155e356f8a15ed250,"They were making sauerkraut, the instructor explained the liquid should be above the cabbage in the what?",A,jar,E,can,0.333333,0.666667,False,0.666667,lexical
+87a133afae5d9d29d634f3384f28ef24,From where would you normally take a cup when you're about to get a drink?,E,kitchen cabinet,C,sand box,0.26087,0.73913,False,0.73913,lexical
+4779be55f47a301debfc472e4fc2c7b6,What are you using if there are speakers strapped on your ears?,B,headphones,E,concert,0.352941,0.647059,False,0.647059,lexical
+7a28d31e66d870370642de3be47b9ef9,Because of his anger he couldn't clearly explain or what?,D,illustrate point,C,get mad,0.173913,0.826087,False,0.826087,lexical
+042898e0c71adac5d123aaa6221c9754,Where is likely to not just have a kosher restaurant?,D,new york city,E,dining,0.210526,0.789474,False,0.789474,lexical
+93bbaccb1c46d22124a846b8514de5bc,The bald eagle flew from Mount St Helen's to the Puget Sound and all over what?,A,washington state,E,the desert,0.153846,0.846154,False,0.846154,lexical
+ef889edd1b57d8d0c81e43f73c98c8e9,Where could you get some knives if you are planning to bring them outside with you?,C,kitchen,A,sporting goods store,0.222222,0.777778,False,0.777778,lexical
+f4bb8ecacb9ce89e040f5f76bc79afb3,How can people fulfill their own calorie requirements?,B,feed themselves,A,compete with each other,0.315789,0.684211,False,0.684211,lexical
+ec2e18fd8c18a4ebe5a091e0c8b94462,What does a stove do to the place that it's in?,B,warm room,E,brown meat,0.315789,0.684211,False,0.684211,lexical
+07b51b231a9d6a143d8a73e69121e1b1,What is the best way to begin going into trance?,B,closed eyes,D,sleep,0.375,0.625,False,0.625,lexical
+e1744fc698cffb574e5cf4b29a81ce76,A computer user working on an important work assignment is located in what structure?,A,office building,D,school,0.190476,0.809524,False,0.809524,lexical
+27604394ccee83e089f9ffae1883cf07,The music was festive but why are the horses dancing in circles,A,carnival,B,night club,0.333333,0.666667,False,0.666667,lexical
+1272e693cf9152e7ac71095c643676b5,In the building where James worked there was a small mezzanine in the auditorium to make more space for seats.  Where might James work?,A,theater,B,floors,0.153846,0.846154,False,0.846154,lexical
+7bff23f6c12e9136f0961514bebb8cd3,If you aren't well rested and it's a rainy day what might you do?,D,stay in bed,B,write,0.25,0.75,False,0.75,lexical
+20ae70b9b157b298569cd761787833e7,Where would you have a stove if you don't live in a detached dwelling?,E,apartment,A,tent,0.615385,0.384615,False,0.384615,lexical
+bdd29d7c12e3d795b78ffc048631e7e7,What kind of place has a revolving door and has things to buy in it?,D,mall,C,bank,0.25,0.75,False,0.75,lexical
+cc1a547bdfdcc95e4d632453af14bc96,Where can books be read?,C,table,A,cabinet,0.5,0.5,False,0.5,lexical
+896b25dc41f84357add1c798d4a96cd8,Where is seaweed usually found alive?,C,water,B,found in ocean,0.105263,0.894737,False,0.894737,lexical
+1ca3cd9475d7e9da2ddb74911ee2bb68,"If a lizard is fed by people every day, what has happened to it?",E,captivity,D,encouragement,0.272727,0.727273,False,0.727273,lexical
+129ec46cc2541b73198d774ee632c8d7,What will happen to someone if his or her spirits cannot elevate?,C,depress,E,decrease,0.666667,0.333333,False,0.333333,lexical
+0e5c7c0cec5b693e52f74f5f879d84fb,"If you wanted a license to catch crabs, what government office would you go to?",B,fish department,D,government submarine,0.342857,0.657143,False,0.657143,lexical
+af035b75b6f7a1927b1648963f281c5e,What furniture will you normally find near a side chair?,B,table,C,wheel barrow,0.117647,0.882353,False,0.882353,lexical
+32d5b7fcae24f0d4871cfb219c5a4b47,Metal is used to make what?,C,instruments,E,bowls,0.125,0.875,False,0.875,lexical
+87505da761eaa5c3c4703d02a12d46bc,What is the word added to Manchester that signifies what county it is in?,D,greater manchester,E,cheshire,0.384615,0.615385,False,0.615385,lexical
+ef3d5d35128678937c36438466e0fc93,"The program kept getting errors, the amateur end user began to what?",E,get frustrated,A,get mad,0.571429,0.428571,False,0.428571,lexical
+4f1d8007b446b0e10f07fd63cbd31b6f,"John knew that the sun produced a massive amount of energy in two forms.  If you were on the surface of the sun, what would kill you first?",B,heat,E,light,0.444444,0.555556,False,0.555556,lexical
+4c30d5eed4137cba89747510973f37a3,Lawyers often talk in front of an audience where?,B,courtroom,D,press charges,0.181818,0.818182,False,0.818182,lexical
+515834727e23e30ab7c8fe5ba7e9a765,James bought a new set of tire chains and put them somewhere he could find them.  Where would he put them?,B,garage,E,hardware store,0.4,0.6,False,0.6,lexical
+34ec6393db5a01f689c11fac153e31c1,"If I wanted to eat something that is made from plants and needs to be washed, what would it be?",A,roots,D,leaves to gather light,0.148148,0.851852,False,0.851852,lexical
+0f0e339412f719a019bf373e6daf2530,"Ficus can be planted in a yard to make summer more bearable, what sort of areas do they create?",A,shady places,D,ceramics,0.3,0.7,False,0.7,lexical
+489a082aab43dd1a53f3f1f89c2365ed,Children's behavior is a direct reflection of their what?,A,parents,B,old people,0.235294,0.764706,False,0.764706,lexical
+7c45033e9fd9f1a759923971b14390ed,Most people who are family like to greet each other with a what?,E,hug,B,listen to music,0.111111,0.888889,False,0.888889,lexical
+061f326d2a87a10da6316b55bd5522bd,John bought a new water hose.  But he found his old one near his car.  Where did he find the old one?,D,garage,C,greenhouse,0.375,0.625,False,0.625,lexical
+d747c4e463b80bfcc49b874063f9fae1,Where is a control room needed to prevent wide spread disaster?,D,nuclear plant,E,recording studio,0.137931,0.862069,False,0.862069,lexical
+df3d27338bcf86b341b8b02d4309daf5,Where do you keep your pizza slice before you eat it?,B,plate,E,popular,0.5,0.5,False,0.5,lexical
+db63bf66a8bfd16e5103cbdd350f5202,"Everybody was changing into costumes in the dressing room, it was almost time to take the what stage?",A,theater,D,dwelling,0.133333,0.866667,False,0.866667,lexical
+f8a9208665a4f2d64986940456b4b964,"The homeowner frowned at the price of gas, what did he have to do later?",D,cut grass,E,receive mail,0.285714,0.714286,False,0.714286,lexical
+1bf4c6b5bd870b1a079106e1e97e5d09,"A thoroughfare meandered through fields and woods, where was it passing though?",C,country,A,move about,0.352941,0.647059,False,0.647059,lexical
+c1c73ef0ff662a76cd42c3500240974a,"If I want a new ottoman, where should I go?",A,furniture store,E,den,0.111111,0.888889,False,0.888889,lexical
+aefa60233f3c5c4966f8ac22e901a1c7,Sean was leaving work and took the roadway that led to his what?,A,neighborhood,B,city,0.125,0.875,False,0.875,lexical
+9221962ed3a6094e5c8f33785ce048cd,What can you use to get a jellyfish?,C,hand,D,see,0.0,1.0,False,1.0,lexical
+8c8052980e357545398d27d1c3c832d8,What has a shelf that does not allow you to see what is inside of it?,A,chest of drawers,D,bookcase,0.166667,0.833333,False,0.833333,lexical
+418913999c665ae9527fd14a6132da39,What will likely happen after stabbing to death a person?,B,being arrested,D,mess,0.222222,0.777778,False,0.777778,lexical
+2634468d21fa33a88cefe28a5d613f59,"The boat passenger was explaining his fear of blowfish, but the captain figured he meant piranhas since they were on a river in the what?",E,jungle,A,cuba,0.2,0.8,False,0.8,lexical
+66bfb6e209c94e6be5b0d04b0c7e2064,Where could you find only a few office?,C,school building,E,work,0.105263,0.894737,False,0.894737,lexical
+3163910d665c139a1f6f07d85803baba,Where can I go to be a religious gentleman?,E,church,A,club,0.4,0.6,False,0.6,lexical
+0e52659484f2f6d763cf0d38d4c5999d,"I want to see a prepared slide up close, what would I use to help?",A,microscope,E,telescope,0.526316,0.473684,False,0.473684,lexical
+167d2cfa04bfaea0e0b5bac3598d5769,"Where can you buy a magazine, paper or gum?",D,newsstand,E,bus depot,0.222222,0.777778,False,0.777778,lexical
+39572e0ba1db51fa74f7fc2d90c5ec7f,Where would you get some wood if you do not have any?,D,lumberyard,A,carpet,0.25,0.75,False,0.75,lexical
+2a32b1e541b1daae04690d0d3a4b3310,"The pitcher felt stress and tension on the mound, what did he feel like?",C,hell,B,baseball field,0.222222,0.777778,False,0.777778,lexical
+71cbfeb995b06b21e890c91040722252,What negative effect can competing in a chess game on a cold day have?,D,tension,C,sweat,0.166667,0.833333,False,0.833333,lexical
+a15d564d0be6996251b5d523ac62db2a,Why is it hard for a young child to read a long book?,E,many words,D,past,0.285714,0.714286,False,0.714286,lexical
+6bd170c8d3d99d3c47b3e96427bacaeb,On a hot day what can you do to enjoy something cool and sweet?,E,eat ice cream,D,go for swim,0.25,0.75,False,0.75,lexical
+7bc1198664b376f79d584725ad7f874b,What is likely to be found in a book that is not a foreword?,E,epilogue,A,last word,0.235294,0.764706,False,0.764706,lexical
+d6c002d46d9bfa466637cec4a134f332,How many hours are in a day?,D,twenty four,B,bright,0.117647,0.882353,False,0.882353,lexical
+8cb45b421375243e788cfc64bd77b051,Why is religion so hard to understand?,E,confusing,C,important to people,0.142857,0.857143,False,0.857143,lexical
+d6ff2d749494d89e9c7a53f587c519f4,"The couple explained they were having trouble communicating, it seemed every conversation took great what?",B,effort,C,laugh,0.0,1.0,False,1.0,lexical
+6974d215428a974641c1df18678522f5,What would a person need to do if his or her captain dies at sea?,E,man crew,C,experience life,0.26087,0.73913,False,0.73913,lexical
+b94a9764acff078b52a9cbae04661dc9,What do children require to grow up healthy?,A,need care,E,wash dishes,0.1,0.9,False,0.9,lexical
+80930e9df9ac4ad752749a54e7fc124f_1,I house outside the center of a community is said to be where?,B,subdivision,E,street,0.117647,0.882353,False,0.882353,lexical
+3310b5b24f03d67179fababf9ae95144,"The field general began to write out a letter to the king, he was told to send what when the enemy was near?",C,word,A,syllable,0.0,1.0,False,1.0,lexical
+846bc47ced7119ad2ee19a8780d7fe18,What will you put on a pen to prevent it from drying out?,D,caps,A,write sentences on paper,0.214286,0.785714,False,0.785714,lexical
+fd5a34e94303d7fd343de2a8f36943d5,"After climbing the mountains, the explored found the cave, what was the general goegraphy of the region he found it in?",E,rocky hills,B,kentucky,0.315789,0.684211,False,0.684211,lexical
+4e87db4771f2d6423034935446e3fff1,"They dealt with combustible mixtures in their experiments, this is why they kept a fire extinguisher where?",B,chemistry lab,C,most businesses,0.357143,0.642857,False,0.642857,lexical
+a585df0818180ce3c06f963a4c3c810a,"If someone mean wanted to insult somebody by calling them a fruit, where is probably not the smartest place to do it?",A,gay bar,D,refrigerator,0.315789,0.684211,False,0.684211,lexical
+c9f7d07e6d363a99f5fadd68a4dfa35a,Where would you get a toothpick if you do not have any?,B,grocery store,A,box,0.125,0.875,False,0.875,lexical
+c7cb327fa4c0008efaa7741081a365d4,What would you be building if you designed a place for an annoying critter to stay?,E,bug campers,D,cat condo,0.2,0.8,False,0.8,lexical
+c54ddc0f9d170ba65d9f4f2e0bb41d1c,"The man working in the attic swatted away a bee, but soon the single bee was an entire what?",A,swarm,B,pack,0.222222,0.777778,False,0.777778,lexical
+1729c737ff92cf558efecde2c6cafc5e,What do you need to wear when hiking?,C,shin splints,B,physical exertion,0.206897,0.793103,False,0.793103,lexical
+19dfd55e967dacd6f5700a62c1e14eee,What type of store would have lots of sports equipment?,D,sporting goods store,A,mall,0.0,1.0,False,1.0,lexical
+b9bed83138901f4a45041b02c5b242c1,"The business man was promoted recently, to celebrate he went where to buy an expensive wristwatch?",B,jewelry store,E,hock,0.117647,0.882353,False,0.882353,lexical
+b9d22425a3d5810be9528a55245c8f09,How is a child eager to be going to play likely to get there?,B,rush,A,slowly,0.2,0.8,False,0.8,lexical
+2af70107e04e61e3c7884bc743901c02,There's some new buying products designed to get you money if you have none. The first step is that it will show you how to declare what?,B,bankruptcy,C,pleasure,0.222222,0.777778,False,0.777778,lexical
+be2cb9c96069ac355a7ccef262743d14,Where can you buy a replacement ax handle?,B,hardware store,E,fridge,0.3,0.7,False,0.7,lexical
+799e48ec7fb16415c8f82828c5761ed1,Is that person acting as silly as a clown?,B,ridiculous,D,mentally unhinged,0.148148,0.851852,False,0.851852,lexical
+a5db1e9677af118deb8e4add8bc18db2,Which group of states is Louisiana part of?,D,gulf states,C,united states,0.666667,0.333333,False,0.333333,lexical
+28357ebf85f8bb82b6a3210c4397e0aa,Where would you put a plate immediately after eating from it?,D,dishwasher,E,flea market,0.190476,0.809524,False,0.809524,lexical
+7b95825a19d6930d6aed35c7c57a2d82,James couldn't get comfortable.  There was too much dirt.  He needed to clean out what?,D,bed,E,street,0.222222,0.777778,False,0.777778,lexical
+6b270159bd402ddd498a38153f9d1efe,"The rats were hiding in the house, where were they?",E,cellar,D,clinic,0.333333,0.666667,False,0.666667,lexical
+eae0e03773365064ce915603c7addc91,What do people do when they don't understand something?,A,ask questions,C,believe in god,0.222222,0.777778,False,0.777778,lexical
+a5ca7c89196e54938b5827814d0071d4,James saw a kite flying in the sky.  He traced the string back to its origin and found it.  Where did the string begin?,E,child's hand,D,toy store,0.095238,0.904762,False,0.904762,lexical
+ffc3461d437a1c6c22d1c4f6439ebd9c,What rubber toy filled with helium will make a child happy?,D,balloon,B,learn,0.333333,0.666667,False,0.666667,lexical
+aa2dcd9bcce5e4445bd3bacbf0bb11d3,Where do people get beer after a bit of gambling?,C,casino,E,hockey game,0.235294,0.764706,False,0.764706,lexical
+6cc797ec148c1fc74592957a55bd0951,What can happen to you when you are using television and it is not interesting?,E,fall asleep,B,functions,0.2,0.8,False,0.8,lexical
+64dbe5cb840ef4f1d25f8b68db8d5fed,"The business men left the discussion in the dressing room, now they just wanted to relax in the sauna of the what?",E,bathhouse,B,theater,0.375,0.625,False,0.625,lexical
+a74753bf249c1cbcff632c5c16b0397b,Where is a likely place for an ivy plant?,D,outside,A,flower pot,0.235294,0.764706,False,0.764706,lexical
+9190efbd77fe10b989fcaae35e208a0f,Where has the newest baseball stadium?,A,phoenix,D,san francisco,0.1,0.9,False,0.9,lexical
+ff0303db294a823d4138fb81a6ee6438,What type of residence has a ground floor with a stoop?,A,brownstone,E,office building,0.16,0.84,False,0.84,lexical
+63963c9c15835d451aac2e1e0b116388,If the wood texture is not smooth it is what?,B,porous,D,painted,0.153846,0.846154,False,0.846154,lexical
+cc8324b73ed9625e723ef041dfc77a37,What might happen if someone is not losing weight?,D,death,C,miss universe,0.111111,0.888889,False,0.888889,lexical
+684dbde19719e8224113433981d6e01e,"Billy lived in the capital of his country, then he moved.  Where might he move to?",A,small town,B,jail,0.285714,0.714286,False,0.714286,lexical
+21450618657881d8c5af73691f3423a7_1,"Making a schedule was easy to pick, the major called for knowledge that required a certain what?",B,class,D,university,0.133333,0.866667,False,0.866667,lexical
+8b94b61b604ec0d7508804033eec6d23,"When getting in shape, this is something that does wonders?",E,jogging,C,give up,0.285714,0.714286,False,0.714286,lexical
+52ecf169febc95a7f5ccb048fc85857d,What could prevent a driving car from continuing to drive?,A,automobile accidents,E,low fuel tank,0.121212,0.878788,False,0.878788,lexical
+e408a5a031caec33782cb3b3a005eecc,Where do you store a large container?,E,cabinet,B,factory,0.285714,0.714286,False,0.714286,lexical
+31bd05ba62a16ee35217224b98c6baea,What is a person likely to experience after they stop being married to a mean person?,C,happiness,E,angry,0.285714,0.714286,False,0.714286,lexical
+b4043bd1f65a8ad088e62042eca259c2,"Despite the large crowds, how did the depressed man feel?",C,solitary,E,panic,0.153846,0.846154,False,0.846154,lexical
+4302e727e47f464511d4d04f22bed0d2,Where does a maid empty a trash can?,D,motel,C,hockey game,0.25,0.75,False,0.75,lexical
+f0d473701d52125dd055d23042de1b0d,"The dog curled up for a nap, it was tuckered out because it had just been what?",A,walked,D,go outside,0.125,0.875,False,0.875,lexical
+d35112a99ab3983fb51c3adae80bc2da,"He used an umbrella while tanning, where was he likely?",D,beach,E,jacket closet,0.222222,0.777778,False,0.777778,lexical
+661474a1a0c29dd7a243b284535ac934,What do the feathers look like on birds found in the rainforest?,D,very colorful,E,light,0.111111,0.888889,False,0.888889,lexical
+6416dcdf9b8d7d2787f07e7426f86fe4,The ancient seafaring Norse tribesman brought pelts of weasel aboard his what?,E,viking ship,C,chicken coop,0.26087,0.73913,False,0.73913,lexical
+0f54a1ee30a0034a3d2db1bfdef9ca85,What is the opposite of an area of elevation?,C,depression,B,reduction,0.526316,0.473684,False,0.473684,lexical
+7850beb1209c41fabe385cbedc96a61a,What do singers need to do before a show?,A,warm up,C,clear throats,0.3,0.7,False,0.7,lexical
+cdb06b28b9c4e7ef7e880d1f096fd409,"When a person with mental illness receives medication and therapy, what has happened?",C,effectively treated,E,cause suffering,0.294118,0.705882,False,0.705882,lexical
+14309d9bd3c13d1c0efb625198f6304a,What type of feeling is performing for the first time likely to produce?,E,anxiety,B,butterflies,0.222222,0.777778,False,0.777778,lexical
+a00276c6db928900772c0320aeff77c0,"If someone is found to be committing murder, what did they do to someone?",B,kill,E,go to jail,0.285714,0.714286,False,0.714286,lexical
+4706be6e24f1fafd9ff9fe63583acffd,"The computer was hooked up to the internet, what could it do as a result?",E,receive data,A,process information,0.387097,0.612903,False,0.612903,lexical
+ee8819b2da5453848c1cbb9d9c93403b,The planet Mercury is unsuitable for human life or what?,B,uninhabitable,D,poisonous,0.090909,0.909091,False,0.909091,lexical
+84ea43b967259814d939c62131f74df0,"Seeing idea become reality was a dream of hers for a long time, but as the time came to get on stage she had more what?",B,anxiety,E,ocean,0.333333,0.666667,False,0.666667,lexical
+60e7338e9e6bfc746a15a161eb12706c,A creek could be located in the opposite for the city which is called what?,E,countryside,D,forest,0.235294,0.764706,False,0.764706,lexical
+a0f5414bf98e094f4d807abee28861a4,Where off the eastern U.S. would you find an anemone?,C,florida keys,E,aquarium,0.2,0.8,False,0.8,lexical
+44120a9443c619d98ce5bfe4bb219c43,Where are traveling clothes often kept?,A,suitcase,C,closet,0.428571,0.571429,False,0.571429,lexical
+38ab26e29a0984b212006d39185c43f3,"If one needed the bathroom they needed a key, to get it they had to also buy something from the what?",B,convenience store,E,theater,0.25,0.75,False,0.75,lexical
+a5e207803684eea8a43ca6670c50b354,"Although the sun did rise, what did the pessimist warn everyone it would do?",B,go down,A,lay,0.0,1.0,False,1.0,lexical
+af3b9a8b1962cd3bcd19e644d873e7bc,"The hardcovers were especially tall, so he removed a shelf on the what to make room?",E,bookcase,B,grocery store,0.285714,0.714286,False,0.714286,lexical
+43a91955fd0717997a16897c3324e095,If you're watching a comedy film what would you expect to hear from the audience?,D,laughter,C,being entertained,0.32,0.68,False,0.68,lexical
+7f7a6f2b3087bf37dadbe8aa8d358047,What can eating lunch cause that is painful?,C,heartburn,A,headache,0.352941,0.647059,False,0.647059,lexical
+37d88a9bb24913c1973cc26d4ce3394f,"The performer was ready to put on a show and stepped onto the launch platform, what was his job?",E,trapeze,D,ocean,0.166667,0.833333,False,0.833333,lexical
+001b0f5a841fd81d13fbe67c7c7179d6,"Eating is part of living, but your body doesn't use it all and the next day you will be doing what?",E,defecating,A,reduced,0.235294,0.764706,False,0.764706,lexical
+9f9ca9bb06d6afc31b19c365fb29a1c9,Where are you if you've paid to get a pizza?,C,restaurant,E,plate,0.133333,0.866667,False,0.866667,lexical
+d60c5a494539c66982c0f692afde9499,What would you use to find a place to stay?,B,phone book,A,mexico,0.125,0.875,False,0.875,lexical
+a6d3a2cb250a6310b8cabd31dbe2138c,"If you're seeking a connection for your laptop, what are you trying to hook up with?",A,computer network,C,lineage,0.173913,0.826087,False,0.826087,lexical
+27c523eb9099d2eec66296558eb4448e,"The child didn't know the problems his mother was going through, all he had was what for her?",C,loved,E,learn,0.4,0.6,False,0.6,lexical
+2509fdd7d94afe9d0c021654ce0ba93f,To see new films you must?,B,go to movies,C,kick ball,0.095238,0.904762,False,0.904762,lexical
+75b8195e23c6bada574f1e41471b8f23,What can happen when you contemplate alone for a long time?,A,daydream,B,headache,0.375,0.625,False,0.625,lexical
+df1bf6f3f87975aa0c1b6d6153d9ecef,"The pioneer went to the general store for storage measures, what was he looking for?",B,barrels,E,salt,0.363636,0.636364,False,0.636364,lexical
+e99d4cb2e69d3e020ee9e4e9a84ac45b,"I was apprehensive to buy the expensive equipment to play a game with so much walking and swinging around in grass, but now I understand why people what?",B,play golf,D,believe in god,0.347826,0.652174,False,0.652174,lexical
+b1274d6f5969dea4d46f43fbdc28fd97,What can a newspaper be used to do to an engagement?,A,announce,D,inform,0.285714,0.714286,False,0.714286,lexical
+001cb999a61a5c8b4031ff53cf261714,"John needed a straight wire.  Unfortunately, this one had endured some abuse and had become what?",A,bent,E,curved,0.2,0.8,False,0.8,lexical
+18ee7a93410a6b4c9cec5d4894775991_1,Metal is taken from what which is pulled from the ground?,C,ore,A,dirt,0.285714,0.714286,False,0.714286,lexical
+3b8be90fdd8c67571d8d692eaa6dd87b,When not in use where on your property would you store you bucket?,D,garden shed,C,well,0.133333,0.866667,False,0.866667,lexical
+300bd7704ae8c5fcef618902f18fd01d,What does someone do to relax at night?,D,go to bed,E,stop worrying,0.272727,0.727273,False,0.727273,lexical
+f18833ace65a54709377134168b457a9,Where might the stapler be if I cannot find it?,C,desk drawer,D,with dwight,0.272727,0.727273,False,0.727273,lexical
+5bba03b425f5abc6e017f194cf074b06,Many homes in this country are built around a courtyard. Where is it?,B,spain,E,office complex,0.105263,0.894737,False,0.894737,lexical
+78276a4eab6e8d6b9ae3749211816977,"Sean was a wreck.  He  loved to build houses, but in his current state, he couldn't do what?",C,construct,A,stand up,0.352941,0.647059,False,0.647059,lexical
+cf33e0f5891ce53a716432be06a46ee1,What would be happening if you are pretending to be a police officer?,C,deception,A,fighting,0.352941,0.647059,False,0.647059,lexical
+3938d6e50d38b1f8774b4f00a89bdb39,Where would you buy a finely crafted writing instrument?,C,stationery store,B,classroom,0.24,0.76,False,0.76,lexical
+cabefb7063a728e77abd44d97397a2a4,"The detective was finding information from witnesses, why would he do that?",C,get answers,D,happiness,0.3,0.7,False,0.7,lexical
+60b909ad1d7956218a5d99954fdebecd,Joe found spiders in the place where he keeps his tools.  Where might that be?,D,garage,B,toolbox,0.0,1.0,False,1.0,lexical
+9fdebd1c2cf498f1d726a025b780a39a,"While on the fan boat he thought he'd see swamps and gators, but he was surprised to spot a bald eagle in what nature area?",A,everglades,B,high places,0.47619,0.52381,False,0.52381,lexical
+f36027954e43cfd926451bdf7cb0c3ac,Where are you likely to find a supermarket?,B,city or town,E,vermont,0.105263,0.894737,False,0.894737,lexical
+7ec14907622c6d5a6087cd59a22d8c9d,Where would you need to use a lantern?,D,dark place,A,grocery store,0.26087,0.73913,False,0.73913,lexical
+efe488f67b53a4b6e69782c01c84f06c,What area does a police officer patrol?,C,beat,A,direct traffic,0.222222,0.777778,False,0.777778,lexical
+7c62637437ad7515452886074010a438,Why would a woman kill a stranger she met in a dark alley?,A,being raped,E,were evil,0.2,0.8,False,0.8,lexical
+4f7be1c68654e2924c161c8eca652928,"The baby was cranky, it needed to eat breakfast but refused to what?",B,open mouth,C,get out of bed,0.416667,0.583333,False,0.583333,lexical
+e4976ee741cf4b28b8a42780ffb15774,What is made up of people?,B,audience,D,classroom,0.117647,0.882353,False,0.882353,lexical
+14e75a42a416d32a24e2826cae34d2bf,"He was afraid he would die from his cold, so he wisely decided to what?",E,seek help,A,ocean,0.142857,0.857143,False,0.857143,lexical
+004607228ad49b69eac932c1005d6106,Where would you get a pen if you do not have one?,C,friend's house,A,briefcase,0.434783,0.565217,False,0.565217,lexical
+a7f54ee1866d5db34eacf40efa53c93e,Why would a small dog pant if it's hot outside?,C,heat,D,wet,0.571429,0.428571,False,0.428571,lexical
+e56c56c3cfe50ba0c787c2bd67255be8,"She asked her little boy why, he replied that he didn't know and it was just what?",D,because,A,case,0.727273,0.272727,False,0.272727,lexical
+6f48ee564a48293eb501cc0d8197bdd9,Where would you display a picture on a horizontal surface?,C,shelf,D,art show,0.307692,0.692308,False,0.692308,lexical
+13d2a103abbed930cabc9567a1ba12f2,What skill is needed for riding a bike?,E,good balance,C,pedalling,0.380952,0.619048,False,0.619048,lexical
+0c1efb38e023ee9725486fbec4f2d797,"He looked at the field of pumps, all slowing churning oil out of the what?",D,ground,C,restaurant,0.375,0.625,False,0.625,lexical
+b7ab4a5e0c19a98f41cd1ba3176f2dff,The department to where vendors deliver goods for sale is called what?,C,receiving,E,keep,0.307692,0.692308,False,0.692308,lexical
+8bcbb5098876940b2382db3a9a0b1beb,Where is the worst place to be in a ticket office?,D,end of line,B,movie theaters,0.24,0.76,False,0.76,lexical
+c7ce02d9365fe9275f88338ad51cbde6,"Exercise is very good for you, for faster recovery you should always do what afterwards?",A,stretch,C,weigh,0.333333,0.666667,False,0.666667,lexical
+fb54a118d46b2776e435d411ae3dd9c8,What happens when you go somewhere and forget something at home?,D,go back,E,fart,0.181818,0.818182,False,0.818182,lexical
+2c13e6d61e3733db90a9fd22d72b3337,Where would you acquire a wind instrument for you own use?,C,music store,B,concert,0.222222,0.777778,False,0.777778,lexical
+350292ae429060a00ff2cf64d71558e4,Where would a person light alcohol on fire to observe the reaction?,E,chemistry lab,B,bar,0.125,0.875,False,0.875,lexical
+179fff4b5928e5ac3d3ae3e1db782547,"If a storey contained a panoramic view, what kind of structure would it be in?",D,tall building,B,storey book,0.25,0.75,False,0.75,lexical
+81cc0d320488c7bacafb285cf7db5fbd,Where does lettuce arrive by large trucks?,B,supermarket,A,kitchen,0.111111,0.888889,False,0.888889,lexical
+26c8a7165d0ed7250b9328f90d83ba83,Why do people who are dying receive social security payments?,D,unable to work,E,change of color,0.482759,0.517241,False,0.517241,lexical
+636fc69dee35cd357b4191b47e64d0e5,What should I do with a jumping rope?,E,hopping,B,sweating,0.4,0.6,False,0.6,lexical
+f0c4622a082eb9ad0690dd36dcf61297,What do geese do every fall in fields?,E,group together,D,follow ultralight airplane,0.2,0.8,False,0.8,lexical
+4499ebd5e8188b0d5fdef6afd893017a,"I took my seat, the curtains drew back and I enjoyed the what?",E,show,B,movie,0.222222,0.777778,False,0.777778,lexical
+230cc491829307e8edb5423c8d09f945,What should everyone do who doesn't want to fight anymore?,C,hope for peace,B,pay tribute to king,0.30303,0.69697,False,0.69697,lexical
+6163a897cd7eac1deddd4c002a1930ae,Where is the ideal location for a post office?,E,center of town,D,most towns,0.5,0.5,False,0.5,lexical
+55478486079423907508a06be13ca536,Where outside of a city would a squirrel live?,C,forest,D,yard,0.2,0.8,False,0.8,lexical
+4fa0d61ec82eb1e238d8938d5f43f392,You should watch out for snakes if floating down what African body of water?,D,amazon river,E,tree,0.25,0.75,False,0.75,lexical
+b4f79ca5f3595248ee25292ab60ad105,"At the end of the day as he began to eat he paused and thanked her, it wasn't often she would what?",A,cook dinner,D,stretch out,0.181818,0.818182,False,0.818182,lexical
+c39131d979c9205c11d0e109e18188e4,To what do trees roots cling?,E,surface of earth,A,yard,0.2,0.8,False,0.8,lexical
+bd773d64f4e22db2358c6e00cbdf2d83,What probably has a lot of dust in the back?,A,closet,E,library,0.153846,0.846154,False,0.846154,lexical
+2b416120e2fbd84b44b5dcd4eb42ed5c,"At the new comic store he found himself making friends, it was nice to meet people with what?",D,common interests,C,open mind,0.4,0.6,False,0.6,lexical
+cef855ec07c66a731741026c2839b0d3,"The student explained he had a clue what neuroepithelium was and got really nervous, he then lost his balance because a what issue?",C,inner ear,B,retina,0.4,0.6,False,0.6,lexical
+0bbb82c1dc4bfd3b0e0c409a0afd248b,What could people do that involves talking?,A,confession,B,state park,0.1,0.9,False,0.9,lexical
+67beae081a9b5ef56988f205f80cf129,If you're a child answering questions and an adult is asking them that adult is doing what?,C,teaching,E,correct,0.133333,0.866667,False,0.866667,lexical
+3b4dcfcab4726496bdbe9535cc669082,"He has lactose intolerant, but was eating dinner made of cheese, what followed for him?",D,indigestion,C,sleepiness,0.380952,0.619048,False,0.619048,lexical
+eebddf5f35d85e9fe2ecbd9b56c1db60,"The teacher played on the upright piano, she was explaining the song to all the students in the what?",A,music room,D,living room,0.571429,0.428571,False,0.428571,lexical
+5393ba1ce298bd1ac4744c07d7373a9c,"When you get an F, you fail. If you get A's you are?",D,passing,E,succeeding,0.470588,0.529412,False,0.529412,lexical
+fde48d43e27cefed6ed9c52514e0bb6d,What is the main purpose of having a bath?,A,cleanness,D,use water,0.333333,0.666667,False,0.666667,lexical
+da83d85e28778c082d9a63f5b890b26d,The ball was hit over a boundary and struck an audience member.  What kind of game were they playing?,A,sporting event,E,ranch country,0.222222,0.777778,False,0.777778,lexical
+cfa980561efe82e7ae7080d4f081b463,What is someone operating a vehicle likely to be accused of after becoming inebriated?,D,drunk driving,C,automobile accidents,0.121212,0.878788,False,0.878788,lexical
+384b89e789e0f4b4796120394fb6303b,Where would you get jewelry if you do not have any?,D,department store,B,suitcase,0.083333,0.916667,False,0.916667,lexical
+0d66d33a17e41eaa3278ca7b3930c5ea,What is a philosopher waiting for to eventually gain through his studies?,E,wisdom,D,impatience,0.25,0.75,False,0.75,lexical
+732183ead4206e51ed4df18b9c9f14fe,What do young boys do on the ice in the winter?,B,play hockey,E,warm,0.133333,0.866667,False,0.866667,lexical
+2632ff6c9b781d3aa74e8dd36b990871,"She loved spending money at the thrift store on knickknacks, this resulted in a lot of what on every shelf in her house?",B,clutter,A,poverty,0.285714,0.714286,False,0.714286,lexical
+63db79b940f36f0333377f85c19eacb2,"I listened to lecture intensely, what is my goal?",B,concentrate,C,get attention,0.25,0.75,False,0.75,lexical
+1520a8fd3116e7b856947c5e308d7ce5,"If a person is using a computer to talk to their granddaughter, what might the computer cause for them?",C,happiness,E,headache,0.352941,0.647059,False,0.647059,lexical
+bd780fea2d4dd262583446e64c0f314d,"Joe was there to meet a large number of people.  As he filed though the entrance hall, he saw many strangers who came from far away.  What sort of building is he probably in?",C,convention center,D,public building,0.125,0.875,False,0.875,lexical
+99e0b2ddf88ebed98b977043b7c2331b,John wanted scatter his wife's remains in a lake in the wilderness.  He had to delay before of where he lived.  Where did he live?,E,new york,C,pay debts,0.117647,0.882353,False,0.882353,lexical
+eb0e0c4eaf19c1e9b4df3b4d3a11be3d,Many towns and cities have trash cans where on sidewalks?,C,corner,D,motel,0.363636,0.636364,False,0.636364,lexical
+467a3b464b08b3ffc9922e2a726554f6,"The family wanted to adopt for enviro-ethical reasons, what did they abhor?",B,biological child,A,orphan,0.181818,0.818182,False,0.818182,lexical
+dea70fe40fac9ad03bf319bf8a480efa,What happens when airplane engines cut off and are unable to be restarted in flight?,D,crash,E,speed up,0.153846,0.846154,False,0.846154,lexical
+2f1680da0d388a8453150ff3637e4689,Where would you be concerned about finding a cavity?,E,teeth,C,dentist,0.333333,0.666667,False,0.666667,lexical
+8369adc4b4710d00f917d80a75d844d7,Human beings learn about current events from what print item?,C,read newspapers,A,question authority,0.060606,0.939394,False,0.939394,lexical
+20a3bb788cf408d9a3e25e610fe60905,In what kind of environment does an anemone live?,D,sea water,A,nursery,0.375,0.625,False,0.625,lexical
+36c1f50eec01c287b8ef6ffe69fe0528,"He wanted lodging in the actual what, so that he was already where he needed to be?",B,resort area,E,going on vacation,0.142857,0.857143,False,0.857143,lexical
+5f4825137a27f369fe859e85dfe1793f,"If I am suffering from boredom, and I want to see something beautiful, what should I do?",A,see art,D,grocery shop,0.105263,0.894737,False,0.894737,lexical
+b3dc6d6a5e2f9d7da8eb72816c80b3f8_1,"The goal was to hit the target, but a projectile ball can't hit anything if it isn't in what?",A,motion,C,flintlock,0.133333,0.866667,False,0.866667,lexical
+63bb6128026ce24209583d0eea75fc27,Where is a good place to set a cup of coffee while relaxing?,D,table,C,hand,0.222222,0.777778,False,0.777778,lexical
+e8a9142d2402f818273dd62cf5a7b559_1,"If a fried egg was runny and there was no toast to sop it up, after the meal there'd be a messy what?",C,plate,B,garden,0.363636,0.636364,False,0.636364,lexical
+ead9c9744aee08678759158efe005175,"If I want to behave with proper aplomb, what manners should I avoid?",A,inappropriate,C,impolite,0.571429,0.428571,False,0.428571,lexical
+ab8bf60f76bc6119459271140ccae781,"Before lifting weights he liked to warm up on the squash court, he really enjoyed the facilities of the what?",D,fitness center,C,country club,0.230769,0.769231,False,0.769231,lexical
+3c6e2d95a63316b31986e8c7979582c9,What will happen to animals after eating food?,C,feel pleasure,B,digestion,0.181818,0.818182,False,0.818182,lexical
+5c171b9837af49211891ce40e4a10204,"If I wanted to grow plants, where could I put a lot of dirt?",D,garden,A,corner,0.333333,0.666667,False,0.666667,lexical
+56d0fc282a144565f2c852415c6fa92c,What does a person often feel about someone judging them guilty?,C,resentment,A,controversy,0.285714,0.714286,False,0.714286,lexical
+5b8a3081c3235d62bc77e2d15f3ad454,A town between two mountains is located in a what?,A,valley,D,train station,0.105263,0.894737,False,0.894737,lexical
+e43c4eaa04243ddee30f29171718eb92,James need to use a toilet but there were no public ones in sight.  Eventually he broke down and did something very expensive so that he could get a toilet.  Where might he have gone?,A,motel room,E,house,0.266667,0.733333,False,0.733333,lexical
+84a736d4b702a6869d8fa8523aee6f1b,Why did the heavy metal band need electricity at the stadium?,A,concert,B,bedroom,0.142857,0.857143,False,0.857143,lexical
+72611791cdcb040f2d699827fb9cebc4,What is a person looking for when completing puzzles or riddles?,C,intellectual challenge,D,passing grade,0.171429,0.828571,False,0.828571,lexical
+4477fb61fde4bb8695c241dfc366b554,"If someone was making breakfast, they'd probably put two slices of bread in the what?",D,toaster,B,pantry,0.307692,0.692308,False,0.692308,lexical
+ce246bc94a54431b9c0530e71d2456b5,"His house was a mess, he began doing housework to get what?",E,house clean,A,boredom,0.222222,0.777778,False,0.777778,lexical
+2eef2d255fe629414f4d24ade8590102,Where would a corpse be covered by a blanket?,C,hospital,D,flower garden,0.190476,0.809524,False,0.809524,lexical
+2f85d53721ccc8b3fa4cfc184186d124,"The man  tried to break the glass in order to make his escape in time, but he could not.  The person in the cat, trying to kill him, did what?",A,accelerate,D,construct,0.315789,0.684211,False,0.684211,lexical
+2192c5c2145a6e03755ad89a02e64055,"The trucker plopped on the bench with a sense of relief, where did he arrive?",B,rest area,E,state park,0.526316,0.473684,False,0.473684,lexical
+bea07406aaadeef50110883b6932d86a,What is part of a republic like the USA?,A,state,C,kingdom,0.0,1.0,False,1.0,lexical
+7a58e7e7bf76658751e850f790922aba,Where do you keep extra clothing on a hike?,E,backpack,B,hamper,0.285714,0.714286,False,0.714286,lexical
+76b2c6d254f9127b4fd66d90e1a330e7,What could an apple tree do?,B,bloom,C,washington state,0.095238,0.904762,False,0.904762,lexical
+cdd3d074031fbd3efeb4f9408abef04e,What very cold area in the east can a crab be found?,C,atlantic ocean,D,fresh water,0.24,0.76,False,0.76,lexical
+359aed918343d228e67cef329b693904,"The chef wanted to perfect his craft, what did he do?",C,study french cooking,D,drink,0.32,0.68,False,0.68,lexical
+cf02cca40a47c2deefd8b2e5a5ff2f70,She wanted a kitten and puppy so why did she only get the puppy?,A,one choice for pet,C,kennel,0.166667,0.833333,False,0.833333,lexical
+ac1abecdbbd7bcde6592ca645c2ecb1e,There was no shade for Jenny.  She was forced to lie there exposed to what?,A,full sunlight,D,eat cake,0.095238,0.904762,False,0.904762,lexical
+2adbb4fc0d5249dc411dda433f378591,What could happen to you after you are cleaning house for a long time?,D,exhaustion,E,sneezing,0.333333,0.666667,False,0.666667,lexical
+5a1c8a9dbbb60e523cc1ba14a370729c,What is someone doing when scheduling when to go to party?,E,plan,C,having fun,0.285714,0.714286,False,0.714286,lexical
+3665b329f93f7c84edeabe394140f8d2,What kind of path do comets tend to have?,B,set orbits,D,space,0.266667,0.733333,False,0.733333,lexical
+dbcedaa6a6f1f68bc8f2bf7aef23294e,What do people feel after having sex that requires them to shower?,E,dirty,A,bedroom,0.333333,0.666667,False,0.666667,lexical
+ba3a2b9ff289c106051163f840a6f5ba,"The vet found malignant tumors on the animals, what is their likely fate?",C,die of cancer,E,feel pleasure,0.307692,0.692308,False,0.692308,lexical
+13fc28f53423a9b3a656c9431df1b3b5,What is the thing that is agitated in your head when kissing?,E,happiness,A,sexual stimulation,0.222222,0.777778,False,0.777778,lexical
+3f4b48708d08f8bf7bec796531023f9c,"Billy was reading the newspaper as he commuted to work, but once he got to his destination he balled it up and put it somewhere. Where did it put it?",A,trash,C,subway,0.181818,0.818182,False,0.818182,lexical
+c61790eb63ff6652b878ca051493c07d,Where do you keep a pail in your house?,C,utility room,B,pool,0.25,0.75,False,0.75,lexical
+e5ebbe0ea4097bb197ac525b49108362,what is printed with ink and distributed daily?,C,newspaper,E,printer,0.375,0.625,False,0.625,lexical
+029e36d8f65982b142c319064dc5e32f,What are people likely to do when an unexpected decent outcome occurs?,B,thank god,D,hatred,0.4,0.6,False,0.6,lexical
+3d1a67f87b34303f97549ba83e5521c2,"The terrace had Kanji written on it, indicating that it was made where?",A,japan,B,rice paddy,0.266667,0.733333,False,0.733333,lexical
+e050bce7048da1b3743a54153e91694e,"The company sent off many purchases, they used recycled cardboard as their what?",A,packaging materials,E,bowler hats,0.266667,0.733333,False,0.733333,lexical
+8233ccb60dd0c0ff3b7ca5d73e5681f2,Why might a person be known as a liar?,B,false information,A,have no home,0.413793,0.586207,False,0.586207,lexical
+eb4b2cd0f2a69686e5a82250c5806b84,"The child was politely waiting for dessert, he was eventually rewarded for his what?",E,patience,C,getting bored,0.285714,0.714286,False,0.714286,lexical
+d0bda97a087904320216e4d0b8a08a8d,"The man was giving assistance to a pan handler in the streets, how did he give assistance?",D,out of pocket,A,feeling good,0.16,0.84,False,0.84,lexical
+e216381e9f0ddd1d248ee25fccca2b1f,What do you call the caretakers of a child?,E,parents,D,act of sex,0.235294,0.764706,False,0.764706,lexical
+b1fba9ad6193c6751ddb3f58f7f39b35,Where would you run in to a niece you only see every one and a while?,A,family reunion,D,family tree,0.72,0.28,False,0.28,lexical
+3ceae7a18073050bd2c0448abef1f393,"Working on the elaborate task was taxing, it require extreme what?",B,concentration,D,job,0.125,0.875,False,0.875,lexical
+f1182e3a070f5a1be529843aa6e5c20c,What may you have after awaking after a night of heavy drinking?,D,headache,E,shock,0.307692,0.692308,False,0.692308,lexical
+5799089c131e26473697afc54d5f6964,What uses a ribbon to put words on paper?,E,typewriter,C,bath,0.142857,0.857143,False,0.857143,lexical
+7ce1f99e8185489a7113e6d18c71abb0,Where are sheep likely to live?,D,farm,A,school,0.0,1.0,False,1.0,lexical
+69425fb4cd2dc034e9ff223d2d5676ec,"If I was watching TV on the couch and the air was stuffy, I might turn the fan on to make the what more comfortable?",B,living room,C,bathroom,0.421053,0.578947,False,0.578947,lexical
+f75b22d5b88ac56ae7df030c1ebeded5,"While walking the student needed to store his writing insturment away, where did he put it?",E,pocket,D,classroom,0.133333,0.866667,False,0.866667,lexical
+4eb3e69c0d42a2287692d2b9d2cb5979,Who watches a play in an auditorium?,B,crowd,A,building,0.153846,0.846154,False,0.846154,lexical
+7d937233b4a9043da0b976dbd42d141b,What is a possible outcome for committing murder?,D,imprisonment,C,trial,0.235294,0.764706,False,0.764706,lexical
+6bd176cc91a2a2088807ec446c008856,where is a good place to obtain new soap?,A,supermarket,C,cabinet,0.333333,0.666667,False,0.666667,lexical
+c3890d43b84635d9e61c007ca2521d5b,What do people do for food?,D,kill animals,A,talk to each other,0.133333,0.866667,False,0.866667,lexical
+6195ed74cf445cb5d991e1076a080dde,There was many a bottle to choose from behind the cashier where?,D,liquor store,E,medicine cabinet,0.214286,0.785714,False,0.785714,lexical
+37644422df4bcd28b3f54bbf3fc2c0f8,"They had to know where to go, they got on the national highway after consulting the what?",B,atlas,D,major cities,0.352941,0.647059,False,0.647059,lexical
+23d97480fe45bace231503f8fc367a5b,What do professors primarily do?,E,teach courses,D,school students,0.357143,0.642857,False,0.642857,lexical
+15556e26feaa5a8a29c9f30896e535d4,Where do you throw a ball at pins?,A,bowling alley,B,football stadium,0.275862,0.724138,False,0.724138,lexical
+6be05d227f4f6fe727218fc8be9df340,What might you need to do cleaning?,E,using water,B,neatness,0.421053,0.578947,False,0.578947,lexical
+3f3ba1d9a3bfe63df11247a968eaddce,If i were to spit a lot without noticing i may have extra what?,B,saliva nd mouth,A,phlegm,0.190476,0.809524,False,0.809524,lexical
+ca9a3ccfb140aa66816f96ac983b6d9f_1,"If student got a list of supplies from class like paper and pencils, their parent would have to go where?",C,store,A,classroom,0.285714,0.714286,False,0.714286,lexical
+487cabfcd776d89748ee7e7bb681ad59,Why do young people swallow semen ?,C,you're curious,D,curiosity,0.521739,0.478261,False,0.478261,lexical
+6915dfdefe3b1cd5fd8886c8bb84929a,"Sally was standing in queue.  The line was very, very slow.  What was she feeling?",A,frustration,E,progress,0.210526,0.789474,False,0.789474,lexical
+ec224c1dbfb569cce7ec317fe987ae68,What is the animal trying to accomplish?,B,live long,A,sand trap,0.111111,0.888889,False,0.888889,lexical
+0cba8ddda21e29c8c53482e131d741cd,"James and Holly went dancing together. As they danced, he  pressed himself against her what?",B,moving body,A,euphoria,0.210526,0.789474,False,0.789474,lexical
+e65559cd9f5d96b577caeb78d9033502,"If a house has a subscription, what likely shows up in the driveway every morning?",B,newspaper,C,street,0.266667,0.733333,False,0.733333,lexical
+b8937a30f25093910c040f4e63e1d352,What does a person do when they feel dirty?,C,wash themselves,B,cross street,0.37037,0.62963,False,0.62963,lexical
+aabe8eb218468fc63b6c9aa6d428c951,"After the weight cut he was worried about his energy levels, but this was part of participating in a what?",B,wrestle,E,sleep,0.5,0.5,False,0.5,lexical
+43ba9669564217f2f909f33acbedaf95,what does a person do to stay healthy?,B,eat every day,E,expressive,0.347826,0.652174,False,0.652174,lexical
+2b9b625c788584b8d41f1a74d740e126,Who is the guard here for?,D,prisoner,C,intimidation,0.3,0.7,False,0.7,lexical
+eb6807290df71b040e2c7bcc5d11fdea,"If a person stutters when he experiences anxiety or excitement, he'll have difficult doing what?",A,express information,E,study,0.166667,0.833333,False,0.833333,lexical
+f06852fb4bb2764dc208a991d037f211,Where can you keep letter opener when it likely to be needed soon?,C,dek,B,stationery store,0.105263,0.894737,False,0.894737,lexical
+5efadabaf61b5174916e3ab659bcd283,"Danny found that the carpet did not ,match the drapes, which was disappointing, because this place was expensive.  But it was the only place in town that wasn't booked solid for the week and he needed it while he was in town, so he couldn't complain.   Where might this place be?",E,at hotel,D,bowling alley,0.190476,0.809524,False,0.809524,lexical
+e9d4c747018ff81b8c0aefb5abc3c539,What do people need to do to change their lives?,A,face problems,B,better themselves,0.333333,0.666667,False,0.666667,lexical
+30a8cfd186f1aae5acd425a52d058863,Humans need shelter to survive.  They usually find shelter where?,B,homes,E,space shuttle,0.222222,0.777778,False,0.777778,lexical
+9e7805871c8a276300a89fe910a90949,Someone who had a very bad flight might be given a trip in this to make up for it?,A,first class,E,sufficient,0.285714,0.714286,False,0.714286,lexical
+047c2d8c65d297b39aa42821c1ca76a9,"Nature can be good and bad for the person who walks, what are some things?",B,see beautiful views,D,getting lost,0.322581,0.677419,False,0.677419,lexical
+0bed77da54b6c54facd0ee6614aad72e,Jim decided to lose weight.  He thought that exercise is the best way to lose weight because you can't get rid of what?,A,need for food,B,fitness,0.2,0.8,False,0.8,lexical
+32e2adee67aace0a98c830fb39463015,Nature creates more beautiful structures than those that are what?,D,man made,C,city,0.0,1.0,False,1.0,lexical
+8272f08792b873885f93d4c148e307e5,The water in clouds turn in to what when it gets cold?,B,snowflake,C,laddle,0.4,0.6,False,0.6,lexical
+bc05bc6b4df7a3d25a361515fe8912ad,What southern U.S. state is know for having many swamps?,D,louisiana,E,river delta,0.2,0.8,False,0.8,lexical
+b893a6e7a2b172bd71f03c9dbee4f960,When going to sleep what happens to your body?,D,relaxation,E,dreaming,0.555556,0.444444,False,0.444444,lexical
+cf8e30dd6956d03e3f0f0397112a8696,Where is a monkey likely to enjoy being?,A,banana tree,C,theatre,0.444444,0.555556,False,0.555556,lexical
+159d50e325b59c6d29ec371500e173b4,What is a form of anaerobic exercising?,E,run,C,error,0.25,0.75,False,0.75,lexical
+17eafc807b198236faf06a66f4c05313,The earth is one planet in what?,C,solar system,A,tree,0.25,0.75,False,0.75,lexical
+24eebfa678112100803da16dde148b2d,Where would you put a container can after you buy it?,E,garage,C,gas,0.444444,0.555556,False,0.555556,lexical
+ec882fc3a9bfaeae2a26fe31c2ef2c07,Where did you meet your best friend since Kindergarten?,B,school,D,internet cafe,0.105263,0.894737,False,0.894737,lexical
+0a006d16d9042e0c170935e5fbf7f9af,James was below the balloon.  He watched it rise.  What direction did he look in?,E,upwards,A,upstairs,0.666667,0.333333,False,0.333333,lexical
+d33a81660058e570a18fb2eafa284a78,John and Tim like playing. It makes them what?,A,feeling happy,E,get hungry,0.347826,0.652174,False,0.652174,lexical
+1e09c3136a743b862e783700b7667028,What could happen if someone is seeing new presents at a birthday party?,E,excitement,C,education,0.421053,0.578947,False,0.578947,lexical
+5e851c47682bdf79ec7c139ecf124c9a,"Joe's cat smelled something delicious and jumped into this, causing him to panic and fear for its life. Where might it have jumped?",C,microwave,B,bedroom,0.25,0.75,False,0.75,lexical
+b148f18fb8b5a504b67078ef6ac29717,Why would a person put flowers in a room with dirty gym socks?,D,smell good,A,continue to grow,0.307692,0.692308,False,0.692308,lexical
+b6bbe013995fdb5def3d504319af0791,The table wasn't level.  some parts were higher and some were lower with no rhyme or reason.   It was very what?,C,uneven,E,tilted,0.166667,0.833333,False,0.833333,lexical
