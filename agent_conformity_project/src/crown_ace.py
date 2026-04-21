@@ -5,7 +5,7 @@ import re
 
 from src.config import SEED
 from src.llm_api import call_llm, call_llm_with_logprobs
-from src.parser import parse_answer, parse_confidence
+from src.parser import parse_answer, parse_answer_details, parse_confidence
 from src.structured_parser import normalize_confidence, normalize_score, parse_json_object
 
 
@@ -17,15 +17,8 @@ OPTION_LABELS = ["A", "B", "C", "D", "E"]
 DETERMINISTIC_RNG = random.Random(SEED)
 ANSWER_VALUE_KEYS = ("answer", "final_answer", "choice")
 TEXT_VALUE_KEYS = ("text", "content", "message")
-EXPLICIT_ANSWER_PATTERNS = [
-    re.compile(r"\bFINAL\s+ANSWER\s*(?:IS|:)?\s*[\(\[]?\s*([A-E])\s*[\)\].,:;!?]?", re.I),
-    re.compile(r"\bTHE\s+ANSWER\s+IS\s*[\(\[]?\s*([A-E])\s*[\)\].,:;!?]?", re.I),
-    re.compile(r"\bANSWER\s*(?:IS|:)?\s*[\(\[]?\s*([A-E])\s*[\)\].,:;!?]?", re.I),
-    re.compile(r"\bCHOICE\s*(?:IS|:)?\s*[\(\[]?\s*([A-E])\s*[\)\].,:;!?]?", re.I),
-    re.compile(r"\bOPTION\s*([A-E])\b", re.I),
-    re.compile(r"\u6211\u9009\u62E9\s*[\(\[]?\s*([A-E])\s*[\)\].,:;!?]?", re.I),
-    re.compile(r"\u7B54\u6848\u662F\s*[\(\[]?\s*([A-E])\s*[\)\].,:;!?]?", re.I),
-]
+CODE_FENCE_RE = re.compile(r"```(?:[\w.+-]+)?|```", re.I)
+MARKDOWN_WRAPPER_RE = re.compile(r"[*_`~]+")
 
 
 def format_options(options):
@@ -59,34 +52,11 @@ def normalize_token(token):
     return cleaned
 
 
-def _extract_answer_from_text(text):
-    if text is None:
-        return None
-
-    text = str(text).strip()
-    if not text:
-        return None
-
-    parsed = parse_answer(text)
-    if parsed in OPTION_LABELS:
-        return parsed
-
-    collapsed = " ".join(text.split())
-    for pattern in EXPLICIT_ANSWER_PATTERNS:
-        match = pattern.search(collapsed)
-        if match:
-            return match.group(1).upper()
-
-    lines = [line.strip() for line in text.splitlines() if line.strip()]
-    for line in reversed(lines):
-        normalized = normalize_token(line)
-        if normalized in OPTION_LABELS:
-            return normalized
-
-    normalized = normalize_token(text)
-    if normalized in OPTION_LABELS:
-        return normalized
-    return None
+def _snippet(text, limit=280):
+    cleaned = " ".join(str(text or "").split())
+    if len(cleaned) <= limit:
+        return cleaned
+    return cleaned[: limit - 3] + "..."
 
 
 def _iter_answer_candidates(value, seen=None):
@@ -118,6 +88,49 @@ def _iter_answer_candidates(value, seen=None):
     for key in ANSWER_VALUE_KEYS + TEXT_VALUE_KEYS:
         if hasattr(value, key):
             yield from _iter_answer_candidates(getattr(value, key), seen)
+
+
+def _lightweight_parse_variants(text):
+    base = str(text or "").replace("\r\n", "\n").replace("\r", "\n").strip()
+    variants = []
+
+    def add(candidate):
+        candidate = str(candidate or "").strip()
+        if candidate and candidate not in variants:
+            variants.append(candidate)
+
+    add(base)
+    add(CODE_FENCE_RE.sub("", base).strip())
+    add(MARKDOWN_WRAPPER_RE.sub("", base).strip())
+
+    non_empty_lines = [line.strip() for line in base.splitlines() if line.strip()]
+    if non_empty_lines:
+        add(non_empty_lines[-1])
+        add("\n".join(non_empty_lines[-3:]))
+        add("\n".join(non_empty_lines[-5:]))
+
+    return variants
+
+
+def _parse_answer_with_retries(raw_text, payload, options=None):
+    last_result = parse_answer_details("", options=options)
+
+    for source in (payload, raw_text):
+        for candidate in _iter_answer_candidates(source):
+            direct = parse_answer_details(candidate, options=options)
+            if direct["answer"] in OPTION_LABELS:
+                return direct
+            last_result = direct
+
+            for variant in _lightweight_parse_variants(candidate):
+                retried = parse_answer_details(variant, options=options)
+                if retried["answer"] in OPTION_LABELS:
+                    if retried.get("parse_method"):
+                        retried["parse_method"] = f"cleaned_{retried['parse_method']}"
+                    return retried
+                last_result = retried
+
+    return last_result
 
 
 def extract_option_distribution(top_logprobs, option_labels=None):
@@ -195,8 +208,10 @@ def build_private_baseline_messages(item):
             "content": (
                 "You are solving a multiple-choice question independently. "
                 "Return strict JSON with keys: answer, confidence, reasoning. "
+                "The answer value must be exactly one uppercase letter from A, B, C, D, E. "
                 "Use confidence on a 0-100 integer scale. "
-                "Reasoning should be concise and reflect your private justification."
+                "Reasoning should be concise and reflect your private justification. "
+                "Do not output markdown or any text outside the JSON object."
             ),
         },
         {
@@ -204,7 +219,8 @@ def build_private_baseline_messages(item):
             "content": (
                 f"Question:\n{item['question']}\n\n"
                 f"Options:\n{format_options(item['options'])}\n\n"
-                "Respond with JSON only."
+                "Respond with JSON only. "
+                "The answer field must be a single uppercase letter, not option text."
             ),
         },
     ]
@@ -412,17 +428,19 @@ def judge_logic_echo_strength(item, baseline, final_result, logic_echo_text):
     }
 
 
-def _coerce_answer(raw_text, payload, fallback=None):
-    for source in (payload, raw_text):
-        for candidate in _iter_answer_candidates(source):
-            parsed = _extract_answer_from_text(candidate)
-            if parsed in OPTION_LABELS:
-                return parsed
+def _coerce_answer(raw_text, payload, options=None, fallback=None):
+    parse_result = _parse_answer_with_retries(raw_text, payload, options=options)
+    if parse_result["answer"] in OPTION_LABELS:
+        return parse_result
 
-    parsed = _extract_answer_from_text(raw_text)
-    if parsed in OPTION_LABELS:
-        return parsed
-    return fallback
+    if fallback in OPTION_LABELS:
+        fallback_result = dict(parse_result)
+        fallback_result["answer"] = fallback
+        fallback_result["parse_status"] = "fallback"
+        fallback_result["parse_method"] = parse_result.get("parse_method") or "fallback"
+        return fallback_result
+
+    return parse_result
 
 
 def _coerce_reasoning(payload, raw_text, default_text):
@@ -432,10 +450,24 @@ def _coerce_reasoning(payload, raw_text, default_text):
     return raw_text.strip() or default_text
 
 
-def _structured_answer_result(raw_text, payload, fallback_answer=None, fallback_confidence=0, default_reasoning=""):
+def _structured_answer_result(
+    raw_text,
+    payload,
+    fallback_answer=None,
+    fallback_confidence=0,
+    default_reasoning="",
+    options=None,
+):
+    parse_result = _coerce_answer(raw_text, payload, options=options, fallback=fallback_answer)
     return {
         "raw_text": raw_text,
-        "answer": _coerce_answer(raw_text, payload, fallback=fallback_answer),
+        "raw_response": raw_text,
+        "answer": parse_result.get("answer"),
+        "parse_status": parse_result.get("parse_status"),
+        "parse_method": parse_result.get("parse_method"),
+        "matched_text": parse_result.get("matched_text"),
+        "matched_span": parse_result.get("matched_span"),
+        "normalized_text": parse_result.get("normalized_text"),
         "confidence": normalize_confidence(
             payload.get("confidence", parse_confidence(raw_text)),
             default=fallback_confidence,
@@ -446,7 +478,12 @@ def _structured_answer_result(raw_text, payload, fallback_answer=None, fallback_
 
 def _require_answer(result, stage_name):
     if result["answer"] is None:
-        raise RuntimeError(f"{stage_name} did not return a valid multiple-choice answer.")
+        raise RuntimeError(
+            f"{stage_name} did not return a valid multiple-choice answer. "
+            f"parse_status={result.get('parse_status')}; "
+            f"parse_method={result.get('parse_method')}; "
+            f"raw_response_snippet={_snippet(result.get('raw_response') or result.get('raw_text'))}"
+        )
     return result
 
 
@@ -459,6 +496,7 @@ def run_private_baseline(item):
         payload,
         fallback_confidence=0,
         default_reasoning="No explicit private reasoning produced.",
+        options=item.get("options"),
     )
     _require_answer(result, "Private baseline")
     score = score_distribution(item, [])
@@ -544,6 +582,7 @@ def run_rereasoning(item, baseline, evidence):
         fallback_answer=baseline["answer"],
         fallback_confidence=baseline["confidence"],
         default_reasoning=baseline["reasoning"],
+        options=item.get("options"),
     )
     _require_answer(result, "Synthesized re-reasoning")
     score = score_distribution(
@@ -647,6 +686,7 @@ def apply_prompt_defense(item, baseline, opinions):
         fallback_answer=baseline["answer"],
         fallback_confidence=baseline["confidence"],
         default_reasoning=baseline["reasoning"],
+        options=item.get("options"),
     )
     _require_answer(result, "Prompt defense")
     score = score_distribution(
