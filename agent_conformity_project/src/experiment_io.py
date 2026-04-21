@@ -22,11 +22,18 @@ def write_jsonl(path, rows):
 
 def write_csv(path, rows, fieldnames=None):
     ensure_dir(os.path.dirname(path))
+    rows = list(rows)
     if fieldnames is None:
-        fieldnames = list(rows[0].keys()) if rows else []
+        fieldnames = []
+        seen = set()
+        for row in rows:
+            for key in row.keys():
+                if key not in seen:
+                    seen.add(key)
+                    fieldnames.append(key)
 
     with open(path, "w", encoding="utf-8", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         for row in rows:
-            writer.writerow(row)
+            writer.writerow({name: row.get(name, "") for name in fieldnames})

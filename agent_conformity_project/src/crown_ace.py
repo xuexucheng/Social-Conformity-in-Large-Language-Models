@@ -1,6 +1,7 @@
 import math
 import os
 import random
+import re
 
 from src.config import SEED
 from src.llm_api import call_llm, call_llm_with_logprobs
@@ -14,6 +15,17 @@ DEFAULT_CONFIDENCE_GAIN_THRESHOLD = float(os.getenv("CROWN_ACE_CONFIDENCE_GAIN_T
 DEFAULT_AGENT_COUNT = int(os.getenv("N_ATTACK_AGENTS", "5"))
 OPTION_LABELS = ["A", "B", "C", "D", "E"]
 DETERMINISTIC_RNG = random.Random(SEED)
+ANSWER_VALUE_KEYS = ("answer", "final_answer", "choice")
+TEXT_VALUE_KEYS = ("text", "content", "message")
+EXPLICIT_ANSWER_PATTERNS = [
+    re.compile(r"\bFINAL\s+ANSWER\s*(?:IS|:)?\s*[\(\[]?\s*([A-E])\s*[\)\].,:;!?]?", re.I),
+    re.compile(r"\bTHE\s+ANSWER\s+IS\s*[\(\[]?\s*([A-E])\s*[\)\].,:;!?]?", re.I),
+    re.compile(r"\bANSWER\s*(?:IS|:)?\s*[\(\[]?\s*([A-E])\s*[\)\].,:;!?]?", re.I),
+    re.compile(r"\bCHOICE\s*(?:IS|:)?\s*[\(\[]?\s*([A-E])\s*[\)\].,:;!?]?", re.I),
+    re.compile(r"\bOPTION\s*([A-E])\b", re.I),
+    re.compile(r"\u6211\u9009\u62E9\s*[\(\[]?\s*([A-E])\s*[\)\].,:;!?]?", re.I),
+    re.compile(r"\u7B54\u6848\u662F\s*[\(\[]?\s*([A-E])\s*[\)\].,:;!?]?", re.I),
+]
 
 
 def format_options(options):
@@ -43,8 +55,69 @@ def normalize_token(token):
     if token is None:
         return ""
     cleaned = str(token).strip().upper()
-    cleaned = cleaned.strip("\"'`()[]{}:,")
+    cleaned = cleaned.strip("\"'`()[]{}:,.;!?\uFF0C\u3002\uFF01\uFF1F\uFF1B\uFF1A")
     return cleaned
+
+
+def _extract_answer_from_text(text):
+    if text is None:
+        return None
+
+    text = str(text).strip()
+    if not text:
+        return None
+
+    parsed = parse_answer(text)
+    if parsed in OPTION_LABELS:
+        return parsed
+
+    collapsed = " ".join(text.split())
+    for pattern in EXPLICIT_ANSWER_PATTERNS:
+        match = pattern.search(collapsed)
+        if match:
+            return match.group(1).upper()
+
+    lines = [line.strip() for line in text.splitlines() if line.strip()]
+    for line in reversed(lines):
+        normalized = normalize_token(line)
+        if normalized in OPTION_LABELS:
+            return normalized
+
+    normalized = normalize_token(text)
+    if normalized in OPTION_LABELS:
+        return normalized
+    return None
+
+
+def _iter_answer_candidates(value, seen=None):
+    if seen is None:
+        seen = set()
+    if value is None:
+        return
+
+    value_id = id(value)
+    if value_id in seen:
+        return
+    seen.add(value_id)
+
+    if isinstance(value, str):
+        yield value
+        return
+
+    if isinstance(value, dict):
+        for key in ANSWER_VALUE_KEYS + TEXT_VALUE_KEYS:
+            if key in value:
+                yield from _iter_answer_candidates(value[key], seen)
+        return
+
+    if isinstance(value, (list, tuple)):
+        for entry in value:
+            yield from _iter_answer_candidates(entry, seen)
+        return
+
+    for key in ANSWER_VALUE_KEYS + TEXT_VALUE_KEYS:
+        if hasattr(value, key):
+            yield from _iter_answer_candidates(getattr(value, key), seen)
 
 
 def extract_option_distribution(top_logprobs, option_labels=None):
@@ -340,12 +413,14 @@ def judge_logic_echo_strength(item, baseline, final_result, logic_echo_text):
 
 
 def _coerce_answer(raw_text, payload, fallback=None):
-    answer = payload.get("answer")
-    if answer in {"A", "B", "C", "D", "E"}:
-        return answer
+    for source in (payload, raw_text):
+        for candidate in _iter_answer_candidates(source):
+            parsed = _extract_answer_from_text(candidate)
+            if parsed in OPTION_LABELS:
+                return parsed
 
-    parsed = parse_answer(raw_text)
-    if parsed:
+    parsed = _extract_answer_from_text(raw_text)
+    if parsed in OPTION_LABELS:
         return parsed
     return fallback
 

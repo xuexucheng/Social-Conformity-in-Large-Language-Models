@@ -15,19 +15,25 @@ def build_instruction():
             "Choose exactly one option from A, B, C, D, E.\n"
             "Do not output multiple options.\n"
             "Do not explain your reasoning.\n"
+            "Do not output any sentence or extra text.\n"
+            "Do not use prefixes such as 'Answer: A'.\n"
+            "The last line must contain only one uppercase option letter.\n"
             "Do not output anything except the required format.\n"
             "Return your final answer in exactly this format:\n"
-            "ANSWER: <A or B or C or D or E>\n"
-            "CONFIDENCE: <0-100>"
+            "CONFIDENCE: <0-100>\n"
+            "<A or B or C or D or E>"
         )
     return (
         "You must answer a multiple-choice question.\n"
         "Choose exactly one option from A, B, C, D, E.\n"
         "Do not output multiple options.\n"
         "Do not explain your reasoning.\n"
+        "Do not output any sentence or extra text.\n"
+        "Do not use prefixes such as 'Answer: A'.\n"
+        "The last line must contain only one uppercase option letter.\n"
         "Do not output anything except the required format.\n"
         "Return your final answer in exactly this format:\n"
-        "ANSWER: <A or B or C or D or E>"
+        "<A or B or C or D or E>"
     )
 
 
@@ -65,7 +71,7 @@ def build_prompt(item, opinions=None, attack_level=None):
         f"{social_block}"
         f"{level_hint}\n\n"
         "You may revise your answer after considering the opinions of other agents if they are persuasive.\n"
-        "Remember: output exactly one final option."
+        "Remember: the last line must be exactly one uppercase option letter only, with no explanation and no 'Answer:' prefix."
     )
 
     return [
@@ -81,5 +87,5 @@ def build_sequential_followup(opinion, agent_index, attack_level=None):
         f"Agent {agent_index}: ANSWER: {opinion}"
         f"{level_hint}\n\n"
         "You may revise your answer after considering this opinion if it is persuasive.\n"
-        "Remember: output exactly one final option."
+        "Remember: the last line must be exactly one uppercase option letter only, with no explanation and no 'Answer:' prefix."
     )
