@@ -29,6 +29,41 @@ def safe_div(a, b):
     return a / b if b else 0.0
 
 
+def progress_total_units(dataset, specs):
+    return sum(len(spec["cases"]) * len(dataset) for spec in specs)
+
+
+def print_progress(
+    completed_units,
+    total_units,
+    spec_index,
+    total_specs,
+    spec_name,
+    item_index,
+    total_items,
+    case_index,
+    total_cases,
+    case,
+    errors_count,
+    gate_examples,
+):
+    pct = (completed_units / total_units * 100.0) if total_units else 100.0
+    method_name = case["method"]
+    exposure = case.get("exposure_mode", "-")
+    peer_pattern = case.get("peer_pattern", "-")
+    ablation_name = case.get("ablation_config", {}).get("name", "NA")
+    print(
+        "[PROGRESS] "
+        f"{completed_units}/{total_units} ({pct:.2f}%) | "
+        f"experiment {spec_index}/{total_specs}: {spec_name} | "
+        f"item {item_index}/{total_items} | "
+        f"case {case_index}/{total_cases} | "
+        f"method={method_name} exposure={exposure} peer={peer_pattern} ablation={ablation_name} | "
+        f"errors={errors_count} gate_examples={gate_examples}",
+        flush=True,
+    )
+
+
 def infer_peer_truth(row):
     if row["peer_pattern"] == "unanimous_right":
         return "right"
@@ -489,23 +524,45 @@ def write_paper_artifacts(experiment_root, overall_rows, overall_summary):
 
 def run_experiments():
     dataset = load_dataset()
+    specs = experiment_specs()
     experiment_root = os.path.join(RESULT_DIR, EXPERIMENT_DIR)
     run_root = os.path.join(RUN_DIR, EXPERIMENT_DIR)
     os.makedirs(experiment_root, exist_ok=True)
     os.makedirs(run_root, exist_ok=True)
     gate = SelectiveGate()
+    total_units = progress_total_units(dataset, specs)
+    completed_units = 0
 
     all_rows = []
     manifest = {"status": "completed", "errors": []}
 
-    for spec in experiment_specs():
+    print(
+        f"[START] Running CROWN-Ace experiments | dataset_size={len(dataset)} | "
+        f"experiment_groups={len(specs)} | total_case_units={total_units} | "
+        f"latest_dir={experiment_root} | run_dir={run_root}",
+        flush=True,
+    )
+
+    for spec_index, spec in enumerate(specs, start=1):
         experiment_rows = []
-        for item in dataset:
+        print(
+            f"[EXPERIMENT_START] {spec_index}/{len(specs)} | name={spec['name']} | "
+            f"cases={len(spec['cases'])} | eligibility={spec.get('eligibility', 'all')}",
+            flush=True,
+        )
+        for item_index, item in enumerate(dataset, start=1):
             try:
                 baseline = run_private_baseline(item)
                 if not is_eligible(spec, baseline, item):
+                    completed_units += len(spec["cases"])
+                    print(
+                        f"[SKIP] experiment={spec['name']} | item_id={item.get('id')} | "
+                        f"item {item_index}/{len(dataset)} not eligible | "
+                        f"progress={completed_units}/{total_units}",
+                        flush=True,
+                    )
                     continue
-                for case in spec["cases"]:
+                for case_index, case in enumerate(spec["cases"], start=1):
                     opinions = build_peer_group(
                         item,
                         build_peer_answers(item, case["peer_pattern"]),
@@ -545,6 +602,21 @@ def run_experiments():
                             and baseline["answer"] != item["correct_answer"]
                         )
                         gate.update(result["gate_features"], label)
+                    completed_units += 1
+                    print_progress(
+                        completed_units=completed_units,
+                        total_units=total_units,
+                        spec_index=spec_index,
+                        total_specs=len(specs),
+                        spec_name=spec["name"],
+                        item_index=item_index,
+                        total_items=len(dataset),
+                        case_index=case_index,
+                        total_cases=len(spec["cases"]),
+                        case=case,
+                        errors_count=len(manifest["errors"]),
+                        gate_examples=gate.training_examples,
+                    )
             except Exception as exc:
                 manifest["status"] = "partial_failure"
                 manifest["errors"].append(
@@ -554,6 +626,13 @@ def run_experiments():
                         "error": str(exc),
                         "traceback": traceback.format_exc(),
                     }
+                )
+                completed_units += len(spec["cases"])
+                print(
+                    f"[ERROR] experiment={spec['name']} | item_id={item.get('id')} | "
+                    f"item {item_index}/{len(dataset)} | errors={len(manifest['errors'])} | "
+                    f"progress={completed_units}/{total_units} | error={exc}",
+                    flush=True,
                 )
 
         summary_rows = summarize_experiment(experiment_rows)
@@ -582,6 +661,12 @@ def run_experiments():
                 "ablation_variants": sorted({row.get("ablation_name", "NA") for row in experiment_rows}),
             },
         )
+        print(
+            f"[EXPERIMENT_DONE] {spec_index}/{len(specs)} | name={spec['name']} | "
+            f"rows={len(experiment_rows)} | summary_rows={len(summary_rows)} | "
+            f"errors={len(manifest['errors'])} | saved_to={exp_dir}",
+            flush=True,
+        )
 
     overall_summary = summarize_experiment(all_rows)
     write_json(os.path.join(experiment_root, "overall_summary.json"), overall_summary)
@@ -590,6 +675,11 @@ def run_experiments():
     write_json(os.path.join(experiment_root, "run_manifest.json"), manifest)
 
     shutil.copytree(experiment_root, run_root, dirs_exist_ok=True)
+    print(
+        f"[DONE] total_rows={len(all_rows)} | overall_summary_rows={len(overall_summary)} | "
+        f"errors={len(manifest['errors'])} | latest_dir={experiment_root} | archived_dir={run_root}",
+        flush=True,
+    )
     return experiment_root, run_root, manifest
 
 
