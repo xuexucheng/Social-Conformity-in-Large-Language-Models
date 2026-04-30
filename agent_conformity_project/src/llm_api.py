@@ -51,7 +51,13 @@ def call_llm_with_logprobs(messages, max_tokens=1, temperature=0.0, top_logprobs
     try:
         choice = data["choices"][0]
         text = choice["message"]["content"]
-        top = choice["logprobs"]["content"][0]["top_logprobs"]
-        return {"text": text, "top_logprobs": top, "raw": data}
+        content_logprobs = choice.get("logprobs", {}).get("content", []) or []
+        top = content_logprobs[0]["top_logprobs"] if content_logprobs else []
+        return {
+            "text": text,
+            "top_logprobs": top,
+            "content_logprobs": content_logprobs,
+            "raw": data,
+        }
     except Exception:
-        return {"text": "", "top_logprobs": [], "raw": data}
+        return {"text": "", "top_logprobs": [], "content_logprobs": [], "raw": data}
