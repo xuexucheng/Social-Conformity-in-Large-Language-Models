@@ -8,28 +8,40 @@ def format_options(options: dict) -> str:
     return "\n".join(lines)
 
 
-def build_instruction():
+def format_label_set(options=None):
+    labels = list((options or {}).keys()) or ["A", "B", "C", "D", "E"]
+    return ", ".join(labels)
+
+
+def format_answer_placeholder(options=None):
+    labels = list((options or {}).keys()) or ["A", "B", "C", "D", "E"]
+    return "/".join(labels)
+
+
+def build_instruction(options=None):
+    label_set = format_label_set(options)
+    answer_placeholder = format_answer_placeholder(options)
     if USE_CONFIDENCE:
         return (
             "You must answer a multiple-choice question.\n"
-            "Choose exactly one option from A, B, C, D, E.\n"
+            f"Choose exactly one option from {label_set}.\n"
             "Do not output multiple options.\n"
             "Do not explain your reasoning.\n"
             "Return only the final choice and confidence.\n"
             "Do not output anything except the required format.\n"
             "Output exactly two lines in this format:\n"
-            "ANSWER: <A/B/C/D/E>\n"
+            f"ANSWER: <{answer_placeholder}>\n"
             "CONFIDENCE: <0-100>"
         )
     return (
         "You must answer a multiple-choice question.\n"
-        "Choose exactly one option from A, B, C, D, E.\n"
+        f"Choose exactly one option from {label_set}.\n"
         "Do not output multiple options.\n"
         "Do not explain your reasoning.\n"
         "Return only the final choice.\n"
         "Do not output anything except the required format.\n"
         "Output exactly one line in this format:\n"
-        "ANSWER: <A/B/C/D/E>"
+        f"ANSWER: <{answer_placeholder}>"
     )
 
 
@@ -59,7 +71,7 @@ def build_prompt(item, opinions=None, attack_level=None):
     opts = format_options(item["options"])
     social_block = build_social_block(opinions)
     level_hint = build_level_hint(attack_level)
-    instruction = build_instruction()
+    instruction = build_instruction(item["options"])
 
     user_prompt = (
         f"Question:\n{q}\n\n"
