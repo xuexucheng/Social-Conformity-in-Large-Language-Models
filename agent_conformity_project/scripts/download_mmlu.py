@@ -26,7 +26,16 @@ def parse_args():
     parser.add_argument("--limit", type=int, default=0, help="0 means keep all rows.")
     parser.add_argument("--seed", type=int, default=SEED)
     parser.add_argument("--raw-data-dir", default=RAW_DATA_DIR)
-    parser.add_argument("--output", default=DATA_PATH)
+    parser.add_argument(
+        "--output",
+        default=None,
+        help="Converted project-format output. Defaults to data/datasets/mmlu_<subject>_<split>.json.",
+    )
+    parser.add_argument(
+        "--activate",
+        action="store_true",
+        help=f"Also write the converted dataset to the active DATA_PATH ({DATA_PATH}).",
+    )
     return parser.parse_args()
 
 
@@ -77,20 +86,30 @@ def main():
 
     raw_rows = [dict(row) for row in dataset]
     converted = [convert_row(row, index, rng) for index, row in enumerate(raw_rows)]
+    output_path = args.output or os.path.join(
+        "data", "datasets", f"mmlu_{args.subject}_{args.split}.json"
+    )
 
     os.makedirs(args.raw_data_dir, exist_ok=True)
-    os.makedirs(os.path.dirname(args.output), exist_ok=True)
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
     raw_name = f"mmlu_{args.subject}_{args.split}.json"
     raw_path = os.path.join(args.raw_data_dir, raw_name)
     with open(raw_path, "w", encoding="utf-8") as fout:
         json.dump(raw_rows, fout, ensure_ascii=False, indent=2)
 
-    with open(args.output, "w", encoding="utf-8") as fout:
+    with open(output_path, "w", encoding="utf-8") as fout:
         json.dump(converted, fout, ensure_ascii=False, indent=2)
 
+    if args.activate:
+        os.makedirs(os.path.dirname(DATA_PATH), exist_ok=True)
+        with open(DATA_PATH, "w", encoding="utf-8") as fout:
+            json.dump(converted, fout, ensure_ascii=False, indent=2)
+
     print(f"[OK] raw MMLU saved: {raw_path}, size={len(raw_rows)}")
-    print(f"[OK] project dataset saved: {args.output}, size={len(converted)}")
+    print(f"[OK] project dataset saved: {output_path}, size={len(converted)}")
+    if args.activate:
+        print(f"[OK] active dataset updated: {DATA_PATH}, size={len(converted)}")
 
 
 if __name__ == "__main__":

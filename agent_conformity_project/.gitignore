@@ -2,7 +2,11 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 results/
-data/
+data/*
+!data/dataset.json
+!data/datasets/
+!data/datasets/*.json
+!data/README.md
 .venv/
 venv/
 env/
