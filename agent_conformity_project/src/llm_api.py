@@ -4,6 +4,44 @@ import requests
 from src.config import API_URL, MODEL_NAME, TEMPERATURE, MAX_TOKENS
 
 
+def normalize_messages_for_model(messages, model_name):
+    model = (model_name or "").lower()
+    if "gemma" not in model and "google/gemma" not in model:
+        return messages
+
+    system_contents = []
+    normalized = []
+    for message in messages:
+        if message.get("role") == "system":
+            content = message.get("content")
+            if content:
+                system_contents.append(str(content))
+            continue
+        normalized.append(dict(message))
+
+    if not system_contents:
+        return normalized
+
+    system_text = "\n\n".join(system_contents)
+    for message in normalized:
+        if message.get("role") == "user":
+            original_content = message.get("content") or ""
+            message["content"] = (
+                f"[System instruction]\n{system_text}\n\n"
+                f"[User task]\n{original_content}"
+            )
+            return normalized
+
+    normalized.insert(
+        0,
+        {
+            "role": "user",
+            "content": f"[System instruction]\n{system_text}",
+        },
+    )
+    return normalized
+
+
 def _payload_logprob_flags(payload):
     return (
         f"payload_has_logprobs={'logprobs' in payload}; "
@@ -34,6 +72,11 @@ def _api_error(message, payload, response=None, exception=None):
 
 
 def post_chat_completion(payload):
+    if "messages" in payload:
+        payload = {
+            **payload,
+            "messages": normalize_messages_for_model(payload["messages"], MODEL_NAME),
+        }
     payload = {
         "model": MODEL_NAME,
         **payload,
