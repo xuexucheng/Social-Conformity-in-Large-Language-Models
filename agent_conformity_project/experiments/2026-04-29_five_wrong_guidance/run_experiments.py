@@ -2,6 +2,7 @@ import json
 import os
 import shutil
 import sys
+import traceback
 
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -100,6 +101,77 @@ def call_legacy_answer_with_logprobs(messages):
         "selected_logprob": selected_logprob,
         "raw": result.get("raw", {}),
     }
+
+
+def smoke_item_limit():
+    if os.getenv("RUN_SMOKE_ONLY", "0") == "1":
+        return int(os.getenv("SMOKE_ITEMS", "3"))
+    smoke_items = os.getenv("SMOKE_ITEMS")
+    if smoke_items:
+        return int(smoke_items)
+    return None
+
+
+def limited_dataset():
+    limit = smoke_item_limit()
+    for idx, item in enumerate(load_dataset(), start=1):
+        if limit is not None and idx > limit:
+            break
+        yield item
+
+
+def item_identifier(item):
+    return item.get("item_id", item.get("id", "UNKNOWN"))
+
+
+def format_error(exc):
+    return {
+        "error": str(exc),
+        "error_type": type(exc).__name__,
+        "traceback": traceback.format_exc(limit=5),
+    }
+
+
+def log_error(stage, item, exc):
+    print(
+        f"[ERROR] {stage} item_id={item_identifier(item)}: {type(exc).__name__}: {exc}",
+        file=sys.stderr,
+        flush=True,
+    )
+
+
+def build_error_row(item, experiment_name, stage, exc, initial_result=None, condition=None):
+    row = {
+        "id": item.get("id"),
+        "item_id": item_identifier(item),
+        "experiment_mode": experiment_name if experiment_name != EXP5_NAME else None,
+        "experiment_name": experiment_name,
+        "condition": condition,
+        "stage": stage,
+        "is_error": True,
+        "n_wrong_guides": N_WRONG_GUIDES,
+        "question": item.get("question"),
+        "options": item.get("options"),
+        "correct_answer": item.get("correct_answer"),
+        "distractor": item.get("distractor"),
+        "model_name": MODEL_NAME,
+        "initial_prediction": (initial_result or {}).get("prediction"),
+        "initial_confidence": (initial_result or {}).get("confidence"),
+        "initial_option_logprobs": (initial_result or {}).get("option_logprobs"),
+        "initial_selected_logprob": (initial_result or {}).get("selected_logprob"),
+        "attack_prediction": None,
+        "attack_confidence": None,
+        "attack_option_logprobs": None,
+        "attack_selected_logprob": None,
+        "final_answer": None,
+        "is_correct": False,
+        "chose_distractor": False,
+        "raw_initial_output": (initial_result or {}).get("text"),
+        "raw_attack_output": None,
+        "raw_output": None,
+    }
+    row.update(format_error(exc))
+    return row
 
 
 def build_initial_messages(item):
@@ -407,8 +479,12 @@ def copy_script_to_output(output_dir):
 
 def main():
     run_exp5_only = os.getenv("RUN_EXP5_ONLY", "0") == "1"
-    output_dir = os.path.join(RESULT_DIR, "2026-04-29_five_wrong_guidance")
-    run_output_dir = os.path.join(RUN_DIR, "2026-04-29_five_wrong_guidance")
+    smoke_limit = smoke_item_limit()
+    output_subdir = "2026-04-29_five_wrong_guidance"
+    if smoke_limit is not None:
+        output_subdir = f"{output_subdir}_smoke"
+    output_dir = os.path.join(RESULT_DIR, output_subdir)
+    run_output_dir = os.path.join(RUN_DIR, output_subdir)
     os.makedirs(output_dir, exist_ok=True)
     os.makedirs(run_output_dir, exist_ok=True)
     copy_script_to_output(output_dir)
@@ -442,6 +518,10 @@ def main():
             "temperature": TEMPERATURE,
             "top_logprobs": 20,
         },
+        "smoke_mode": {
+            "enabled": smoke_limit is not None,
+            "max_items": smoke_limit,
+        },
         "logprobs_source": "chat completion logprobs for the generated answer option token",
         "option_logprobs": "raw top-logprobs for A/B/C/D/E at the answer token when present; missing labels are null",
     }
@@ -471,19 +551,50 @@ def main():
     }
 
     try:
-        for item in load_dataset():
-            initial_result = run_initial_pass(item)
+        if smoke_limit is not None:
+            print(f"[SMOKE] Running first {smoke_limit} item(s) only.", flush=True)
+
+        for item in limited_dataset():
+            try:
+                initial_result = run_initial_pass(item)
+            except RuntimeError as exc:
+                log_error("initial_pass", item, exc)
+                for name in experiment_fns:
+                    row = build_error_row(item, name, "initial_pass", exc)
+                    handles[name].write(json.dumps(row, ensure_ascii=False) + "\n")
+                    handles[name].flush()
+                for condition in EXP5_CONDITIONS:
+                    row = build_error_row(item, EXP5_NAME, "initial_pass", exc, condition=condition)
+                    handles[EXP5_NAME].write(json.dumps(row, ensure_ascii=False) + "\n")
+                    handles[EXP5_NAME].flush()
+                continue
+
             opinions = [item["distractor"] for _ in range(N_WRONG_GUIDES)]
 
             for name, fn in experiment_fns.items():
-                experiment_result = fn(item, opinions, initial_result)
-                row = build_row(item, opinions, initial_result, experiment_result)
+                try:
+                    experiment_result = fn(item, opinions, initial_result)
+                    row = build_row(item, opinions, initial_result, experiment_result)
+                except RuntimeError as exc:
+                    log_error(name, item, exc)
+                    row = build_error_row(item, name, name, exc, initial_result=initial_result)
                 handles[name].write(json.dumps(row, ensure_ascii=False) + "\n")
                 handles[name].flush()
 
             for condition in EXP5_CONDITIONS:
-                experiment_result = run_exp5_condition(item, condition, initial_result)
-                row = build_exp5_row(item, experiment_result)
+                try:
+                    experiment_result = run_exp5_condition(item, condition, initial_result)
+                    row = build_exp5_row(item, experiment_result)
+                except RuntimeError as exc:
+                    log_error(f"{EXP5_NAME}:{condition}", item, exc)
+                    row = build_error_row(
+                        item,
+                        EXP5_NAME,
+                        condition,
+                        exc,
+                        initial_result=initial_result,
+                        condition=condition,
+                    )
                 handles[EXP5_NAME].write(json.dumps(row, ensure_ascii=False) + "\n")
                 handles[EXP5_NAME].flush()
     finally:
