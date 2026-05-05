@@ -479,6 +479,7 @@ def copy_script_to_output(output_dir):
 
 def main():
     run_exp5_only = os.getenv("RUN_EXP5_ONLY", "0") == "1"
+    run_first4_only = os.getenv("RUN_FIRST4_ONLY", "0") == "1"
     smoke_limit = smoke_item_limit()
     output_subdir = "2026-04-29_five_wrong_guidance"
     if smoke_limit is not None:
@@ -536,7 +537,8 @@ def main():
     }
     if run_exp5_only:
         experiment_fns = {}
-    output_names = list(experiment_fns) + [EXP5_NAME]
+    run_exp5 = not run_first4_only or run_exp5_only
+    output_names = list(experiment_fns) + ([EXP5_NAME] if run_exp5 else [])
     latest_paths = {
         name: os.path.join(output_dir, f"{name}.jsonl")
         for name in output_names
@@ -563,10 +565,11 @@ def main():
                     row = build_error_row(item, name, "initial_pass", exc)
                     handles[name].write(json.dumps(row, ensure_ascii=False) + "\n")
                     handles[name].flush()
-                for condition in EXP5_CONDITIONS:
-                    row = build_error_row(item, EXP5_NAME, "initial_pass", exc, condition=condition)
-                    handles[EXP5_NAME].write(json.dumps(row, ensure_ascii=False) + "\n")
-                    handles[EXP5_NAME].flush()
+                if run_exp5:
+                    for condition in EXP5_CONDITIONS:
+                        row = build_error_row(item, EXP5_NAME, "initial_pass", exc, condition=condition)
+                        handles[EXP5_NAME].write(json.dumps(row, ensure_ascii=False) + "\n")
+                        handles[EXP5_NAME].flush()
                 continue
 
             opinions = [item["distractor"] for _ in range(N_WRONG_GUIDES)]
@@ -581,22 +584,23 @@ def main():
                 handles[name].write(json.dumps(row, ensure_ascii=False) + "\n")
                 handles[name].flush()
 
-            for condition in EXP5_CONDITIONS:
-                try:
-                    experiment_result = run_exp5_condition(item, condition, initial_result)
-                    row = build_exp5_row(item, experiment_result)
-                except RuntimeError as exc:
-                    log_error(f"{EXP5_NAME}:{condition}", item, exc)
-                    row = build_error_row(
-                        item,
-                        EXP5_NAME,
-                        condition,
-                        exc,
-                        initial_result=initial_result,
-                        condition=condition,
-                    )
-                handles[EXP5_NAME].write(json.dumps(row, ensure_ascii=False) + "\n")
-                handles[EXP5_NAME].flush()
+            if run_exp5:
+                for condition in EXP5_CONDITIONS:
+                    try:
+                        experiment_result = run_exp5_condition(item, condition, initial_result)
+                        row = build_exp5_row(item, experiment_result)
+                    except RuntimeError as exc:
+                        log_error(f"{EXP5_NAME}:{condition}", item, exc)
+                        row = build_error_row(
+                            item,
+                            EXP5_NAME,
+                            condition,
+                            exc,
+                            initial_result=initial_result,
+                            condition=condition,
+                        )
+                    handles[EXP5_NAME].write(json.dumps(row, ensure_ascii=False) + "\n")
+                    handles[EXP5_NAME].flush()
     finally:
         for handle in handles.values():
             handle.close()
