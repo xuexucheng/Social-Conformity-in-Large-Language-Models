@@ -4,6 +4,30 @@ import requests
 from src.config import API_URL, MODEL_NAME, TEMPERATURE, MAX_TOKENS
 
 
+def collapse_consecutive_roles(messages):
+    collapsed = []
+    group_counts = []
+
+    for message in messages:
+        current = dict(message)
+        if collapsed and current.get("role") == collapsed[-1].get("role"):
+            group_counts[-1] += 1
+            if group_counts[-1] == 2:
+                collapsed[-1]["content"] = (
+                    f"[Message 1]\n{collapsed[-1].get('content') or ''}"
+                )
+            collapsed[-1]["content"] = (
+                f"{collapsed[-1].get('content') or ''}\n\n"
+                f"[Message {group_counts[-1]}]\n{current.get('content') or ''}"
+            )
+            continue
+
+        collapsed.append(current)
+        group_counts.append(1)
+
+    return collapsed
+
+
 def normalize_messages_for_model(messages, model_name):
     model = (model_name or "").lower()
     if "gemma" not in model and "google/gemma" not in model:
@@ -19,27 +43,26 @@ def normalize_messages_for_model(messages, model_name):
             continue
         normalized.append(dict(message))
 
-    if not system_contents:
-        return normalized
-
-    system_text = "\n\n".join(system_contents)
-    for message in normalized:
-        if message.get("role") == "user":
-            original_content = message.get("content") or ""
-            message["content"] = (
-                f"[System instruction]\n{system_text}\n\n"
-                f"[User task]\n{original_content}"
+    if system_contents:
+        system_text = "\n\n".join(system_contents)
+        for message in normalized:
+            if message.get("role") == "user":
+                original_content = message.get("content") or ""
+                message["content"] = (
+                    f"[System instruction]\n{system_text}\n\n"
+                    f"[User task]\n{original_content}"
+                )
+                break
+        else:
+            normalized.insert(
+                0,
+                {
+                    "role": "user",
+                    "content": f"[System instruction]\n{system_text}",
+                },
             )
-            return normalized
 
-    normalized.insert(
-        0,
-        {
-            "role": "user",
-            "content": f"[System instruction]\n{system_text}",
-        },
-    )
-    return normalized
+    return collapse_consecutive_roles(normalized)
 
 
 def _payload_logprob_flags(payload):
