@@ -1,299 +1,151 @@
-﻿# Social Conformity in Large Language Models
+# Protocol-Dependent Conformity in Large Language Models
 
-This repository studies how social signals change an LLM's answer and implements the `CROWN-Ace (Epistemic Vigilance Edition)` defense pipeline.
+This repository is the public artifact for the paper **Protocol-Dependent Conformity in Large Language Models** (also referred to as **Social Conformity in LLMs**).
 
-The current codebase supports:
+Its purpose is to make the paper's experiment code, dataset construction files, analysis utilities, and small validation reports inspectable. Large raw model outputs, extracted runs, logs, model weights, and compressed result packages are intentionally not committed to Git.
 
-- private baseline answering
-- wrong-signal social attack settings from Zhu-style group structures
-- CROWN-Ace with blind evidence extraction, synthesized re-reasoning, and cognitive audit gating
-- prompt-defense and no-defense baselines
-- per-experiment result saving for rows and summaries
+## Paper Experiments
 
-## Repository Layout
+The main paper studies whether multiple-choice LLM answers change after exposure to wrong peer signals, and whether that effect depends on the interaction protocol.
 
-- `agent_conformity_project/src/`
-  - core model calling, parsing, metrics, and CROWN-Ace logic
-- `agent_conformity_project/scripts/`
-  - dataset building and experiment runners
-- `agent_conformity_project/results/`
-  - latest experiment outputs
+The four main protocols are:
 
-## Main CROWN-Ace Files
+- **Exp1 - All-at-once majority**: five wrong peer signals are shown together, followed by one final answer.
+- **Exp2 - Sequential, final-only**: wrong peer signals are shown one by one, but only the final answer is observed.
+- **Exp3 - Sequential + intermediate commitments**: the model answers after each peer signal, so prior answers can become anchors.
+- **Exp4 - All-at-once + self-iteration**: all wrong peer signals are shown first, then the model self-iterates before the final answer.
 
-- Core defense logic: [agent_conformity_project/src/crown_ace.py](C:\Users\21572\IdeaProjects\Social-Conformity-in-Large-Language-Models\agent_conformity_project\src\crown_ace.py)
-- Experiment runner: [agent_conformity_project/scripts/run_crown_ace_experiments.py](C:\Users\21572\IdeaProjects\Social-Conformity-in-Large-Language-Models\agent_conformity_project\scripts\run_crown_ace_experiments.py)
-- JSON parsing helpers: [agent_conformity_project/src/structured_parser.py](C:\Users\21572\IdeaProjects\Social-Conformity-in-Large-Language-Models\agent_conformity_project\src\structured_parser.py)
-- API calls and logprobs: [agent_conformity_project/src/llm_api.py](C:\Users\21572\IdeaProjects\Social-Conformity-in-Large-Language-Models\agent_conformity_project\src\llm_api.py)
+The paper also includes:
 
-## CROWN-Ace Flow
+- **Log-probability shift analysis** for correct and target-wrong options.
+- **Robustness checks** using non-overlapping 500-example subsets.
+- **Exact McNemar tests** for paired protocol comparisons.
+- **Exp5 social-label framing** on Gemma-2-2B-it, testing whether explicit peer labels add influence beyond repeated recommendation content.
 
-`CROWN-Ace` follows this sequence:
+## Datasets And Models
 
-1. `Step 0: Private Baseline`
-   - answer independently
-   - record `y_init`, reasoning, answer probability `p_init`, and entropy `H_init`
-2. `Step 1: Sequential Protocol`
-   - social opinions can be injected one-by-one instead of as a monolithic block
-3. `Step 2: Blind Evidence Extraction`
-   - peer answer labels are hidden
-   - only hidden reasoning is exposed for evidence extraction
-4. `Step 3: Synthesized Re-Reasoning`
-   - recompute a candidate answer from baseline reasoning plus extracted evidence
-5. `Step 4: Cognitive Audit Gate`
-   - trigger only if candidate answer differs from the baseline
-   - compute forward audit, logic echo, reasoning score, counterevidence score, and logic-echo strength
-6. `Step 5: Final Decision`
-   - accept only when the audit passes
-   - otherwise roll back to the private baseline
+Datasets:
 
-## Implemented Experiments
+- CommonsenseQA
+- MMLU `all/validation`
 
-The runner executes four experiment families.
+Models:
 
-### Experiment 1: Sequential Pressure Test
+- Qwen2.5-3B-Instruct
+- Phi-3.5-mini-instruct
+- Gemma-2-2B-it
 
-Purpose:
-- compare `Single` vs `Sequential` exposure under wrong social pressure
+Reusable dataset files are under:
 
-Subconditions:
-- `unanimous_wrong`
-- `diverse_wrong`
-- `devils_advocate_wrong`
+```text
+agent_conformity_project/data/datasets/
+```
 
-Methods:
-- `CROWN_ACE_SINGLE`
-- `CROWN_ACE_SEQUENTIAL`
-
-Eligibility:
-- only samples where the private baseline is initially correct
-
-### Experiment 2: Sequential Correction Test
-
-Purpose:
-- compare `Single` vs `Sequential` exposure when peers are unanimously correct
-
-Subconditions:
-- `unanimous_right`
-
-Methods:
-- `CROWN_ACE_SINGLE`
-- `CROWN_ACE_SEQUENTIAL`
-
-Eligibility:
-- only samples where the private baseline is initially wrong
-
-### Experiment 3: Algorithm-Only Correction Test
-
-Purpose:
-- remove the sequential protocol and compare audit logic under single-input exposure
-
-Subconditions:
-- `unanimous_right`
-
-Methods:
-- `PD`
-- `CROWN_ACE_SINGLE`
-- `ROLLBACK`
-
-Eligibility:
-- only samples where the private baseline is initially wrong
-
-### Experiment 4: Full-System Comparison
-
-Purpose:
-- compare full `ND`, `PD`, and `CROWN-Ace` under Zhu-style wrong-signal settings
-
-Subconditions:
-- `unanimous_wrong`
-- `diverse_wrong`
-- `devils_advocate_wrong`
-
-Methods:
-- `ND`
-- `PD`
-- `CROWN_ACE`
-
-## Zhu-Style Group Definitions
-
-These match the structure shown in the user-provided Zhu summary image.
-
-- `unanimous_wrong`
-  - all peers choose the same wrong distractor
-- `diverse_wrong`
-  - peer answers are distributed across wrong options
-- `devils_advocate_wrong`
-  - `N-1` peers choose one wrong distractor and `1` peer chooses a different wrong distractor
+The current repository includes the main 500-example datasets and the non-overlapping new500 dataset files used for robustness checks. See `agent_conformity_project/analysis_outputs/new500_dataset_integrity_report.md` for the integrity audit.
 
 ## Metrics
 
-The runner saves or derives:
+The paper reports:
 
-- `WCR`
-- `CR`
-- `SAR`
-- `CR_coll`
-- `CR_res`
-- `DNR`
-- `ES`
-- `delta_CR`
-- `delta_CR_vs_rollback`
-- `avg_delta_p`
-- `avg_delta_h`
-- `avg_reasoning_score`
-- `avg_logic_echo_strength`
+- **Initial accuracy**: accuracy before peer exposure.
+- **Final accuracy**: accuracy after the protocol.
+- **Conformity rate (CR)**: fraction of valid examples where the final answer changes toward the peer target.
+- **Harmful conformity rate (HCR)**: initially correct examples that end at the wrong peer target.
+- **Beneficial revision rate (BRR)**: initially wrong examples that end correct.
+- **Answer-change rate**: fraction of valid examples where final answer differs from initial answer.
 
-Notes:
+Some older code and reports use related names such as `wrong_conformity_rate`, `distractor_rate`, or `change_rate`; the paper-facing validation reports map these to the table metrics.
 
-- `p_init` and `p_final` are computed from real `logprobs` returned by the model API.
-- `delta_h` is computed from the answer-option distribution, not from text confidence alone.
-- the audit gate uses probability gain `delta_p`, not parsed confidence text.
-
-## Environment Requirements
-
-You need:
-
-1. Python 3.11 or compatible
-2. a local OpenAI-compatible chat completion API
-3. a dataset file at `agent_conformity_project/data/dataset.json`
-
-The default API endpoint is:
+## Repository Layout
 
 ```text
-http://127.0.0.1:8000/v1/chat/completions
+agent_conformity_project/
+  src/                 Core prompt, parsing, model API, and metric helpers
+  scripts/             Dataset and experiment runner scripts
+  analysis/            Lightweight analysis and integrity-check scripts
+  analysis_outputs/    Small Markdown validation reports
+  data/datasets/       Reusable processed dataset files
+docs/
+  REPRODUCIBILITY.md   Artifact-review reproduction notes
+  ARTIFACT_MANIFEST.md Public file manifest
 ```
 
-The code expects `logprobs` support for answer-option scoring.
-
-## Dataset Format
-
-Create `agent_conformity_project/data/dataset.json` with entries like:
-
-```json
-[
-  {
-    "id": 1,
-    "question": "Which planet is known as the Red Planet?",
-    "options": {
-      "A": "Earth",
-      "B": "Mars",
-      "C": "Jupiter",
-      "D": "Venus",
-      "E": "Mercury"
-    },
-    "correct_answer": "B",
-    "distractor": "D"
-  }
-]
-```
-
-If you only have raw data, build the dataset first with:
-
-```powershell
-cd agent_conformity_project
-python scripts/build_dataset.py
-```
-
-The dataset builder reads:
-
-- `data/raw/validation.json`
-
-and writes:
-
-- `data/dataset.json`
-
-## Configuration
-
-Key environment variables are defined in [config.py](C:\Users\21572\IdeaProjects\Social-Conformity-in-Large-Language-Models\agent_conformity_project\src\config.py).
-
-Common ones:
-
-```powershell
-$env:API_URL="http://127.0.0.1:8000/v1/chat/completions"
-$env:MODEL_NAME="Qwen/Qwen2.5-7B-Instruct"
-$env:DATA_PATH="data/dataset.json"
-$env:RESULT_DIR="results"
-$env:N_ATTACK_AGENTS="5"
-$env:SEED="42"
-```
-
-Audit thresholds:
-
-```powershell
-$env:CROWN_ACE_REASONING_THRESHOLD="0.65"
-$env:CROWN_ACE_COUNTER_THRESHOLD="0.35"
-$env:CROWN_ACE_CONFIDENCE_GAIN_THRESHOLD="0.0"
-```
-
-## Running the CROWN-Ace Experiments
-
-From the project directory:
-
-```powershell
-cd agent_conformity_project
-python scripts/run_crown_ace_experiments.py
-```
-
-This runner will:
-
-- load `data/dataset.json`
-- compute private baselines
-- generate social settings
-- run all four experiment families
-- save per-experiment rows and summaries
-- archive a copy under the run directory
-
-## Output Structure
-
-Latest outputs are written to:
+Large local outputs are ignored by Git:
 
 ```text
-agent_conformity_project/results/crown_ace/
+agent_conformity_project/results/
+results/
+logs/
+runs/
+*.jsonl
+*.tar.gz
 ```
 
-Archived outputs are written to:
+## Validation Reports
 
-```text
-agent_conformity_project/results/runs/<run_name>/crown_ace/
+Small reports that should remain in Git:
+
+- `agent_conformity_project/analysis_outputs/imported_results_validation_report.md`
+- `agent_conformity_project/analysis_outputs/new500_dataset_integrity_report.md`
+- `agent_conformity_project/analysis_outputs/exp5_label_attention_gemma2_2b_commonsenseqa500_fixed_summary.md`
+- `agent_conformity_project/analysis_outputs/mmlu_gemma_first4_integrity_report.md`
+
+These reports audit imported local result packages and dataset integrity. They do not contain full raw model generations.
+
+## Setup
+
+Create an environment:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
 ```
 
-Each experiment directory contains:
+The experiment code expects an OpenAI-compatible chat completions endpoint when running model inference. For artifact review, the lightweight checks below do not start vLLM, call remote APIs, download models, or rerun large experiments.
 
-- `rows.jsonl`
-- `rows.csv`
-- `summary.json`
-- `summary.csv`
-- `metadata.json`
+## Safe Sanity Checks
 
-The root experiment directory also contains:
+Compile Python files:
 
-- `overall_summary.json`
-- `overall_summary.csv`
-- `run_manifest.json`
+```powershell
+python -m py_compile agent_conformity_project\analysis\analyze_exp5_label_attention.py
+python -m py_compile agent_conformity_project\analysis\check_jsonl_integrity.py
+python -m py_compile agent_conformity_project\analysis\exact_mcnemar.py
+```
 
-## Supporting Scripts
+Regenerate the Exp5 summary if the corresponding local result JSONL is available:
 
-Other available scripts in `agent_conformity_project/scripts/`:
+```powershell
+python agent_conformity_project\analysis\analyze_exp5_label_attention.py
+```
 
-- `run_clean.py`
-- `run_attack.py`
-- `run_defense.py`
-- `run_social_influence_mechanisms.py`
-- `run_directional_probability_analysis.py`
-- `run_semantic_exclusion_test.py`
+Inspect dataset integrity:
 
-These are older or parallel experiment utilities. The main script for the current defense study is:
+```powershell
+Get-Content agent_conformity_project\analysis_outputs\new500_dataset_integrity_report.md
+```
 
-- `run_crown_ace_experiments.py`
+Run an exact McNemar test from paired discordant counts:
 
-## Troubleshooting
+```powershell
+python agent_conformity_project\analysis\exact_mcnemar.py --b 10 --c 35
+```
 
-- If `run_manifest.json` says `blocked`, check whether `data/dataset.json` exists.
-- If API calls fail, verify your local model server is running and supports `logprobs`.
-- If you want deterministic `diverse_wrong` sampling, keep `SEED` fixed.
+## What Is Not Included
 
-## Current Status
+The Git repository intentionally excludes:
 
-The code is prepared for execution, but no formal experiment results are bundled in the repository by default. You need to provide data and a running model API, then launch the experiment runner.
+- raw model output JSONL files
+- extracted run directories
+- logs and caches
+- model weights
+- vLLM caches
+- compressed result packages
+- paper drafts, slides, private feedback, and internal audit notes
 
+If a reviewer needs raw result artifacts, distribute them through a release archive such as GitHub Releases, Zenodo, OSF, or Hugging Face Datasets, then place them locally under `agent_conformity_project/results/` before rerunning analysis scripts.
 
+## Notes On Legacy Files
+
+The repository also contains earlier CROWN-Ace and social-influence utilities. They are retained for provenance and related experiments, but the paper-facing artifact is centered on Exp1-Exp4, Exp5, dataset integrity, and analysis validation reports listed above.
