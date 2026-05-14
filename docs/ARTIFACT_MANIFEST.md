@@ -37,14 +37,6 @@ These files should remain outside normal Git commits:
 | `*.docx`, `*.pptx`, `*.pdf` | Manuscript drafts and slides should not be committed |
 | generated Markdown validation reports | Intentionally excluded from Git and regenerated locally when needed |
 
-## Known Tracked Cleanup Candidates
+## Current Cleanup Status
 
-The current history already contains some old or bulky files. They were not removed automatically in this cleanup branch because removing tracked files is a destructive repository decision.
-
-Candidate categories for a later, explicit cleanup PR:
-
-- tracked `.tmp_results1/results/...` JSONL and checkpoint outputs
-- tracked `agent_conformity_project/*.tar.gz` result packages
-- tracked IDE metadata under `.idea/`
-
-Before removing them, verify whether any paper table still depends on those exact files or whether they have been archived externally.
+Legacy local files and bulky result archives have been removed from the current tracked file tree. Large raw outputs and generated reports are intentionally excluded and should be stored externally if needed.

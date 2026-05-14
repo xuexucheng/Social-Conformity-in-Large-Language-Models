@@ -2,7 +2,12 @@ import os
 
 
 API_URL = os.getenv("API_URL", "http://127.0.0.1:8000/v1/chat/completions")
-MODEL_NAME = os.getenv("MODEL_NAME", "Qwen/Qwen2.5-7B-Instruct")
+MODEL_NAME = os.getenv("MODEL_NAME", "Qwen/Qwen2.5-3B-Instruct")
+PAPER_MODEL_NAMES = [
+    "Qwen/Qwen2.5-3B-Instruct",
+    "microsoft/Phi-3.5-mini-instruct",
+    "google/gemma-2-2b-it",
+]
 
 RAW_DATA_DIR = os.getenv("RAW_DATA_DIR", "data/raw")
 DATA_SPLIT = os.getenv("DATA_SPLIT", "validation")
