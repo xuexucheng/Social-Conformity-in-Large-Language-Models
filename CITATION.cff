@@ -1,0 +1,7 @@
+cff-version: 1.2.0
+message: "If you use this artifact, please cite the paper."
+title: "Protocol-Dependent Conformity in Large Language Models"
+authors:
+  - family-names: "Xue"
+    given-names: "Xucheng"
+year: 2026
