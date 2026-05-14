@@ -118,6 +118,85 @@ Run an exact McNemar test from paired discordant counts:
 python agent_conformity_project\analysis\exact_mcnemar.py --b 10 --c 35
 ```
 
+Run the paper-ready item-paired protocol analysis on a standard result directory:
+
+```powershell
+python agent_conformity_project\analysis\paired_protocol_analysis.py `
+  --input-dir agent_conformity_project\results\2026-04-29_five_wrong_guidance `
+  --pair Batch-Single:Sequential-Final `
+  --pair Sequential-Final:Sequential-Stepwise `
+  --bootstrap-reps 10000 `
+  --seed 42 `
+  --output-dir agent_conformity_project\analysis_outputs\paired_primary
+```
+
+The paired analysis uses common-valid items, requires matching initial answers by
+default for initial-state-dependent metrics, and writes condition validity counts,
+effect sizes with 95% confidence intervals, exact McNemar tests, Holm-adjusted
+p-values, and a per-item inclusion audit.
+
+Analyze whether the protocol effect persists after controlling for the target
+distractor's baseline plausibility:
+
+```powershell
+python agent_conformity_project\analysis\distractor_plausibility_analysis.py `
+  --input-dir agent_conformity_project\results\2026-04-29_five_wrong_guidance `
+  --pair Batch-Single:Sequential-Final `
+  --pair Sequential-Final:Sequential-Stepwise `
+  --reference-condition Batch-Single `
+  --bootstrap-reps 10000 `
+  --seed 42 `
+  --output-dir agent_conformity_project\analysis_outputs\distractor_plausibility
+```
+
+This analysis defines plausibility as `initial log p(target) - initial log p(gold)`,
+reports logprob coverage without imputing missing options, estimates protocol effects
+within model-dataset-specific plausibility quartiles, and fits adjusted logistic models
+with item-clustered robust standard errors.
+
+Audit invalid outputs and test sensitivity to the current parser and missing outcomes:
+
+```powershell
+python agent_conformity_project\analysis\invalid_parser_sensitivity.py `
+  --input-dir agent_conformity_project\results\2026-04-29_five_wrong_guidance `
+  --pair Batch-Single:Sequential-Final `
+  --pair Sequential-Final:Sequential-Stepwise `
+  --bootstrap-reps 10000 `
+  --seed 42 `
+  --output-dir agent_conformity_project\analysis_outputs\invalid_parser_sensitivity
+```
+
+This audit keeps stored common-valid predictions as the primary analysis. It separately
+reports current-parser results, deterministic manual-review samples, invalid-as-non-event
+results, and worst-case bounds for missing binary outcomes.
+
+Analyze the non-overlapping main500/new500 runs separately and then perform repeated
+subsampling from their pooled common-valid items:
+
+```powershell
+python agent_conformity_project\analysis\repeated_subset_robustness.py `
+  --batch qwen_csqa::main500=C:\path\to\qwen_csqa_main500 `
+  --batch qwen_csqa::new500=C:\path\to\qwen_csqa_new500 `
+  --pair Batch-Single:Sequential-Final `
+  --pair Sequential-Final:Sequential-Stepwise `
+  --repetitions 30 `
+  --sample-size 500 `
+  --bootstrap-reps 10000 `
+  --seed 42 `
+  --output-dir agent_conformity_project\analysis_outputs\repeated_subset
+```
+
+The script rejects duplicate item IDs across batches, records every repetition's seed
+and membership, and quantifies overlap between repetitions. Empirical ranges across
+overlapping subsets are reported as descriptive robustness ranges, not as confidence
+intervals from independent experiments.
+
+Run its regression tests:
+
+```powershell
+python -m unittest discover -s agent_conformity_project\tests -p "test_*.py" -v
+```
+
 ## What Is Not Included
 
 The Git repository intentionally excludes:

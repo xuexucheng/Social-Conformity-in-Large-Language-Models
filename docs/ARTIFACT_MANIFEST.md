@@ -15,6 +15,14 @@ This manifest separates public Git-tracked files from local-only artifacts.
 | `agent_conformity_project/scripts/` | Dataset and experiment runner scripts | yes |
 | `agent_conformity_project/analysis/` | Lightweight integrity and Exp5 analysis scripts | yes |
 | `agent_conformity_project/analysis/exact_mcnemar.py` | Dependency-free exact McNemar test helper for paired counts | yes |
+| `agent_conformity_project/analysis/paired_protocol_analysis.py` | Common-valid paired protocol analysis, CIs, McNemar tests, Holm correction, and audit outputs | yes |
+| `agent_conformity_project/analysis/distractor_plausibility_analysis.py` | Baseline target-plausibility coverage, quartile effects, and item-clustered adjusted regression | yes |
+| `agent_conformity_project/analysis/invalid_parser_sensitivity.py` | Invalid-output audit, current-parser sensitivity, manual-review samples, and worst-case missing-data bounds | yes |
+| `agent_conformity_project/analysis/repeated_subset_robustness.py` | Independent-batch replication, duplicate-ID audit, repeated subsampling, and overlap analysis | yes |
+| `agent_conformity_project/tests/test_paired_protocol_analysis.py` | Synthetic regression tests for the paired statistical pipeline | yes |
+| `agent_conformity_project/tests/test_distractor_plausibility_analysis.py` | Synthetic tests for margin extraction, missing logprobs, quartiles, and adjusted regression | yes |
+| `agent_conformity_project/tests/test_invalid_parser_sensitivity.py` | Synthetic tests for parser recovery/disagreement, ambiguity, reanalysis, and missing-output bounds | yes |
+| `agent_conformity_project/tests/test_repeated_subset_robustness.py` | Synthetic tests for independent batches, pooled sampling, membership tracking, and repetition overlap | yes |
 | `agent_conformity_project/data/datasets/` | Processed reusable dataset files for CommonsenseQA and MMLU | yes |
 
 ## Generated Validation Summaries
