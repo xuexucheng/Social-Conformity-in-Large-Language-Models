@@ -16,16 +16,10 @@ This manifest separates public Git-tracked files from local-only artifacts.
 | `agent_conformity_project/analysis/` | Lightweight integrity and Exp5 analysis scripts | yes |
 | `agent_conformity_project/analysis/exact_mcnemar.py` | Dependency-free exact McNemar test helper for paired counts | yes |
 | `agent_conformity_project/data/datasets/` | Processed reusable dataset files for CommonsenseQA and MMLU | yes |
-| `agent_conformity_project/analysis_outputs/*.md` | Small validation reports for datasets and imported result checks | yes |
 
-## Paper Validation Reports
+## Generated Validation Summaries
 
-| Report | Role |
-|---|---|
-| `agent_conformity_project/analysis_outputs/imported_results_validation_report.md` | Recomputed first500 table checks against locally imported result packages |
-| `agent_conformity_project/analysis_outputs/new500_dataset_integrity_report.md` | Confirms new500 dataset structure and non-overlap with first500 |
-| `agent_conformity_project/analysis_outputs/exp5_label_attention_gemma2_2b_commonsenseqa500_fixed_summary.md` | Summarizes the Gemma Exp5 social-label framing run |
-| `agent_conformity_project/analysis_outputs/mmlu_gemma_first4_integrity_report.md` | Structural integrity diagnosis for the fixed Gemma MMLU first4 package |
+Generated Markdown validation reports are not committed to keep the repository lightweight. They can be regenerated locally from the analysis scripts when the corresponding raw result files are available.
 
 ## Local-Only Artifacts
 
@@ -41,6 +35,7 @@ These files should remain outside normal Git commits:
 | `*.tar`, `*.tar.gz`, `*.zip`, `*.7z` | Result packages should be released externally |
 | `*.pt`, `*.pth`, `*.safetensors`, `*.bin` | Model weights are not part of this source artifact |
 | `*.docx`, `*.pptx`, `*.pdf` | Manuscript drafts and slides should not be committed |
+| generated Markdown validation reports | Intentionally excluded from Git and regenerated locally when needed |
 
 ## Known Tracked Cleanup Candidates
 

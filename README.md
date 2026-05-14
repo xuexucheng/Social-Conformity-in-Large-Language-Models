@@ -2,7 +2,7 @@
 
 This repository is the public artifact for the paper **Protocol-Dependent Conformity in Large Language Models** (also referred to as **Social Conformity in LLMs**).
 
-Its purpose is to make the paper's experiment code, dataset construction files, analysis utilities, and small validation reports inspectable. Large raw model outputs, extracted runs, logs, model weights, and compressed result packages are intentionally not committed to Git.
+Its purpose is to make the paper's experiment code, dataset construction files, analysis utilities, and reproducibility documentation inspectable. Large raw model outputs, extracted runs, logs, model weights, generated reports, and compressed result packages are intentionally not committed to Git.
 
 ## Paper Experiments
 
@@ -41,7 +41,7 @@ Reusable dataset files are under:
 agent_conformity_project/data/datasets/
 ```
 
-The current repository includes the main 500-example datasets and the non-overlapping new500 dataset files used for robustness checks. See `agent_conformity_project/analysis_outputs/new500_dataset_integrity_report.md` for the integrity audit.
+The current repository includes the main 500-example datasets and the non-overlapping new500 dataset files used for robustness checks.
 
 ## Metrics
 
@@ -54,7 +54,7 @@ The paper reports:
 - **Beneficial revision rate (BRR)**: initially wrong examples that end correct.
 - **Answer-change rate**: fraction of valid examples where final answer differs from initial answer.
 
-Some older code and reports use related names such as `wrong_conformity_rate`, `distractor_rate`, or `change_rate`; the paper-facing validation reports map these to the table metrics.
+Some older code uses related names such as `wrong_conformity_rate`, `distractor_rate`, or `change_rate`; paper-facing summaries can be regenerated locally from the analysis scripts.
 
 ## Repository Layout
 
@@ -63,7 +63,6 @@ agent_conformity_project/
   src/                 Core prompt, parsing, model API, and metric helpers
   scripts/             Dataset and experiment runner scripts
   analysis/            Lightweight analysis and integrity-check scripts
-  analysis_outputs/    Small Markdown validation reports
   data/datasets/       Reusable processed dataset files
 docs/
   REPRODUCIBILITY.md   Artifact-review reproduction notes
@@ -81,16 +80,9 @@ runs/
 *.tar.gz
 ```
 
-## Validation Reports
+## Generated Validation Summaries
 
-Small reports that should remain in Git:
-
-- `agent_conformity_project/analysis_outputs/imported_results_validation_report.md`
-- `agent_conformity_project/analysis_outputs/new500_dataset_integrity_report.md`
-- `agent_conformity_project/analysis_outputs/exp5_label_attention_gemma2_2b_commonsenseqa500_fixed_summary.md`
-- `agent_conformity_project/analysis_outputs/mmlu_gemma_first4_integrity_report.md`
-
-These reports audit imported local result packages and dataset integrity. They do not contain full raw model generations.
+Generated Markdown validation reports are not committed to keep the repository lightweight. They can be regenerated locally from the analysis scripts when the corresponding raw result files are available.
 
 ## Setup
 
@@ -120,12 +112,6 @@ Regenerate the Exp5 summary if the corresponding local result JSONL is available
 python agent_conformity_project\analysis\analyze_exp5_label_attention.py
 ```
 
-Inspect dataset integrity:
-
-```powershell
-Get-Content agent_conformity_project\analysis_outputs\new500_dataset_integrity_report.md
-```
-
 Run an exact McNemar test from paired discordant counts:
 
 ```powershell
@@ -148,4 +134,4 @@ If a reviewer needs raw result artifacts, distribute them through a release arch
 
 ## Notes On Legacy Files
 
-The repository also contains earlier CROWN-Ace and social-influence utilities. They are retained for provenance and related experiments, but the paper-facing artifact is centered on Exp1-Exp4, Exp5, dataset integrity, and analysis validation reports listed above.
+The repository also contains earlier CROWN-Ace and social-influence utilities. They are retained for provenance and related experiments, but the paper-facing artifact is centered on Exp1-Exp4, Exp5, dataset files, analysis scripts, and reproducibility documentation.

@@ -8,7 +8,7 @@ The repository supports three levels of checking:
 
 1. **Code inspection**: prompts, parsers, metrics, dataset conversion scripts, and experiment runners are available in `agent_conformity_project/`.
 2. **Dataset audit**: the processed CommonsenseQA and MMLU dataset files used by the paper can be inspected directly under `agent_conformity_project/data/datasets/`.
-3. **Analysis-layer validation**: small Markdown reports in `agent_conformity_project/analysis_outputs/` document checks against imported local result packages.
+3. **Analysis-layer validation**: analysis scripts can be used to regenerate validation summaries locally.
 
 Full model inference is not rerun by default. Reproducing the entire paper from scratch requires local access to the listed models and an OpenAI-compatible chat-completions server with logprob support.
 
@@ -31,12 +31,6 @@ Tracked dataset files:
 - `agent_conformity_project/data/datasets/commonsenseqa_new500_validation_rows500_999_seed42.json`
 - `agent_conformity_project/data/datasets/mmlu_all_validation.json`
 - `agent_conformity_project/data/datasets/mmlu_new500_all_validation_rows500_999.json`
-
-The new500 dataset audit is recorded in:
-
-```text
-agent_conformity_project/analysis_outputs/new500_dataset_integrity_report.md
-```
 
 ## Main Protocols
 
@@ -76,11 +70,7 @@ If the Exp5 JSONL is present locally, regenerate its summary with:
 python agent_conformity_project\analysis\analyze_exp5_label_attention.py
 ```
 
-The generated report is:
-
-```text
-agent_conformity_project/analysis_outputs/exp5_label_attention_gemma2_2b_commonsenseqa500_fixed_summary.md
-```
+Generated Markdown validation reports are not committed to keep the repository lightweight. They can be regenerated locally from the analysis scripts when the corresponding raw result files are available.
 
 To compute an exact two-sided McNemar test from paired discordant counts:
 
