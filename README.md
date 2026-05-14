@@ -132,6 +132,6 @@ The Git repository intentionally excludes:
 
 If a reviewer needs raw result artifacts, distribute them through a release archive such as GitHub Releases, Zenodo, OSF, or Hugging Face Datasets, then place them locally under `agent_conformity_project/results/` before rerunning analysis scripts.
 
-## Notes On Legacy Files
+## Artifact Scope
 
-The repository also contains earlier CROWN-Ace and social-influence utilities. They are retained for provenance and related experiments, but the paper-facing artifact is centered on Exp1-Exp4, Exp5, dataset files, analysis scripts, and reproducibility documentation.
+This repository is organized as a paper-facing artifact for the protocol-dependent conformity experiments. It keeps runnable code, lightweight processed data, analysis utilities, and reproducibility documentation while excluding bulky local outputs and unrelated legacy artifacts.
