@@ -8,6 +8,7 @@ runs/
 results/
 logs/
 outputs/raw/
+agent_conformity_project/analysis_outputs/
 2026-04-29_five_wrong_guidance/
 five_wrong_guidance_commonsenseqa500_gemma2_2b_20260504/
 five_wrong_guidance_mmlu500_gemma2_2b_cut_from1531_20260504/
@@ -41,4 +42,7 @@ checkpoints/
 *.docx
 *.pptx
 *.pdf
-项目整体总结.md
+*_private.md
+*_internal.md
+local_notes.md
+personal_notes.md

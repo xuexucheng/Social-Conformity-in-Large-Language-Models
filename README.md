@@ -31,9 +31,9 @@ Datasets:
 
 Models:
 
-- Qwen2.5-3B-Instruct
-- Phi-3.5-mini-instruct
-- Gemma-2-2B-it
+- `Qwen/Qwen2.5-3B-Instruct`
+- `microsoft/Phi-3.5-mini-instruct`
+- `google/gemma-2-2b-it`
 
 Reusable dataset files are under:
 
@@ -49,10 +49,10 @@ The paper reports:
 
 - **Initial accuracy**: accuracy before peer exposure.
 - **Final accuracy**: accuracy after the protocol.
-- **Conformity rate (CR)**: fraction of valid examples where the final answer changes toward the peer target.
+- **Conformity rate (CR)**: among examples that did not initially choose the target distractor, the proportion whose final answer changes to that target distractor, i.e., `count(y0 != d and ya = d) / count(y0 != d)`.
 - **Harmful conformity rate (HCR)**: initially correct examples that end at the wrong peer target.
 - **Beneficial revision rate (BRR)**: initially wrong examples that end correct.
-- **Answer-change rate**: fraction of valid examples where final answer differs from initial answer.
+- **Answer-change rate (ChangeRate)**: fraction of valid examples where final answer differs from initial answer.
 
 Some older code uses related names such as `wrong_conformity_rate`, `distractor_rate`, or `change_rate`; paper-facing summaries can be regenerated locally from the analysis scripts.
 
