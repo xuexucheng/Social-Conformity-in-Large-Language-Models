@@ -1,3 +1,0 @@
-input_mode,dimension,condition_name,total,conformity_rate,wrong_conformity_rate,change_rate,attack_accuracy,avg_target_vote_count,avg_correct_vote_count
-sequential_input,input_mode_comparison,target_consensus_n5,500,0.264,0.138,0.212,0.6,5.0,0.0
-single_input,input_mode_comparison,target_consensus_n5,500,0.94,0.692,0.886,0.046,5.0,0.0

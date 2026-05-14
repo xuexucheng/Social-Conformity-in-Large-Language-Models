@@ -1,36 +1,44 @@
-# Local IDE metadata
-.idea/.name
+# Local IDE files
+.idea/
 .DS_Store
 
-# Experiment outputs and extracted runs
+# Local temporary result folders
+.tmp_results1/
 runs/
 results/
 logs/
-checkpoints/
-models/
 outputs/raw/
 2026-04-29_five_wrong_guidance/
 five_wrong_guidance_commonsenseqa500_gemma2_2b_20260504/
 five_wrong_guidance_mmlu500_gemma2_2b_cut_from1531_20260504/
 
-# Large result/archive artifacts should be released externally, not committed
+# Python/cache
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+*.pyc
+
+# Archives and large run packages
 *.tar
 *.tar.gz
 *.zip
 *.7z
-*.docx
-*.pptx
-*.pdf
+
+# Raw logs/results
 *.jsonl
 *.log
 *.tmp
+
+# Model/checkpoint files
+models/
+checkpoints/
 *.pt
 *.pth
 *.safetensors
 *.bin
 
-# Python/Jupyter cache
-__pycache__/
-.pytest_cache/
-.ipynb_checkpoints/
-*.pyc
+# Paper drafts and local notes
+*.docx
+*.pptx
+*.pdf
+项目整体总结.md
