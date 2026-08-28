@@ -1,0 +1,18 @@
+{
+  "comparisons": [
+    ["exp1", "exp2"],
+    ["exp2", "exp3"]
+  ],
+  "cells": [
+    {
+      "dataset": "CommonsenseQA",
+      "model": "Qwen/Qwen2.5-3B-Instruct",
+      "conditions": {
+        "exp1": "REPLACE/run/exp1_all_at_once_final.jsonl",
+        "exp2": "REPLACE/run/exp2_sequential_context_final_only.jsonl",
+        "exp3": "REPLACE/run/exp3_sequential_answer_each_step.jsonl",
+        "exp4": "REPLACE/run/exp4_all_at_once_self_iter5.jsonl"
+      }
+    }
+  ]
+}
