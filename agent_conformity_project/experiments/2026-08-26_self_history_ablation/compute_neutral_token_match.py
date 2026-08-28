@@ -23,7 +23,7 @@ from transformers import AutoTokenizer
 # Candidate family (all pass the neutrality rules). The first is the Qwen-confirmed default.
 CANDIDATES = [
     "Acknowledged. Message received. Proceeding to the next message.",
-    "Acknowledged. Message received. Continuing to the next message.",
+    "Message received. Acknowledged. Moving to the following message.",
     "Acknowledged. Message received. Continuing.",
     "Received. Acknowledged. Message received. Continuing.",
     "Acknowledged. Message received. Proceeding to the next message now.",

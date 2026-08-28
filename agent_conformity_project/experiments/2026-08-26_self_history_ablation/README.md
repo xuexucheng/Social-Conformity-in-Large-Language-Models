@@ -68,8 +68,8 @@ turn- and length-matched neutral condition.
 stance / no answer / no confidence / no decision steer). Phi / Gemma variants
 must be length-checked on their own tokenizers first (`compute_neutral_token_match.py`).
 
-**Neutral-V2** is `Acknowledged. Message received. Continuing to the next
-message.`. It changes the main lexical choice while preserving the same control
+**Neutral-V2** is `Message received. Acknowledged. Moving to the following
+message.`. It changes the wording and ordering while preserving the same control
 structure; the supplied Qwen job refuses to proceed unless Neutral-V1 and V2
 have equal token counts on the exact local tokenizer. **Short-Ack** is
 `Acknowledged.` and is intentionally shorter: it tests whether assistant-role
@@ -109,6 +109,7 @@ kept only as the "as-published" reference.
 | `smoke_offline.py` | deterministic-stub smoke; prints full auditable traces (no GPU) |
 | `show_condition_diffs.py` | exact line-level message diffs between conditions |
 | `compute_neutral_token_match.py` | AutoDL: exact tokenizer counts per model family |
+| `verify_neutral_token_match.py` | fail-closed Neutral-V1/V2 equality preflight using `conditions.py` |
 
 ## Run
 
@@ -169,6 +170,11 @@ checks the dataset MD5 and 500-line reference file, performs the tokenizer
 preflight, runs exactly two conditions, then combines the old and new JSONLs in
 one analysis. If the cluster checkout or result folder differs, edit only the
 path variables at the top of the Slurm file.
+
+Both the standalone preflight and the runner resolve the control text from
+`conditions.py`; the Slurm file contains no duplicated neutral strings. The
+runner also refuses to execute Neutral-V2 without strict token auditing or when
+the two neutral turns differ in token length.
 
 Analyze a completed run and write a machine-readable result summary:
 

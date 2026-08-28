@@ -62,7 +62,9 @@ export DATA_PATH="$DATA"
 export RESULT_DIR="results"
 
 echo "===== TOKEN PREFLIGHT ====="
-python -c "from transformers import AutoTokenizer; t=AutoTokenizer.from_pretrained('$MODEL',local_files_only=True); a='Acknowledged. Message received. Proceeding to the next message.'; b='Acknowledged. Message received. Continuing to the next message.'; na=len(t.encode(a,add_special_tokens=False)); nb=len(t.encode(b,add_special_tokens=False)); print('Neutral-V1 tokens=',na,'Neutral-V2 tokens=',nb); assert na==nb, (na,nb)"
+python experiments/2026-08-26_self_history_ablation/verify_neutral_token_match.py \
+  --tokenizer-path "$MODEL" \
+  --model-name "$MODEL_NAME"
 
 echo "===== START VLLM ====="
 python -m vllm.entrypoints.openai.api_server \

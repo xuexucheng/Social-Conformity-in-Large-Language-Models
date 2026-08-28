@@ -634,6 +634,27 @@ def main():
                 f"could not be loaded from {tokenizer_path!r}: {type(exc).__name__}: {exc}"
             ) from exc
 
+    neutral_turn_token_count = (
+        _text_token_count(neutral_turn, tokenizer) if tokenizer is not None else None
+    )
+    neutral_v2_turn_token_count = (
+        _text_token_count(neutral_v2_turn, tokenizer) if tokenizer is not None else None
+    )
+    short_ack_turn_token_count = (
+        _text_token_count(short_ack_turn, tokenizer) if tokenizer is not None else None
+    )
+    if "sequential_final_neutral_v2" in conditions:
+        if tokenizer is None:
+            raise SystemExit(
+                "[FATAL] sequential_final_neutral_v2 requires --compute-tokens "
+                "and the exact local --tokenizer-path"
+            )
+        if neutral_v2_turn_token_count != neutral_turn_token_count:
+            raise SystemExit(
+                "[FATAL] Neutral-V2 is not token-length matched to Neutral-V1: "
+                f"{neutral_v2_turn_token_count} vs {neutral_turn_token_count}"
+            )
+
     # --- output dir + hard guards against clobbering the paper artifact -------
     out_dir = os.path.join(RESULT_DIR, "runs", run_name, OUTPUT_SUBDIR)
     if LEGACY_SUBDIR in out_dir:
@@ -668,15 +689,14 @@ def main():
         "reference_jsonl": reference_jsonl,
         "reference_jsonl_md5": reference_jsonl_md5,
         "initial_answer_source": "reference_jsonl" if reference_jsonl else "model_call",
-        "neutral_turn_token_count": (
-            _text_token_count(neutral_turn, tokenizer) if tokenizer is not None else None
+        "neutral_turn_token_count": neutral_turn_token_count,
+        "neutral_v2_turn_token_count": neutral_v2_turn_token_count,
+        "neutral_v2_token_match_verified": (
+            neutral_v2_turn_token_count == neutral_turn_token_count
+            if tokenizer is not None
+            else None
         ),
-        "neutral_v2_turn_token_count": (
-            _text_token_count(neutral_v2_turn, tokenizer) if tokenizer is not None else None
-        ),
-        "short_ack_turn_token_count": (
-            _text_token_count(short_ack_turn, tokenizer) if tokenizer is not None else None
-        ),
+        "short_ack_turn_token_count": short_ack_turn_token_count,
         "note": "Archived Exp3 kept as as-published reference; 'Full-History' term retired.",
     }
 

@@ -33,6 +33,7 @@ for p in (CURRENT_DIR, PROJECT_DIR):
 import conditions as C  # noqa: E402
 import analyze_ablation as A  # noqa: E402
 import run_ablation as R  # noqa: E402
+import verify_neutral_token_match as V  # noqa: E402
 from src.config import MAX_TOKENS, TEMPERATURE  # noqa: E402
 
 
@@ -159,6 +160,35 @@ def test4b_new_controls_change_only_inserted_assistant_text():
         controlled = C.build_length_matched_messages(INITIAL_RESULT, OPINIONS, turn)
         assert eq(without_injected_assistants(controlled), seqfinal)
         assert [m["content"] for m in injected_assistant_turns(controlled)] == [turn] * 4
+
+
+def test4c_neutral_preflight_uses_conditions_as_single_source_of_truth():
+    assert C.DEFAULT_NEUTRAL_V2_TURN == (
+        "Message received. Acknowledged. Moving to the following message."
+    )
+    assert C.DEFAULT_NEUTRAL_V2_TURN != C.DEFAULT_NEUTRAL_TURN
+
+    class ExactCountStub:
+        def encode(self, text, add_special_tokens=False):
+            assert add_special_tokens is False
+            assert text in (C.DEFAULT_NEUTRAL_TURN, C.DEFAULT_NEUTRAL_V2_TURN)
+            return list(range(13))
+
+    audit = V.count_control_tokens(
+        ExactCountStub(), "Qwen/Qwen2.5-3B-Instruct"
+    )
+    assert audit["neutral_v1"] == C.DEFAULT_NEUTRAL_TURN
+    assert audit["neutral_v2"] == C.DEFAULT_NEUTRAL_V2_TURN
+    assert audit["neutral_v1_tokens"] == audit["neutral_v2_tokens"] == 13
+
+    slurm_path = os.path.join(
+        os.path.dirname(PROJECT_DIR), "hpc_self_history_qwen3b_neutral_controls.slurm"
+    )
+    with open(slurm_path, encoding="utf-8") as f:
+        slurm = f.read()
+    assert "verify_neutral_token_match.py" in slurm
+    assert C.DEFAULT_NEUTRAL_TURN not in slurm
+    assert C.DEFAULT_NEUTRAL_V2_TURN not in slurm
 
 
 # --- Test 5 -------------------------------------------------------------------

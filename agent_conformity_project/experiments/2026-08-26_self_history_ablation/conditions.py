@@ -90,7 +90,9 @@ HISTORY_ANSWER_CONFIDENCE = "answer_confidence"  # Stepwise-Answer+Confidence-Hi
 # (Phi / Gemma) must be length-checked on their own tokenizers BEFORE running;
 # see compute_neutral_token_match.py.
 DEFAULT_NEUTRAL_TURN = "Acknowledged. Message received. Proceeding to the next message."
-DEFAULT_NEUTRAL_V2_TURN = "Acknowledged. Message received. Continuing to the next message."
+# Independently worded from Neutral-V1 and verified as exactly 13 tokens with
+# the Qwen2.5-3B-Instruct tokenizer used by the formal run.
+DEFAULT_NEUTRAL_V2_TURN = "Message received. Acknowledged. Moving to the following message."
 DEFAULT_SHORT_ACK_TURN = "Acknowledged."
 
 NEUTRAL_TURN_BY_MODEL_FAMILY = {
