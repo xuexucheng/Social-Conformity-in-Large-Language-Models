@@ -110,6 +110,7 @@ kept only as the "as-published" reference.
 | `show_condition_diffs.py` | exact line-level message diffs between conditions |
 | `compute_neutral_token_match.py` | AutoDL: exact tokenizer counts per model family |
 | `verify_neutral_token_match.py` | fail-closed Neutral-V1/V2 equality preflight using `conditions.py` |
+| `select_neutral_controls.py` | choose two exact tokenizer-specific neutral phrasings from observed self-history |
 
 ## Run
 
@@ -192,6 +193,21 @@ The analyzer rejects duplicate IDs and cross-condition metadata drift, reports
 comparisons A--K, audits prompt-token coverage, reruns Comparisons E and J on
 the exact final-prompt-token-match subset, and prints stepwise behavioral
 trajectories plus option-logprob coverage.
+
+For a new model family, run the answer-history conditions first, then select
+the controls from the observed inserted outputs:
+
+```bash
+python3 experiments/2026-08-26_self_history_ablation/select_neutral_controls.py \
+  --tokenizer-path /exact/local/model \
+  --model-name google/gemma-2-2b-it \
+  --self-history-jsonl /base/stepwise_answer_confidence_history.jsonl \
+  --output-json /base/neutral_control_selection.json
+```
+
+Pass that JSON to both `verify_neutral_token_match.py --selection-json ...`
+and `run_ablation.py --neutral-selection-json ...`.  The runner verifies that
+V1, V2, and the observed modal self-history length remain equal.
 
 ## Reproducibility invariants (asserted by tests)
 

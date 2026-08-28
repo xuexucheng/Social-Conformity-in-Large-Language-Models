@@ -34,6 +34,7 @@ import conditions as C  # noqa: E402
 import analyze_ablation as A  # noqa: E402
 import run_ablation as R  # noqa: E402
 import verify_neutral_token_match as V  # noqa: E402
+import select_neutral_controls as S  # noqa: E402
 from src.config import MAX_TOKENS, TEMPERATURE  # noqa: E402
 
 
@@ -189,6 +190,27 @@ def test4c_neutral_preflight_uses_conditions_as_single_source_of_truth():
     assert "verify_neutral_token_match.py" in slurm
     assert C.DEFAULT_NEUTRAL_TURN not in slurm
     assert C.DEFAULT_NEUTRAL_V2_TURN not in slurm
+
+
+def test4d_tokenizer_specific_neutral_selection_uses_observed_mode():
+    class WordTokenizer:
+        def encode(self, text, add_special_tokens=False):
+            assert add_special_tokens is False
+            return str(text).split()
+
+    observed = ["one two three"] * 7 + ["one two"] * 2
+    candidates = ["red blue green", "cat dog bird", "too short"]
+    selected = S.select_candidates(WordTokenizer(), observed, candidates)
+    assert selected["target_tokens"] == 3
+    assert selected["neutral_v1"] == "red blue green"
+    assert selected["neutral_v2"] == "cat dog bird"
+    audit = V.count_control_tokens(
+        WordTokenizer(),
+        "unknown-model",
+        neutral_turn=selected["neutral_v1"],
+        neutral_v2_turn=selected["neutral_v2"],
+    )
+    assert audit["neutral_v1_tokens"] == audit["neutral_v2_tokens"] == 3
 
 
 # --- Test 5 -------------------------------------------------------------------

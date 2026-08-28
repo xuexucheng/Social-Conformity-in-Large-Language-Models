@@ -21,6 +21,8 @@ The paper also includes:
 - **Robustness checks** using non-overlapping 500-example subsets.
 - **Exact McNemar tests** for paired protocol comparisons.
 - **Exp5 social-label framing** on Gemma-2-2B-it, testing whether explicit peer labels add influence beyond repeated recommendation content.
+- **Self-history mechanism controls** that separate discarded intermediate calls, retained answer history, confidence-bearing history, neutral assistant turns, and short acknowledgements.
+- **A clean social-label add-on** whose primary pair changes only the source-label word and is prompt-token matched on the exact local tokenizer.
 
 ## Datasets And Models
 
@@ -63,6 +65,7 @@ agent_conformity_project/
   src/                 Core prompt, parsing, model API, and metric helpers
   scripts/             Dataset and experiment runner scripts
   analysis/            Lightweight analysis and integrity-check scripts
+  experiments/         Main protocols and reviewer-requested controlled add-ons
   data/datasets/       Reusable processed dataset files
 docs/
   REPRODUCIBILITY.md   Artifact-review reproduction notes
@@ -117,6 +120,17 @@ Run an exact McNemar test from paired discordant counts:
 ```powershell
 python agent_conformity_project\analysis\exact_mcnemar.py --b 10 --c 35
 ```
+
+Prepare paper-facing paired and repeated-subset statistics after restoring the
+archived per-item result JSONL files:
+
+```powershell
+python agent_conformity_project\analysis\paired_protocol_analysis.py --help
+python agent_conformity_project\analysis\repeated_subset_analysis.py --help
+```
+
+The full colleague handoff sequence is documented in
+`docs/MAJOR_REVISION_RUNBOOK.md`.
 
 ## What Is Not Included
 

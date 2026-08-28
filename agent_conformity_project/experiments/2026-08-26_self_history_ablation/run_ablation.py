@@ -541,6 +541,9 @@ def _validate_resume_manifest(existing, expected):
         "reference_jsonl",
         "reference_jsonl_md5",
         "initial_answer_source",
+        "neutral_selection_json",
+        "neutral_selection_json_md5",
+        "neutral_selection_target_tokens",
     ]
     mismatches = [key for key in keys if existing.get(key) != expected.get(key)]
     if mismatches:
@@ -566,6 +569,11 @@ def main():
     ap.add_argument("--neutral-turn", default=os.getenv("NEUTRAL_TURN", ""))
     ap.add_argument("--neutral-v2-turn", default=os.getenv("NEUTRAL_V2_TURN", ""))
     ap.add_argument("--short-ack-turn", default=os.getenv("SHORT_ACK_TURN", ""))
+    ap.add_argument(
+        "--neutral-selection-json",
+        default=os.getenv("NEUTRAL_SELECTION_JSON", ""),
+        help="JSON emitted by select_neutral_controls.py; supplies V1/V2 text",
+    )
     ap.add_argument(
         "--reference-jsonl",
         default=os.getenv("REFERENCE_JSONL", ""),
@@ -596,12 +604,40 @@ def main():
         if c not in ALL_CONDITIONS:
             raise SystemExit(f"[FATAL] unknown condition: {c}")
 
+    selection_json = (
+        os.path.abspath(args.neutral_selection_json)
+        if args.neutral_selection_json
+        else None
+    )
+    selection = {}
+    if selection_json:
+        if not os.path.isfile(selection_json):
+            raise SystemExit(f"[FATAL] neutral selection JSON not found: {selection_json}")
+        with open(selection_json, encoding="utf-8") as handle:
+            selection = json.load(handle)
+        if not selection.get("neutral_v1") or not selection.get("neutral_v2"):
+            raise SystemExit(
+                "[FATAL] neutral selection JSON must contain neutral_v1 and neutral_v2"
+            )
+        for cli_value, key in [
+            (args.neutral_turn, "neutral_v1"),
+            (args.neutral_v2_turn, "neutral_v2"),
+        ]:
+            if cli_value and cli_value != selection[key]:
+                raise SystemExit(
+                    f"[FATAL] command-line {key} conflicts with neutral selection JSON"
+                )
+
     timestamp = _dt.datetime.now().strftime("%Y%m%d_%H%M%S")
     model_tag = MODEL_NAME.split("/")[-1].lower().replace(".", "-")
     run_name = args.run_name or f"{EXPERIMENT_NAME}_{model_tag}_{timestamp}"
-    neutral_turn = C.resolve_neutral_turn(MODEL_NAME, override=args.neutral_turn or None)
+    neutral_turn = C.resolve_neutral_turn(
+        MODEL_NAME,
+        override=args.neutral_turn or selection.get("neutral_v1") or None,
+    )
     neutral_v2_turn = C.resolve_neutral_v2_turn(
-        MODEL_NAME, override=args.neutral_v2_turn or None
+        MODEL_NAME,
+        override=args.neutral_v2_turn or selection.get("neutral_v2") or None,
     )
     short_ack_turn = C.resolve_short_ack_turn(
         MODEL_NAME, override=args.short_ack_turn or None
@@ -654,6 +690,12 @@ def main():
                 "[FATAL] Neutral-V2 is not token-length matched to Neutral-V1: "
                 f"{neutral_v2_turn_token_count} vs {neutral_turn_token_count}"
             )
+        target_tokens = selection.get("target_tokens")
+        if target_tokens is not None and neutral_turn_token_count != target_tokens:
+            raise SystemExit(
+                "[FATAL] selected neutral controls do not match the observed "
+                f"self-history target: {neutral_turn_token_count} vs {target_tokens}"
+            )
 
     # --- output dir + hard guards against clobbering the paper artifact -------
     out_dir = os.path.join(RESULT_DIR, "runs", run_name, OUTPUT_SUBDIR)
@@ -689,6 +731,9 @@ def main():
         "reference_jsonl": reference_jsonl,
         "reference_jsonl_md5": reference_jsonl_md5,
         "initial_answer_source": "reference_jsonl" if reference_jsonl else "model_call",
+        "neutral_selection_json": selection_json,
+        "neutral_selection_json_md5": _md5(selection_json) if selection_json else None,
+        "neutral_selection_target_tokens": selection.get("target_tokens"),
         "neutral_turn_token_count": neutral_turn_token_count,
         "neutral_v2_turn_token_count": neutral_v2_turn_token_count,
         "neutral_v2_token_match_verified": (

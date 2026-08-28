@@ -80,6 +80,51 @@ python agent_conformity_project\analysis\exact_mcnemar.py --b 10 --c 35
 
 Here `b` and `c` are the two off-diagonal discordant counts for a paired 2x2 comparison.
 
+## Paper-Facing Paired and Repeated-Subset Analysis
+
+Once archived per-item main outputs are restored locally, use:
+
+```powershell
+python agent_conformity_project\analysis\paired_protocol_analysis.py `
+  --manifest C:\path\to\main_paired_manifest.json `
+  --output-dir C:\path\to\main_paired_analysis `
+  --bootstrap-reps 10000 `
+  --seed 12345
+
+python agent_conformity_project\analysis\repeated_subset_analysis.py `
+  --manifest C:\path\to\main_paired_manifest.json `
+  --output-dir C:\path\to\repeated_subset_analysis `
+  --sample-size 500 `
+  --repetitions 30 `
+  --seed-start 1000
+```
+
+The detailed GPU and analysis handoff procedure is in
+`docs/MAJOR_REVISION_RUNBOOK.md`; exact prompt templates and parsing order are
+in `docs/PROMPT_APPENDIX.md`.
+
+## Verified Qwen Mechanism-Ablation Environment
+
+The retained stdout and vLLM logs for the completed Qwen2.5-3B
+CommonsenseQA500 self-history run record:
+
+- NVIDIA GeForce RTX 4090, 24,564 MiB;
+- NVIDIA driver 565.77 and reported CUDA 12.7;
+- Python 3.10.21;
+- PyTorch 2.5.1+cu124;
+- vLLM 0.6.6.post1;
+- Transformers 4.57.6;
+- vLLM model dtype resolved to `torch.bfloat16`;
+- maximum model length 4096;
+- vLLM server seed 0;
+- GPU memory utilization setting 0.85;
+- default model chat template (`chat_template=None`, auto-detected string format).
+
+The request payload specifies `temperature=0`, `max_tokens=128`,
+`logprobs=true`, and `top_logprobs=20`.  It does not explicitly send `top_p`,
+`do_sample`, or a request-level seed.  This distinction must be preserved in the
+paper rather than reporting settings that were not present in the request.
+
 ## External Artifacts
 
 Large files are intentionally excluded from Git:
