@@ -51,6 +51,8 @@ inserted *after* each `Agent i` for i < step; the request always ends with
 | `stepwise_answer_history` | 5 | + prev **`ANSWER: X`** (confidence stripped) | +normalized answers only |
 | `stepwise_answer_confidence_history` | 5 | + prev raw **`ANSWER: X\nCONFIDENCE: N`** | +confidence line only |
 | `sequential_final_length_matched` | 1 | + 4 fixed **neutral** turns after Agent 1–4 | +turns only; Agent 5 → FINAL_INSTR |
+| `sequential_final_neutral_v2` | 1 | + 4 alternative fixed neutral turns | wording-robustness replication |
+| `sequential_final_short_ack` | 1 | + 4 `Acknowledged.` turns | assistant-role markers without length matching |
 
 `stepwise_no_history` still calls the model at steps 1–4 (their outputs are saved
 for analysis) but never feeds them back — so, for a stateless greedy model,
@@ -66,6 +68,13 @@ turn- and length-matched neutral condition.
 stance / no answer / no confidence / no decision steer). Phi / Gemma variants
 must be length-checked on their own tokenizers first (`compute_neutral_token_match.py`).
 
+**Neutral-V2** is `Acknowledged. Message received. Continuing to the next
+message.`. It changes the main lexical choice while preserving the same control
+structure; the supplied Qwen job refuses to proceed unless Neutral-V1 and V2
+have equal token counts on the exact local tokenizer. **Short-Ack** is
+`Acknowledged.` and is intentionally shorter: it tests whether assistant-role
+turn markers alone reproduce the structural effect.
+
 ## Comparisons (paired, common-valid subset)
 
 * **A** No-History vs Sequential-Final → harness/determinism check (expect ≡).
@@ -74,12 +83,19 @@ must be length-checked on their own tokenizers first (`compute_neutral_token_mat
 * **D** Length-Matched vs Sequential-Final → effect of turn/context structure alone.
 * **E** Answer+Confidence vs Length-Matched → history content beyond matched turn/context structure (**key mechanism test**).
 * **F** Answer-History vs Length-Matched → answer-only diagnostic; interpret cautiously because token length is not matched.
+* **G** Neutral-V2 vs Sequential-Final → wording-robust structural effect.
+* **H** Short-Ack vs Sequential-Final → short assistant-role-marker effect.
+* **I** Neutral-V2 vs Neutral-V1 → sensitivity to neutral wording.
+* **J** Answer+Confidence vs Neutral-V2 → key content test under the alternative neutral wording.
+* **K** Neutral-V1 vs Short-Ack → added neutral text/length beyond a short role marker.
 
 Report Accuracy, Harmful-Conformity Rate, target-distractor adoption, flip rate,
 valid/invalid N, pp differences, exact McNemar, and question-level paired
 bootstrap (10,000 resamples, both conditions of a question resampled together).
-Holm correction is applied separately within each outcome across comparisons
-B--F; A is a deterministic harness check and is excluded from inference.
+Holm correction is applied separately within each outcome across the inferential
+family B--E and G--K. A is a deterministic harness check, while F and the exact-
+token sensitivity analyses are diagnostics; those are excluded from the Holm
+family.
 Archived Exp2/Exp3 are read directly for the paired comparison; archived Exp3 is
 kept only as the "as-published" reference.
 
@@ -132,18 +148,43 @@ Resume fails closed if condition files contain duplicate IDs, have unequal ID
 sets, or disagree with the existing manifest. This prevents mixing partial
 conditions or incompatible decoding/tokenizer settings.
 
+### Qwen 500 add-on controls (the next GPU job)
+
+Do **not** rerun the original five conditions. The add-on job runs only
+Neutral-V2 and Short-Ack and replays each item's exact initial answer from the
+completed Qwen run. `--reference-jsonl` validates IDs, question, options,
+correct answer, distractor, and raw/parsed initial-answer consistency before the
+first model request; this avoids a fresh greedy baseline call becoming a hidden
+source of drift.
+
+The ready-to-submit job is at repository root:
+
+```bash
+sbatch hpc_self_history_qwen3b_neutral_controls.slurm
+```
+
+It expects the completed base run at
+`results/runs/qwen25_3b_cqa_main500_2542766/2026-08-26_self_history_ablation/`,
+checks the dataset MD5 and 500-line reference file, performs the tokenizer
+preflight, runs exactly two conditions, then combines the old and new JSONLs in
+one analysis. If the cluster checkout or result folder differs, edit only the
+path variables at the top of the Slurm file.
+
 Analyze a completed run and write a machine-readable result summary:
 
 ```bash
 python3 experiments/2026-08-26_self_history_ablation/analyze_ablation.py \
   --run-dir results/runs/<run-name>/2026-08-26_self_history_ablation \
+  --condition sequential_final_neutral_v2=results/runs/<control-run>/2026-08-26_self_history_ablation/sequential_final_neutral_v2.jsonl \
+  --condition sequential_final_short_ack=results/runs/<control-run>/2026-08-26_self_history_ablation/sequential_final_short_ack.jsonl \
   --bootstrap-reps 10000 \
   --seed 12345 \
   --output-json results/runs/<run-name>/self_history_analysis.json
 ```
 
 The analyzer rejects duplicate IDs and cross-condition metadata drift, reports
-comparisons A--F, audits prompt-token coverage, and prints stepwise behavioral
+comparisons A--K, audits prompt-token coverage, reruns Comparisons E and J on
+the exact final-prompt-token-match subset, and prints stepwise behavioral
 trajectories plus option-logprob coverage.
 
 ## Reproducibility invariants (asserted by tests)
@@ -153,4 +194,6 @@ trajectories plus option-logprob coverage.
 * `answer_history` − `no_history` = previous `ANSWER: X` turns only.
 * `answer_confidence` − `answer_history` = the `CONFIDENCE:` line only.
 * `length_matched` − `sequential_final` = 4 neutral turns only.
+* Neutral-V2 and Short-Ack change only the text of those 4 assistant turns.
+* reference replay skips the initial model call and fails closed on metadata drift.
 * decoding locked to `temperature=0, max_tokens=128`.

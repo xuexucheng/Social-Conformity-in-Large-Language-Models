@@ -11,13 +11,16 @@ Conditions
   stepwise_answer_history               Condition 3  (5 calls; prev 'ANSWER: X' fed back)
   stepwise_answer_confidence_history    Condition 4  (5 calls; prev raw 'ANSWER: X\\nCONFIDENCE: N' fed back)
   sequential_final_length_matched       Condition 5  (1 call; 4 neutral assistant turns)
+  sequential_final_neutral_v2           Wording robustness control (1 call; 4 alternative neutral turns)
+  sequential_final_short_ack            Role-marker control (1 call; 4 short acknowledgement turns)
 
 Key guarantees
 --------------
 * Decoding is byte-for-byte the legacy setup: temperature=0, max_tokens=128,
   top_logprobs=20, same call_llm_with_logprobs, same parser.
-* The private baseline answer (`initial_result`) is computed ONCE per item and
-  shared across all conditions, so the initial turn is identical everywhere.
+* The private baseline answer (`initial_result`) is computed ONCE per item, or
+  replayed verbatim from a validated prior JSONL for add-on controls, and is
+  shared across conditions so the initial turn is identical everywhere.
 * Per item we assert stepwise_no_history's step-5 request is byte-identical to
   the sequential_final request (Section-9 harness-integrity check).
 * Output goes to a NEW run dir (run_name + timestamp); the runner REFUSES to
@@ -61,6 +64,8 @@ ALL_CONDITIONS = [
     "stepwise_answer_history",
     "stepwise_answer_confidence_history",
     "sequential_final_length_matched",
+    "sequential_final_neutral_v2",
+    "sequential_final_short_ack",
 ]
 STEPWISE_MODES = {
     "stepwise_no_history": C.HISTORY_NONE,
@@ -143,7 +148,16 @@ def _prompt_char_count(messages):
     return sum(len(m.get("content") or "") for m in messages)
 
 
-def _base_row(item, condition, model_name, run_name, timestamp, neutral_turn):
+def _base_row(
+    item,
+    condition,
+    model_name,
+    run_name,
+    timestamp,
+    control_turn,
+    initial_answer_source,
+    reference_jsonl,
+):
     return {
         "schema_version": "1.0",
         "experiment": EXPERIMENT_NAME,
@@ -153,7 +167,9 @@ def _base_row(item, condition, model_name, run_name, timestamp, neutral_turn):
         "model_name": model_name,
         "dataset_path": DATA_PATH,
         "decoding": {"temperature": TEMPERATURE, "max_tokens": MAX_TOKENS, "top_logprobs": 20},
-        "neutral_turn": neutral_turn if condition == "sequential_final_length_matched" else None,
+        "neutral_turn": control_turn,
+        "initial_answer_source": initial_answer_source,
+        "initial_answer_reference_jsonl": reference_jsonl,
         "id": item.get("id"),
         "question": item.get("question"),
         "options": item.get("options"),
@@ -235,13 +251,34 @@ def _run_stepwise_condition(initial_result, opinions, history_mode, answer_fn):
     return final_std, final_messages, step_records
 
 
-def run_item(item, answer_fn, conditions, model_name, run_name, timestamp, neutral_turn):
+def run_item(
+    item,
+    answer_fn,
+    conditions,
+    model_name,
+    run_name,
+    timestamp,
+    neutral_turn,
+    neutral_v2_turn=None,
+    short_ack_turn=None,
+    initial_reference=None,
+    reference_jsonl=None,
+):
     """Run all requested conditions for one item. Returns {condition: row}.
 
     `answer_fn(messages) -> {text, content_logprobs?, raw?}` is injected.
     """
+    neutral_v2_turn = neutral_v2_turn or C.resolve_neutral_v2_turn(model_name)
+    short_ack_turn = short_ack_turn or C.resolve_short_ack_turn(model_name)
     initial_messages = C.build_initial_messages(item)
-    initial_std = standardize_from_call(answer_fn(initial_messages))
+    if initial_reference is None:
+        initial_std = standardize_from_call(answer_fn(initial_messages))
+        initial_answer_source = "model_call"
+    else:
+        initial_std = standardize_from_call(
+            {"text": initial_reference["raw_initial_output"], "content_logprobs": []}
+        )
+        initial_answer_source = "reference_jsonl"
     initial_result = {"messages": initial_messages, "text": initial_std["text"]}
     opinions = [item["distractor"] for _ in range(C.N_WRONG_GUIDES)]
 
@@ -250,7 +287,21 @@ def run_item(item, answer_fn, conditions, model_name, run_name, timestamp, neutr
 
     rows = {}
     for cond in conditions:
-        row = _base_row(item, cond, model_name, run_name, timestamp, neutral_turn)
+        control_turn = {
+            "sequential_final_length_matched": neutral_turn,
+            "sequential_final_neutral_v2": neutral_v2_turn,
+            "sequential_final_short_ack": short_ack_turn,
+        }.get(cond)
+        row = _base_row(
+            item,
+            cond,
+            model_name,
+            run_name,
+            timestamp,
+            control_turn,
+            initial_answer_source,
+            reference_jsonl,
+        )
         if cond == "sequential_final":
             final_std, final_messages, steps = _run_single_call_condition(
                 lambda: seqfinal_messages, initial_result, opinions, answer_fn
@@ -266,6 +317,18 @@ def run_item(item, answer_fn, conditions, model_name, run_name, timestamp, neutr
         elif cond == "sequential_final_length_matched":
             final_std, final_messages, steps = _run_single_call_condition(
                 lambda: C.build_length_matched_messages(initial_result, opinions, neutral_turn),
+                initial_result, opinions, answer_fn,
+            )
+            steps[0]["opinion"] = "|".join(opinions)
+        elif cond == "sequential_final_neutral_v2":
+            final_std, final_messages, steps = _run_single_call_condition(
+                lambda: C.build_length_matched_messages(initial_result, opinions, neutral_v2_turn),
+                initial_result, opinions, answer_fn,
+            )
+            steps[0]["opinion"] = "|".join(opinions)
+        elif cond == "sequential_final_short_ack":
+            final_std, final_messages, steps = _run_single_call_condition(
+                lambda: C.build_length_matched_messages(initial_result, opinions, short_ack_turn),
                 initial_result, opinions, answer_fn,
             )
             steps[0]["opinion"] = "|".join(opinions)
@@ -360,6 +423,81 @@ def _read_jsonl_ids(path):
     return set(ids)
 
 
+REFERENCE_MATCH_FIELDS = (
+    "question",
+    "options",
+    "correct_answer",
+    "distractor",
+)
+
+
+def _load_initial_answer_references(path):
+    """Load exact initial answers from a prior condition file, fail closed.
+
+    The add-on controls must inherit the already-run baseline answer verbatim;
+    even a greedy re-call can vary at the floating-point/kernel level.  IDs and
+    item metadata are checked separately against the current dataset below.
+    """
+    references = {}
+    with open(path, encoding="utf-8") as f:
+        for line_number, line in enumerate(f, start=1):
+            if not line.strip():
+                continue
+            try:
+                row = json.loads(line)
+            except json.JSONDecodeError as exc:
+                raise SystemExit(
+                    f"[FATAL] invalid reference JSON in {path}:{line_number}: {exc}"
+                ) from exc
+            item_id = row.get("id")
+            if item_id is None:
+                raise SystemExit(f"[FATAL] reference row lacks id in {path}:{line_number}")
+            if item_id in references:
+                raise SystemExit(f"[FATAL] duplicate reference item id {item_id!r} in {path}")
+            raw_initial_output = row.get("raw_initial_output")
+            if not isinstance(raw_initial_output, str) or not raw_initial_output.strip():
+                raise SystemExit(
+                    f"[FATAL] reference row {item_id!r} lacks a non-empty raw_initial_output"
+                )
+            parsed = standardize_from_call(
+                {"text": raw_initial_output, "content_logprobs": []}
+            )["prediction"]
+            recorded = row.get("initial_prediction")
+            if recorded is not None and parsed != recorded:
+                raise SystemExit(
+                    f"[FATAL] reference row {item_id!r} initial answer mismatch: "
+                    f"raw parses as {parsed!r}, recorded={recorded!r}"
+                )
+            references[item_id] = row
+    if not references:
+        raise SystemExit(f"[FATAL] reference JSONL is empty: {path}")
+    return references
+
+
+def _validate_initial_answer_references(references, dataset):
+    """Require one metadata-identical reference row for every selected item."""
+    dataset_ids = []
+    for item in dataset:
+        item_id = item.get("id")
+        if item_id is None:
+            raise SystemExit("[FATAL] dataset item lacks id")
+        dataset_ids.append(item_id)
+        reference = references.get(item_id)
+        if reference is None:
+            raise SystemExit(f"[FATAL] no initial-answer reference for item {item_id!r}")
+        mismatches = [
+            field for field in REFERENCE_MATCH_FIELDS
+            if reference.get(field) != item.get(field)
+        ]
+        if mismatches:
+            raise SystemExit(
+                f"[FATAL] reference metadata mismatch for item {item_id!r}: "
+                + ", ".join(mismatches)
+            )
+    if len(dataset_ids) != len(set(dataset_ids)):
+        raise SystemExit("[FATAL] duplicate item IDs in selected dataset")
+
+
 def _resume_completed_ids(out_dir, conditions):
     """Require an aligned checkpoint across conditions and return completed IDs."""
     id_sets = {}
@@ -392,12 +530,17 @@ def _validate_resume_manifest(existing, expected):
         "decoding",
         "conditions",
         "neutral_turn",
+        "neutral_v2_turn",
+        "short_ack_turn",
         "dataset_md5",
         "n_samples",
         "n_wrong_guides",
         "conditions_module_md5",
         "compute_tokens",
         "tokenizer_path",
+        "reference_jsonl",
+        "reference_jsonl_md5",
+        "initial_answer_source",
     ]
     mismatches = [key for key in keys if existing.get(key) != expected.get(key)]
     if mismatches:
@@ -421,6 +564,16 @@ def main():
                     help="run only the first N items (0/unset = all)")
     ap.add_argument("--run-name", default=os.getenv("RUN_NAME", ""))
     ap.add_argument("--neutral-turn", default=os.getenv("NEUTRAL_TURN", ""))
+    ap.add_argument("--neutral-v2-turn", default=os.getenv("NEUTRAL_V2_TURN", ""))
+    ap.add_argument("--short-ack-turn", default=os.getenv("SHORT_ACK_TURN", ""))
+    ap.add_argument(
+        "--reference-jsonl",
+        default=os.getenv("REFERENCE_JSONL", ""),
+        help=(
+            "prior condition JSONL whose raw_initial_output is replayed exactly; "
+            "IDs and item metadata must match the selected dataset"
+        ),
+    )
     mode = ap.add_mutually_exclusive_group()
     mode.add_argument("--force", action="store_true", default=os.getenv("FORCE_OVERWRITE", "0") == "1")
     mode.add_argument("--resume", action="store_true", default=os.getenv("RESUME_RUN", "0") == "1")
@@ -447,12 +600,28 @@ def main():
     model_tag = MODEL_NAME.split("/")[-1].lower().replace(".", "-")
     run_name = args.run_name or f"{EXPERIMENT_NAME}_{model_tag}_{timestamp}"
     neutral_turn = C.resolve_neutral_turn(MODEL_NAME, override=args.neutral_turn or None)
+    neutral_v2_turn = C.resolve_neutral_v2_turn(
+        MODEL_NAME, override=args.neutral_v2_turn or None
+    )
+    short_ack_turn = C.resolve_short_ack_turn(
+        MODEL_NAME, override=args.short_ack_turn or None
+    )
 
     dataset = load_dataset(DATA_PATH)
     if args.limit:
         dataset = dataset[: args.limit]
     dataset_md5 = _md5(DATA_PATH)
     conditions_md5 = _md5(os.path.join(CURRENT_DIR, "conditions.py"))
+
+    reference_jsonl = os.path.abspath(args.reference_jsonl) if args.reference_jsonl else None
+    initial_references = None
+    reference_jsonl_md5 = None
+    if reference_jsonl:
+        if not os.path.isfile(reference_jsonl):
+            raise SystemExit(f"[FATAL] reference JSONL not found: {reference_jsonl}")
+        initial_references = _load_initial_answer_references(reference_jsonl)
+        _validate_initial_answer_references(initial_references, dataset)
+        reference_jsonl_md5 = _md5(reference_jsonl)
 
     tokenizer = None
     tokenizer_path = args.tokenizer_path or MODEL_NAME
@@ -485,6 +654,8 @@ def main():
         "decoding": {"temperature": TEMPERATURE, "max_tokens": MAX_TOKENS, "top_logprobs": 20},
         "conditions": conditions,
         "neutral_turn": neutral_turn,
+        "neutral_v2_turn": neutral_v2_turn,
+        "short_ack_turn": short_ack_turn,
         "dataset_path": DATA_PATH,
         "dataset_md5": dataset_md5,
         "n_samples": len(dataset),
@@ -494,8 +665,17 @@ def main():
         "compute_tokens": bool(args.compute_tokens),
         "tokenizer_path": tokenizer_path if args.compute_tokens else None,
         "tokenizer_class": type(tokenizer).__name__ if tokenizer is not None else None,
+        "reference_jsonl": reference_jsonl,
+        "reference_jsonl_md5": reference_jsonl_md5,
+        "initial_answer_source": "reference_jsonl" if reference_jsonl else "model_call",
         "neutral_turn_token_count": (
             _text_token_count(neutral_turn, tokenizer) if tokenizer is not None else None
+        ),
+        "neutral_v2_turn_token_count": (
+            _text_token_count(neutral_v2_turn, tokenizer) if tokenizer is not None else None
+        ),
+        "short_ack_turn_token_count": (
+            _text_token_count(short_ack_turn, tokenizer) if tokenizer is not None else None
         ),
         "note": "Archived Exp3 kept as as-published reference; 'Full-History' term retired.",
     }
@@ -537,7 +717,19 @@ def main():
         for i, item in enumerate(dataset, start=1):
             if item.get("id") in completed_ids:
                 continue
-            rows = run_item(item, answer_fn, conditions, MODEL_NAME, run_name, timestamp, neutral_turn)
+            rows = run_item(
+                item,
+                answer_fn,
+                conditions,
+                MODEL_NAME,
+                run_name,
+                timestamp,
+                neutral_turn,
+                neutral_v2_turn=neutral_v2_turn,
+                short_ack_turn=short_ack_turn,
+                initial_reference=(initial_references or {}).get(item.get("id")),
+                reference_jsonl=reference_jsonl,
+            )
             for cond, row in rows.items():
                 if cond == "stepwise_no_history" and row.get("no_history_step5_equals_sequential_final") is False:
                     n_leak_fail += 1

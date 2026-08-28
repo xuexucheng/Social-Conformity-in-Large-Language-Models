@@ -90,12 +90,28 @@ HISTORY_ANSWER_CONFIDENCE = "answer_confidence"  # Stepwise-Answer+Confidence-Hi
 # (Phi / Gemma) must be length-checked on their own tokenizers BEFORE running;
 # see compute_neutral_token_match.py.
 DEFAULT_NEUTRAL_TURN = "Acknowledged. Message received. Proceeding to the next message."
+DEFAULT_NEUTRAL_V2_TURN = "Acknowledged. Message received. Continuing to the next message."
+DEFAULT_SHORT_ACK_TURN = "Acknowledged."
 
 NEUTRAL_TURN_BY_MODEL_FAMILY = {
     # family substring (lower-cased) -> neutral turn
     "qwen": "Acknowledged. Message received. Proceeding to the next message.",
     # "phi":   <fill after AutoDL token check>,
     # "gemma": <fill after AutoDL token check>,
+}
+
+NEUTRAL_V2_TURN_BY_MODEL_FAMILY = {
+    # Independent wording robustness control. Confirm its token count on the
+    # exact local tokenizer before a full run; the runner records the count.
+    "qwen": DEFAULT_NEUTRAL_V2_TURN,
+}
+
+SHORT_ACK_TURN_BY_MODEL_FAMILY = {
+    # Deliberately not length matched. This isolates whether a short assistant
+    # role marker alone is sufficient to reproduce the structural effect.
+    "qwen": DEFAULT_SHORT_ACK_TURN,
+    "phi": DEFAULT_SHORT_ACK_TURN,
+    "gemma": DEFAULT_SHORT_ACK_TURN,
 }
 
 
@@ -112,6 +128,34 @@ def resolve_neutral_turn(model_name, override=None):
         if family in m:
             return turn
     return DEFAULT_NEUTRAL_TURN
+
+
+def _resolve_family_turn(model_name, override, mapping, default):
+    if override:
+        return override
+    model = (model_name or "").lower()
+    for family, turn in mapping.items():
+        if family in model:
+            return turn
+    return default
+
+
+def resolve_neutral_v2_turn(model_name, override=None):
+    return _resolve_family_turn(
+        model_name,
+        override,
+        NEUTRAL_V2_TURN_BY_MODEL_FAMILY,
+        DEFAULT_NEUTRAL_V2_TURN,
+    )
+
+
+def resolve_short_ack_turn(model_name, override=None):
+    return _resolve_family_turn(
+        model_name,
+        override,
+        SHORT_ACK_TURN_BY_MODEL_FAMILY,
+        DEFAULT_SHORT_ACK_TURN,
+    )
 
 
 def normalize_answer_turn(prediction):

@@ -153,6 +153,14 @@ def test4_length_matched_adds_only_neutral_turns():
     assert lm[idx5 + 1]["role"] == "user" and lm[idx5 + 1]["content"] == C.FINAL_DECISION_INSTRUCTION
 
 
+def test4b_new_controls_change_only_inserted_assistant_text():
+    seqfinal = C.build_sequential_final_messages(INITIAL_RESULT, OPINIONS)
+    for turn in (C.DEFAULT_NEUTRAL_V2_TURN, C.DEFAULT_SHORT_ACK_TURN):
+        controlled = C.build_length_matched_messages(INITIAL_RESULT, OPINIONS, turn)
+        assert eq(without_injected_assistants(controlled), seqfinal)
+        assert [m["content"] for m in injected_assistant_turns(controlled)] == [turn] * 4
+
+
 # --- Test 5 -------------------------------------------------------------------
 def _final_messages_all_conditions():
     return {
@@ -161,6 +169,8 @@ def _final_messages_all_conditions():
         "stepwise_answer_history": C.build_stepwise_request_messages(INITIAL_RESULT, OPINIONS, 5, PRIOR_TEXTS, PRIOR_PREDS, C.HISTORY_ANSWER),
         "stepwise_answer_confidence_history": C.build_stepwise_request_messages(INITIAL_RESULT, OPINIONS, 5, PRIOR_TEXTS, PRIOR_PREDS, C.HISTORY_ANSWER_CONFIDENCE),
         "sequential_final_length_matched": C.build_length_matched_messages(INITIAL_RESULT, OPINIONS, C.DEFAULT_NEUTRAL_TURN),
+        "sequential_final_neutral_v2": C.build_length_matched_messages(INITIAL_RESULT, OPINIONS, C.DEFAULT_NEUTRAL_V2_TURN),
+        "sequential_final_short_ack": C.build_length_matched_messages(INITIAL_RESULT, OPINIONS, C.DEFAULT_SHORT_ACK_TURN),
     }
 
 
@@ -282,6 +292,99 @@ def test_resume_requires_aligned_condition_ids():
             assert "unaligned checkpoint" in str(exc)
         else:
             raise AssertionError("unaligned resume checkpoint must fail closed")
+
+
+def test_reference_replay_skips_initial_model_call():
+    calls = []
+
+    def counted_stub(messages):
+        calls.append(messages)
+        return _logprob_stub(messages)
+
+    reference = {
+        "raw_initial_output": "ANSWER: B\nCONFIDENCE: 87",
+        "initial_prediction": "B",
+    }
+    rows = R.run_item(
+        ITEM,
+        counted_stub,
+        ["sequential_final_neutral_v2"],
+        "Qwen/Qwen2.5-3B-Instruct",
+        "test-run",
+        "20260828_000000",
+        C.DEFAULT_NEUTRAL_TURN,
+        initial_reference=reference,
+        reference_jsonl="prior.jsonl",
+    )
+    assert len(calls) == 1, "reference replay must skip the initial model call"
+    row = rows["sequential_final_neutral_v2"]
+    assert row["raw_initial_output"] == reference["raw_initial_output"]
+    assert row["initial_prediction"] == "B"
+    assert row["initial_answer_source"] == "reference_jsonl"
+    assert row["initial_answer_reference_jsonl"] == "prior.jsonl"
+
+
+def test_reference_loader_rejects_duplicates_and_metadata_drift():
+    reference_row = {
+        **ITEM,
+        "raw_initial_output": "ANSWER: A\nCONFIDENCE: 100",
+        "initial_prediction": "A",
+    }
+    with tempfile.TemporaryDirectory() as temp_dir:
+        path = os.path.join(temp_dir, "reference.jsonl")
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(json.dumps(reference_row) + "\n")
+        references = R._load_initial_answer_references(path)
+        R._validate_initial_answer_references(references, [ITEM])
+
+        with open(path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(reference_row) + "\n")
+        try:
+            R._load_initial_answer_references(path)
+        except SystemExit as exc:
+            assert "duplicate reference item id" in str(exc)
+        else:
+            raise AssertionError("duplicate references must fail closed")
+
+        drifted = {**ITEM, "question": "different question"}
+        try:
+            R._validate_initial_answer_references({ITEM["id"]: reference_row}, [drifted])
+        except SystemExit as exc:
+            assert "reference metadata mismatch" in str(exc)
+        else:
+            raise AssertionError("reference metadata drift must fail closed")
+
+
+def test_exact_token_pair_audit_and_restricted_comparison():
+    def record(final, token_count):
+        return {
+            "valid": True,
+            "is_correct": final == "A",
+            "chose_distractor": final == "B",
+            "initial_correct": True,
+            "changed": final != "A",
+            "final_prompt_token_count": token_count,
+        }
+
+    condition1 = {"one": record("A", 100), "two": record("B", 103)}
+    condition2 = {"one": record("B", 100), "two": record("A", 100)}
+    audit = A.build_token_pair_audit("c1", condition1, "c2", condition2)
+    assert audit["exact_match_ids"] == ["one"]
+    assert audit["difference_counts"] == {"0": 1, "3": 1}
+    rows = A.build_comparison(
+        "exact",
+        "c1",
+        condition1,
+        "c2",
+        condition2,
+        100,
+        1,
+        False,
+        allowed_ids={"one"},
+        analysis_subset="exact_final_prompt_token_match",
+    )
+    assert rows and all(row["paired_n"] == 1 for row in rows)
+    assert all(row["analysis_subset"] == "exact_final_prompt_token_match" for row in rows)
 
 
 def test_holm_adjustment_step_down_monotonicity():

@@ -8,12 +8,17 @@ The primary mechanism family is evaluated on common-valid paired items:
   D  Neutral-Turn vs Sequential-Final             turn/context structure
   E  Answer+Confidence vs Neutral-Turn             history content beyond matched structure
   F  Answer-History vs Neutral-Turn                answer-only diagnostic (not length matched)
+  G  Neutral-V2 vs Sequential-Final                wording-robust structure control
+  H  Short-Ack vs Sequential-Final                 short assistant-role-marker control
+  I  Neutral-V2 vs Neutral-V1                      neutral-wording sensitivity
+  J  Answer+Confidence vs Neutral-V2               content beyond alternative neutral control
+  K  Neutral-V1 vs Short-Ack                       added neutral text/length beyond role marker
 
 For accuracy, target-distractor adoption, harmful conformity, and flip rate the
 script reports paired percentage-point differences, question-level paired
 bootstrap confidence intervals, exact McNemar tests, and Holm-adjusted p-values
-within each outcome across inferential comparisons B--F. Comparison A is an
-implementation identity check and is deliberately excluded from multiplicity
+within each outcome across inferential comparisons B--E and G--K. Comparisons A
+and F are checks/diagnostics and are deliberately excluded from multiplicity
 correction. Optional archived Exp2/Exp3 results are descriptive references.
 """
 
@@ -39,6 +44,8 @@ NEW_CONDITION_NAMES = [
     "stepwise_answer_history",
     "stepwise_answer_confidence_history",
     "sequential_final_length_matched",
+    "sequential_final_neutral_v2",
+    "sequential_final_short_ack",
 ]
 
 METRICS = [
@@ -168,8 +175,10 @@ def audit_new_conditions(conditions):
     )
 
 
-def _paired_ids(condition1, condition2, eligibility):
+def _paired_ids(condition1, condition2, eligibility, allowed_ids=None):
     ids = sorted(set(condition1) & set(condition2))
+    if allowed_ids is not None:
+        ids = [item_id for item_id in ids if item_id in allowed_ids]
     return [
         item_id
         for item_id in ids
@@ -227,10 +236,12 @@ def build_comparison(
     n_boot,
     seed,
     adjust,
+    allowed_ids=None,
+    analysis_subset="all_common_valid",
 ):
     rows = []
     for metric_name, metric, eligibility in METRICS:
-        ids = _paired_ids(condition1, condition2, eligibility)
+        ids = _paired_ids(condition1, condition2, eligibility, allowed_ids=allowed_ids)
         if not ids:
             continue
         rate1 = sum(metric(condition1[item_id]) for item_id in ids) / len(ids)
@@ -255,8 +266,9 @@ def build_comparison(
                 "mcnemar_c": c,
                 "p_raw": p_value,
                 "p_holm": None,
-                "holm_family": "B-F within metric" if adjust else None,
+                "holm_family": "B-E and G-K within metric" if adjust else None,
                 "adjust": adjust,
+                "analysis_subset": analysis_subset,
             }
         )
     return rows
@@ -320,6 +332,72 @@ def print_token_audit(name, condition):
     )
 
 
+def build_token_pair_audit(name1, condition1, name2, condition2):
+    """Describe paired prompt-token equality and return the exact-match IDs."""
+    common_ids = sorted(set(condition1) & set(condition2))
+    covered = [
+        item_id
+        for item_id in common_ids
+        if condition1[item_id]["final_prompt_token_count"] is not None
+        and condition2[item_id]["final_prompt_token_count"] is not None
+    ]
+    if not covered:
+        return {
+            "condition1": name1,
+            "condition2": name2,
+            "common_n": len(common_ids),
+            "covered_n": 0,
+            "exact_match_n": 0,
+            "exact_match_ids": [],
+            "difference_counts": {},
+            "mismatches": [],
+        }
+    differences = {
+        item_id: (
+            condition1[item_id]["final_prompt_token_count"]
+            - condition2[item_id]["final_prompt_token_count"]
+        )
+        for item_id in covered
+    }
+    exact_ids = [item_id for item_id in covered if differences[item_id] == 0]
+    difference_counts = {}
+    for difference in differences.values():
+        key = str(difference)
+        difference_counts[key] = difference_counts.get(key, 0) + 1
+    return {
+        "condition1": name1,
+        "condition2": name2,
+        "common_n": len(common_ids),
+        "covered_n": len(covered),
+        "exact_match_n": len(exact_ids),
+        "exact_match_ids": exact_ids,
+        "difference_counts": difference_counts,
+        "mismatches": [
+            {
+                "id": item_id,
+                "condition1_tokens": condition1[item_id]["final_prompt_token_count"],
+                "condition2_tokens": condition2[item_id]["final_prompt_token_count"],
+                "difference": differences[item_id],
+            }
+            for item_id in covered
+            if differences[item_id] != 0
+        ],
+    }
+
+
+def print_token_pair_audit(audit):
+    print(
+        f"  [{audit['condition1']} - {audit['condition2']}] "
+        f"covered={audit['covered_n']}/{audit['common_n']} "
+        f"exact={audit['exact_match_n']} differences={audit['difference_counts']}"
+    )
+    if audit["mismatches"]:
+        preview = ", ".join(
+            f"{row['id']}:{row['difference']:+d}" for row in audit["mismatches"][:10]
+        )
+        print(f"        mismatches (condition1-condition2; first 10): {preview}")
+
+
 def print_stepwise_trajectory(name, condition):
     records = list(condition.values())
     n_steps = max((len(record["step_outputs"]) for record in records), default=0)
@@ -370,6 +448,13 @@ def print_stepwise_trajectory(name, condition):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--run-dir", default=None)
+    parser.add_argument(
+        "--condition",
+        action="append",
+        default=[],
+        metavar="NAME=JSONL",
+        help="add a condition file from another run directory (repeatable)",
+    )
     parser.add_argument("--exp2", default=None)
     parser.add_argument("--exp3", default=None)
     parser.add_argument("--bootstrap-reps", type=int, default=DEFAULT_N_BOOT)
@@ -385,12 +470,26 @@ def main():
             path = os.path.join(args.run_dir, f"{name}.jsonl")
             if os.path.exists(path):
                 conditions[name] = load_condition(path)
+    for specification in args.condition:
+        if "=" not in specification:
+            raise SystemExit(f"--condition must be NAME=JSONL, got: {specification!r}")
+        name, path = specification.split("=", 1)
+        name, path = name.strip(), path.strip()
+        if not name or not path:
+            raise SystemExit(f"--condition must be NAME=JSONL, got: {specification!r}")
+        if name in conditions:
+            raise SystemExit(f"condition {name!r} was provided more than once")
+        if not os.path.isfile(path):
+            raise SystemExit(f"condition file not found: {path}")
+        conditions[name] = load_condition(path)
     if args.exp2:
         conditions["as_published_sequential_final(exp2)"] = load_condition(args.exp2)
     if args.exp3:
         conditions["as_published_stepwise(exp3)"] = load_condition(args.exp3)
     if not conditions:
-        raise SystemExit("Nothing to analyze. Provide --run-dir and/or --exp2/--exp3.")
+        raise SystemExit(
+            "Nothing to analyze. Provide --run-dir, --condition, and/or --exp2/--exp3."
+        )
 
     audit_new_conditions(conditions)
     print("\nPER-CONDITION SUMMARY")
@@ -411,7 +510,17 @@ def main():
     if have("stepwise_answer_confidence_history", "sequential_final_length_matched"):
         specifications.append(("Comparison E (history content beyond matched structure)", "stepwise_answer_confidence_history", "sequential_final_length_matched", True))
     if have("stepwise_answer_history", "sequential_final_length_matched"):
-        specifications.append(("Comparison F (answer-only diagnostic; length unmatched)", "stepwise_answer_history", "sequential_final_length_matched", True))
+        specifications.append(("Comparison F (answer-only diagnostic; length unmatched)", "stepwise_answer_history", "sequential_final_length_matched", False))
+    if have("sequential_final_neutral_v2", "sequential_final"):
+        specifications.append(("Comparison G (Neutral-V2 structure robustness)", "sequential_final_neutral_v2", "sequential_final", True))
+    if have("sequential_final_short_ack", "sequential_final"):
+        specifications.append(("Comparison H (short assistant-role marker)", "sequential_final_short_ack", "sequential_final", True))
+    if have("sequential_final_neutral_v2", "sequential_final_length_matched"):
+        specifications.append(("Comparison I (neutral wording sensitivity)", "sequential_final_neutral_v2", "sequential_final_length_matched", True))
+    if have("stepwise_answer_confidence_history", "sequential_final_neutral_v2"):
+        specifications.append(("Comparison J (history content beyond Neutral-V2)", "stepwise_answer_confidence_history", "sequential_final_neutral_v2", True))
+    if have("sequential_final_length_matched", "sequential_final_short_ack"):
+        specifications.append(("Comparison K (neutral text/length beyond role marker)", "sequential_final_length_matched", "sequential_final_short_ack", True))
     if have("as_published_stepwise(exp3)", "as_published_sequential_final(exp2)"):
         specifications.append(("As-published reference", "as_published_stepwise(exp3)", "as_published_sequential_final(exp2)", False))
 
@@ -430,30 +539,71 @@ def main():
         )
         rows_by_label[label] = rows
         results.extend(rows)
+
+    token_pair_audits = []
+    exact_token_specifications = []
+    for label, name1, name2 in [
+        (
+            "Comparison E exact-token sensitivity",
+            "stepwise_answer_confidence_history",
+            "sequential_final_length_matched",
+        ),
+        (
+            "Comparison J exact-token sensitivity",
+            "stepwise_answer_confidence_history",
+            "sequential_final_neutral_v2",
+        ),
+    ]:
+        if not have(name1, name2):
+            continue
+        audit = build_token_pair_audit(
+            name1, conditions[name1], name2, conditions[name2]
+        )
+        token_pair_audits.append(audit)
+        if audit["exact_match_ids"]:
+            exact_token_specifications.append((label, name1, name2, audit["exact_match_ids"]))
+            rows = build_comparison(
+                label,
+                name1,
+                conditions[name1],
+                name2,
+                conditions[name2],
+                args.bootstrap_reps,
+                args.seed,
+                False,
+                allowed_ids=set(audit["exact_match_ids"]),
+                analysis_subset="exact_final_prompt_token_match",
+            )
+            rows_by_label[label] = rows
+            results.extend(rows)
     apply_holm_within_metric(results)
     for label, _, _, _ in specifications:
         print_comparison(label, rows_by_label[label])
+    for label, _, _, _ in exact_token_specifications:
+        print_comparison(label, rows_by_label[label])
 
-    if args.run_dir:
-        print("\nTOKEN AUDIT")
-        for name in NEW_CONDITION_NAMES:
-            if name in conditions:
-                print_token_audit(name, conditions[name])
-        print("\nSTEPWISE TRAJECTORIES")
-        for name in [
-            "stepwise_no_history",
-            "stepwise_answer_history",
-            "stepwise_answer_confidence_history",
-        ]:
-            if name in conditions:
-                print_stepwise_trajectory(name, conditions[name])
+    print("\nTOKEN AUDIT")
+    for name in NEW_CONDITION_NAMES:
+        if name in conditions:
+            print_token_audit(name, conditions[name])
+    for audit in token_pair_audits:
+        print_token_pair_audit(audit)
+    print("\nSTEPWISE TRAJECTORIES")
+    for name in [
+        "stepwise_no_history",
+        "stepwise_answer_history",
+        "stepwise_answer_confidence_history",
+    ]:
+        if name in conditions:
+            print_stepwise_trajectory(name, conditions[name])
 
     if args.output_json:
         payload = {
             "bootstrap_reps": args.bootstrap_reps,
             "seed": args.seed,
-            "holm_family": "comparisons B-F, corrected separately within each metric",
+            "holm_family": "comparisons B-E and G-K, corrected separately within each metric",
             "summaries": summaries,
+            "token_pair_audits": token_pair_audits,
             "comparisons": [
                 {key: value for key, value in row.items() if key != "adjust"}
                 for row in results
