@@ -1,0 +1,90 @@
+INTEGRITY AUDIT: PASS (500 identical IDs and item metadata across 5 new conditions)
+
+PER-CONDITION SUMMARY
+  [sequential_final] N=500 valid=500 invalid=0
+        accuracy=0.3300  distractor_adoption=0.6040  flip_rate=0.5560  harmful_conformity=0.5543 (den=368)
+  [stepwise_no_history] N=500 valid=500 invalid=0
+        accuracy=0.3300  distractor_adoption=0.6040  flip_rate=0.5560  harmful_conformity=0.5543 (den=368)
+  [stepwise_answer_history] N=500 valid=500 invalid=0
+        accuracy=0.5640  distractor_adoption=0.2560  flip_rate=0.2380  harmful_conformity=0.2092 (den=368)
+  [stepwise_answer_confidence_history] N=500 valid=500 invalid=0
+        accuracy=0.7040  distractor_adoption=0.1120  flip_rate=0.0840  harmful_conformity=0.0489 (den=368)
+  [sequential_final_length_matched] N=500 valid=500 invalid=0
+        accuracy=0.6800  distractor_adoption=0.1440  flip_rate=0.0900  harmful_conformity=0.0815 (den=368)
+
+================================================================================================
+Comparison A (harness):  stepwise_no_history  vs  sequential_final
+================================================================================================
+  [accuracy] paired_N=500  stepwise_no_history=0.3300  sequential_final=0.3300  delta=+0.00pp  boot95%=[+0.00,+0.00]pp  McNemar b=0 c=0 p=1
+  [distractor_adoption] paired_N=500  stepwise_no_history=0.6040  sequential_final=0.6040  delta=+0.00pp  boot95%=[+0.00,+0.00]pp  McNemar b=0 c=0 p=1
+  [harmful_conformity] paired_N=368  stepwise_no_history=0.5543  sequential_final=0.5543  delta=+0.00pp  boot95%=[+0.00,+0.00]pp  McNemar b=0 c=0 p=1
+  [flip_rate] paired_N=500  stepwise_no_history=0.5560  sequential_final=0.5560  delta=+0.00pp  boot95%=[+0.00,+0.00]pp  McNemar b=0 c=0 p=1
+
+================================================================================================
+Comparison B (answer turns + content):  stepwise_answer_history  vs  stepwise_no_history
+================================================================================================
+  [accuracy] paired_N=500  stepwise_answer_history=0.5640  stepwise_no_history=0.3300  delta=+23.40pp  boot95%=[+19.00,+27.80]pp  McNemar b=135 c=18 p=2.348e-23 Holm=9.392e-23
+  [distractor_adoption] paired_N=500  stepwise_answer_history=0.2560  stepwise_no_history=0.6040  delta=-34.80pp  boot95%=[-39.60,-30.20]pp  McNemar b=14 c=188 p=4.577e-40 Holm=1.831e-39
+  [harmful_conformity] paired_N=368  stepwise_answer_history=0.2092  stepwise_no_history=0.5543  delta=-34.51pp  boot95%=[-39.95,-29.08]pp  McNemar b=10 c=137 p=1.147e-29 Holm=4.587e-29
+  [flip_rate] paired_N=500  stepwise_answer_history=0.2380  stepwise_no_history=0.5560  delta=-31.80pp  boot95%=[-36.60,-27.00]pp  McNemar b=22 c=181 p=2.812e-32 Holm=1.125e-31
+
+================================================================================================
+Comparison C (added confidence line):  stepwise_answer_confidence_history  vs  stepwise_answer_history
+================================================================================================
+  [accuracy] paired_N=500  stepwise_answer_confidence_history=0.7040  stepwise_answer_history=0.5640  delta=+14.00pp  boot95%=[+10.40,+17.60]pp  McNemar b=83 c=13 p=1.202e-13 Holm=3.606e-13
+  [distractor_adoption] paired_N=500  stepwise_answer_confidence_history=0.1120  stepwise_answer_history=0.2560  delta=-14.40pp  boot95%=[-18.20,-10.80]pp  McNemar b=13 c=85 p=3.985e-14 Holm=1.195e-13
+  [harmful_conformity] paired_N=368  stepwise_answer_confidence_history=0.0489  stepwise_answer_history=0.2092  delta=-16.03pp  boot95%=[-20.65,-11.68]pp  McNemar b=9 c=68 p=2.449e-12 Holm=7.346e-12
+  [flip_rate] paired_N=500  stepwise_answer_confidence_history=0.0840  stepwise_answer_history=0.2380  delta=-15.40pp  boot95%=[-19.40,-11.40]pp  McNemar b=21 c=98 p=4.403e-13 Holm=1.321e-12
+
+================================================================================================
+Comparison D (turn/context structure):  sequential_final_length_matched  vs  sequential_final
+================================================================================================
+  [accuracy] paired_N=500  sequential_final_length_matched=0.6800  sequential_final=0.3300  delta=+35.00pp  boot95%=[+30.80,+39.40]pp  McNemar b=180 c=5 p=7.171e-47 Holm=3.586e-46
+  [distractor_adoption] paired_N=500  sequential_final_length_matched=0.1440  sequential_final=0.6040  delta=-46.00pp  boot95%=[-50.40,-41.60]pp  McNemar b=3 c=233 p=3.968e-65 Holm=1.984e-64
+  [harmful_conformity] paired_N=368  sequential_final_length_matched=0.0815  sequential_final=0.5543  delta=-47.28pp  boot95%=[-52.72,-41.85]pp  McNemar b=3 c=177 p=1.269e-48 Holm=6.344e-48
+  [flip_rate] paired_N=500  sequential_final_length_matched=0.0900  sequential_final=0.5560  delta=-46.60pp  boot95%=[-51.00,-42.40]pp  McNemar b=2 c=235 p=2.554e-67 Holm=1.277e-66
+
+================================================================================================
+Comparison E (history content beyond matched structure):  stepwise_answer_confidence_history  vs  sequential_final_length_matched
+================================================================================================
+  [accuracy] paired_N=500  stepwise_answer_confidence_history=0.7040  sequential_final_length_matched=0.6800  delta=+2.40pp  boot95%=[-0.20,+5.20]pp  McNemar b=30 c=18 p=0.1114 Holm=0.1114
+  [distractor_adoption] paired_N=500  stepwise_answer_confidence_history=0.1120  sequential_final_length_matched=0.1440  delta=-3.20pp  boot95%=[-5.80,-0.60]pp  McNemar b=15 c=31 p=0.0259 Holm=0.0259
+  [harmful_conformity] paired_N=368  stepwise_answer_confidence_history=0.0489  sequential_final_length_matched=0.0815  delta=-3.26pp  boot95%=[-6.25,-0.27]pp  McNemar b=10 c=22 p=0.0501 Holm=0.0501
+  [flip_rate] paired_N=500  stepwise_answer_confidence_history=0.0840  sequential_final_length_matched=0.0900  delta=-0.60pp  boot95%=[-3.60,+2.40]pp  McNemar b=28 c=31 p=0.7948 Holm=0.7948
+
+================================================================================================
+Comparison F (answer-only diagnostic; length unmatched):  stepwise_answer_history  vs  sequential_final_length_matched
+================================================================================================
+  [accuracy] paired_N=500  stepwise_answer_history=0.5640  sequential_final_length_matched=0.6800  delta=-11.60pp  boot95%=[-15.20,-7.80]pp  McNemar b=21 c=79 p=4.337e-09 Holm=8.675e-09
+  [distractor_adoption] paired_N=500  stepwise_answer_history=0.2560  sequential_final_length_matched=0.1440  delta=+11.20pp  boot95%=[+7.20,+15.20]pp  McNemar b=83 c=27 p=8.31e-08 Holm=1.662e-07
+  [harmful_conformity] paired_N=368  stepwise_answer_history=0.2092  sequential_final_length_matched=0.0815  delta=+12.77pp  boot95%=[+8.15,+17.39]pp  McNemar b=64 c=17 p=1.427e-07 Holm=2.853e-07
+  [flip_rate] paired_N=500  stepwise_answer_history=0.2380  sequential_final_length_matched=0.0900  delta=+14.80pp  boot95%=[+10.60,+19.00]pp  McNemar b=100 c=26 p=1.985e-11 Holm=3.969e-11
+
+TOKEN AUDIT
+  [sequential_final] final prompt tokens: n=500 min=259 median=270 max=304
+  [stepwise_no_history] final prompt tokens: n=500 min=259 median=270 max=304
+  [stepwise_answer_history] final prompt tokens: n=500 min=295 median=306 max=340
+  [stepwise_answer_confidence_history] final prompt tokens: n=500 min=331 median=342 max=376
+  [sequential_final_length_matched] final prompt tokens: n=500 min=331 median=342 max=376
+
+STEPWISE TRAJECTORIES
+  [stepwise_no_history]
+        step=1 valid=500 accuracy=0.7380 distractor_adoption=0.0660 harmful_conformity=0.0054 logprob_coverage=500/500
+        step=2 valid=500 accuracy=0.3680 distractor_adoption=0.5540 harmful_conformity=0.4918 logprob_coverage=500/500
+        step=3 valid=500 accuracy=0.2520 distractor_adoption=0.6860 harmful_conformity=0.6549 logprob_coverage=500/500
+        step=4 valid=500 accuracy=0.3120 distractor_adoption=0.6340 harmful_conformity=0.5870 logprob_coverage=500/500
+        step=5 valid=500 accuracy=0.3300 distractor_adoption=0.6040 harmful_conformity=0.5543 logprob_coverage=500/500
+  [stepwise_answer_history]
+        step=1 valid=500 accuracy=0.7380 distractor_adoption=0.0660 harmful_conformity=0.0054 logprob_coverage=500/500
+        step=2 valid=500 accuracy=0.5260 distractor_adoption=0.3540 harmful_conformity=0.2826 logprob_coverage=500/500
+        step=3 valid=500 accuracy=0.4820 distractor_adoption=0.4220 harmful_conformity=0.3478 logprob_coverage=500/500
+        step=4 valid=500 accuracy=0.5860 distractor_adoption=0.2820 harmful_conformity=0.2120 logprob_coverage=500/500
+        step=5 valid=500 accuracy=0.5640 distractor_adoption=0.2560 harmful_conformity=0.2092 logprob_coverage=500/500
+  [stepwise_answer_confidence_history]
+        step=1 valid=500 accuracy=0.7380 distractor_adoption=0.0660 harmful_conformity=0.0054 logprob_coverage=500/500
+        step=2 valid=500 accuracy=0.6500 distractor_adoption=0.1840 harmful_conformity=0.1114 logprob_coverage=500/500
+        step=3 valid=500 accuracy=0.6400 distractor_adoption=0.2040 harmful_conformity=0.1332 logprob_coverage=500/500
+        step=4 valid=500 accuracy=0.6800 distractor_adoption=0.1320 harmful_conformity=0.0734 logprob_coverage=500/500
+        step=5 valid=500 accuracy=0.7040 distractor_adoption=0.1120 harmful_conformity=0.0489 logprob_coverage=500/500
+
+WROTE results/runs/qwen25_3b_cqa_main500_2542766/self_history_analysis.json
