@@ -190,11 +190,13 @@ def _run_single_call_condition(build_messages, initial_result, opinions, answer_
     step = {
         "step": 1,
         "opinion": None,
-        "history_inserted_before_step": None,
+        "history_inserted_before_step": C.assistant_turns_after_initial(messages),
         "raw_text": std["text"],
         "prediction": std["prediction"],
         "confidence": std["confidence"],
         "valid": std["valid"],
+        "option_logprobs": std["option_logprobs"],
+        "selected_logprob": std["selected_logprob"],
         "request_messages": messages,
     }
     # For single-call conditions the peer opinions are all present at once; record them.
@@ -223,6 +225,8 @@ def _run_stepwise_condition(initial_result, opinions, history_mode, answer_fn):
             "prediction": std["prediction"],
             "confidence": std["confidence"],
             "valid": std["valid"],
+            "option_logprobs": std["option_logprobs"],
+            "selected_logprob": std["selected_logprob"],
             "request_messages": messages,
         })
         prior_texts.append(std["text"])
@@ -293,18 +297,115 @@ def _git_commit():
         return None
 
 
-def _maybe_token_count(messages, model_name):
-    """Best-effort token count of the final prompt. NEVER downloads (local files
-    only). Returns None if the tokenizer is not already cached."""
-    try:
-        from transformers import AutoTokenizer
-        from src.llm_api import normalize_messages_for_model
-        tok = AutoTokenizer.from_pretrained(model_name, local_files_only=True)
-        norm = normalize_messages_for_model(messages, model_name)
-        ids = tok.apply_chat_template(norm, tokenize=True, add_generation_prompt=True)
-        return len(ids)
-    except Exception:
-        return None
+def _load_local_tokenizer(tokenizer_path):
+    """Load the exact local tokenizer used for auditable prompt-length counts.
+
+    Token auditing is opt-in, but once requested it is strict: callers must not
+    silently continue with null counts because the length-matched control then
+    becomes impossible to verify from the result artifact.
+    """
+    from transformers import AutoTokenizer
+
+    return AutoTokenizer.from_pretrained(tokenizer_path, local_files_only=True)
+
+
+def _prompt_token_count(messages, tokenizer, model_name):
+    from src.llm_api import normalize_messages_for_model
+
+    normalized = normalize_messages_for_model(messages, model_name)
+    ids = tokenizer.apply_chat_template(
+        normalized, tokenize=True, add_generation_prompt=True
+    )
+    return len(ids)
+
+
+def _text_token_count(text, tokenizer):
+    return len(tokenizer.encode(text or "", add_special_tokens=False))
+
+
+def _add_token_audit(row, tokenizer, model_name):
+    """Attach prompt and inserted-history token counts to one completed row."""
+    row["final_prompt_token_count"] = _prompt_token_count(
+        row["final_messages"], tokenizer, model_name
+    )
+    for step in row.get("step_outputs", []):
+        history = step.get("history_inserted_before_step") or []
+        counts = [_text_token_count(text, tokenizer) for text in history]
+        step["history_inserted_token_counts"] = counts
+        step["history_inserted_total_token_count"] = sum(counts)
+        step["request_prompt_token_count"] = _prompt_token_count(
+            step.get("request_messages") or [], tokenizer, model_name
+        )
+
+
+def _read_jsonl_ids(path):
+    """Return IDs from a complete JSONL, rejecting corruption and duplicates."""
+    ids = []
+    with open(path, encoding="utf-8") as f:
+        for line_number, line in enumerate(f, start=1):
+            if not line.strip():
+                continue
+            try:
+                row = json.loads(line)
+            except json.JSONDecodeError as exc:
+                raise SystemExit(
+                    f"[FATAL] cannot resume: invalid JSON in {path}:{line_number}: {exc}"
+                ) from exc
+            item_id = row.get("id")
+            if item_id is None:
+                raise SystemExit(f"[FATAL] cannot resume: missing id in {path}:{line_number}")
+            ids.append(item_id)
+    if len(ids) != len(set(ids)):
+        raise SystemExit(f"[FATAL] cannot resume: duplicate item IDs in {path}")
+    return set(ids)
+
+
+def _resume_completed_ids(out_dir, conditions):
+    """Require an aligned checkpoint across conditions and return completed IDs."""
+    id_sets = {}
+    for cond in conditions:
+        path = os.path.join(out_dir, f"{cond}.jsonl")
+        if not os.path.exists(path):
+            raise SystemExit(f"[FATAL] cannot resume: missing condition file {path}")
+        id_sets[cond] = _read_jsonl_ids(path)
+    reference_name = conditions[0]
+    reference = id_sets[reference_name]
+    for cond in conditions[1:]:
+        if id_sets[cond] != reference:
+            only_reference = len(reference - id_sets[cond])
+            only_condition = len(id_sets[cond] - reference)
+            raise SystemExit(
+                "[FATAL] cannot resume an unaligned checkpoint: "
+                f"{reference_name} vs {cond} differ "
+                f"({only_reference} only in reference, {only_condition} only in condition)"
+            )
+    return reference
+
+
+def _validate_resume_manifest(existing, expected):
+    """Fail closed if a resumed run would mix incompatible configurations."""
+    keys = [
+        "experiment",
+        "output_subdir",
+        "run_name",
+        "model_name",
+        "decoding",
+        "conditions",
+        "neutral_turn",
+        "dataset_md5",
+        "n_samples",
+        "n_wrong_guides",
+        "conditions_module_md5",
+        "compute_tokens",
+        "tokenizer_path",
+    ]
+    mismatches = [key for key in keys if existing.get(key) != expected.get(key)]
+    if mismatches:
+        details = ", ".join(
+            f"{key}: existing={existing.get(key)!r} expected={expected.get(key)!r}"
+            for key in mismatches
+        )
+        raise SystemExit(f"[FATAL] resume manifest mismatch: {details}")
 
 
 def load_dataset(path):
@@ -320,10 +421,22 @@ def main():
                     help="run only the first N items (0/unset = all)")
     ap.add_argument("--run-name", default=os.getenv("RUN_NAME", ""))
     ap.add_argument("--neutral-turn", default=os.getenv("NEUTRAL_TURN", ""))
-    ap.add_argument("--force", action="store_true", default=os.getenv("FORCE_OVERWRITE", "0") == "1")
+    mode = ap.add_mutually_exclusive_group()
+    mode.add_argument("--force", action="store_true", default=os.getenv("FORCE_OVERWRITE", "0") == "1")
+    mode.add_argument("--resume", action="store_true", default=os.getenv("RESUME_RUN", "0") == "1")
     ap.add_argument("--compute-tokens", action="store_true",
                     default=os.getenv("COMPUTE_TOKENS", "0") == "1")
+    ap.add_argument(
+        "--tokenizer-path",
+        default=os.getenv("TOKENIZER_PATH", ""),
+        help="local tokenizer path used when --compute-tokens is enabled",
+    )
     args = ap.parse_args()
+
+    if args.force and args.resume:
+        raise SystemExit("[FATAL] --force and --resume are mutually exclusive")
+    if args.resume and not args.run_name:
+        raise SystemExit("[FATAL] --resume requires an explicit --run-name")
 
     conditions = [c.strip() for c in args.conditions.split(",") if c.strip()]
     for c in conditions:
@@ -335,19 +448,33 @@ def main():
     run_name = args.run_name or f"{EXPERIMENT_NAME}_{model_tag}_{timestamp}"
     neutral_turn = C.resolve_neutral_turn(MODEL_NAME, override=args.neutral_turn or None)
 
+    dataset = load_dataset(DATA_PATH)
+    if args.limit:
+        dataset = dataset[: args.limit]
+    dataset_md5 = _md5(DATA_PATH)
+    conditions_md5 = _md5(os.path.join(CURRENT_DIR, "conditions.py"))
+
+    tokenizer = None
+    tokenizer_path = args.tokenizer_path or MODEL_NAME
+    if args.compute_tokens:
+        try:
+            tokenizer = _load_local_tokenizer(tokenizer_path)
+        except Exception as exc:  # noqa: BLE001 - fail with an actionable audit message
+            raise SystemExit(
+                "[FATAL] token auditing was requested but the local tokenizer "
+                f"could not be loaded from {tokenizer_path!r}: {type(exc).__name__}: {exc}"
+            ) from exc
+
     # --- output dir + hard guards against clobbering the paper artifact -------
     out_dir = os.path.join(RESULT_DIR, "runs", run_name, OUTPUT_SUBDIR)
     if LEGACY_SUBDIR in out_dir:
         raise SystemExit("[FATAL] refusing to write under the legacy experiment tree")
     os.makedirs(out_dir, exist_ok=True)
-    for cond in conditions:
-        p = os.path.join(out_dir, f"{cond}.jsonl")
-        if os.path.exists(p) and not args.force:
-            raise SystemExit(f"[FATAL] {p} exists; use --force to overwrite (won't by default)")
-
-    dataset = load_dataset(DATA_PATH)
-    if args.limit:
-        dataset = dataset[: args.limit]
+    if not args.resume:
+        for cond in conditions:
+            p = os.path.join(out_dir, f"{cond}.jsonl")
+            if os.path.exists(p) and not args.force:
+                raise SystemExit(f"[FATAL] {p} exists; use --force to overwrite (won't by default)")
 
     manifest = {
         "experiment": EXPERIMENT_NAME,
@@ -359,39 +486,83 @@ def main():
         "conditions": conditions,
         "neutral_turn": neutral_turn,
         "dataset_path": DATA_PATH,
-        "dataset_md5": _md5(DATA_PATH),
+        "dataset_md5": dataset_md5,
         "n_samples": len(dataset),
         "n_wrong_guides": C.N_WRONG_GUIDES,
         "git_commit": _git_commit(),
-        "conditions_module_md5": _md5(os.path.join(CURRENT_DIR, "conditions.py")),
+        "conditions_module_md5": conditions_md5,
+        "compute_tokens": bool(args.compute_tokens),
+        "tokenizer_path": tokenizer_path if args.compute_tokens else None,
+        "tokenizer_class": type(tokenizer).__name__ if tokenizer is not None else None,
+        "neutral_turn_token_count": (
+            _text_token_count(neutral_turn, tokenizer) if tokenizer is not None else None
+        ),
         "note": "Archived Exp3 kept as as-published reference; 'Full-History' term retired.",
     }
-    with open(os.path.join(out_dir, "manifest.json"), "w", encoding="utf-8") as f:
-        json.dump(manifest, f, ensure_ascii=False, indent=2)
+
+    manifest_path = os.path.join(out_dir, "manifest.json")
+    completed_ids = set()
+    if args.resume:
+        if not os.path.exists(manifest_path):
+            raise SystemExit(f"[FATAL] cannot resume: missing manifest {manifest_path}")
+        with open(manifest_path, encoding="utf-8") as f:
+            existing_manifest = json.load(f)
+        # Preserve the original run timestamp and provenance while validating
+        # every setting that can change model behavior or output interpretation.
+        timestamp = existing_manifest.get("timestamp")
+        manifest["timestamp"] = timestamp
+        manifest["git_commit"] = existing_manifest.get("git_commit")
+        _validate_resume_manifest(existing_manifest, manifest)
+        completed_ids = _resume_completed_ids(out_dir, conditions)
+        dataset_ids = {item.get("id") for item in dataset}
+        unexpected = completed_ids - dataset_ids
+        if unexpected:
+            raise SystemExit(
+                f"[FATAL] cannot resume: {len(unexpected)} completed IDs are absent from the dataset"
+            )
+        print(f"[RESUME] {len(completed_ids)}/{len(dataset)} aligned items already complete")
+    else:
+        with open(manifest_path, "w", encoding="utf-8") as f:
+            json.dump(manifest, f, ensure_ascii=False, indent=2)
 
     answer_fn = make_real_answer_fn()
-    handles = {c: open(os.path.join(out_dir, f"{c}.jsonl"), "w", encoding="utf-8") for c in conditions}
+    file_mode = "a" if args.resume else "w"
+    handles = {
+        c: open(os.path.join(out_dir, f"{c}.jsonl"), file_mode, encoding="utf-8")
+        for c in conditions
+    }
     n_leak_fail = 0
+    n_new = 0
     try:
         for i, item in enumerate(dataset, start=1):
+            if item.get("id") in completed_ids:
+                continue
             rows = run_item(item, answer_fn, conditions, MODEL_NAME, run_name, timestamp, neutral_turn)
             for cond, row in rows.items():
                 if cond == "stepwise_no_history" and row.get("no_history_step5_equals_sequential_final") is False:
                     n_leak_fail += 1
                     print(f"[WARN] item {row['id']}: no_history step-5 != sequential_final !!", file=sys.stderr)
-                if args.compute_tokens:
-                    row["final_prompt_token_count"] = _maybe_token_count(row["final_messages"], MODEL_NAME)
+                if tokenizer is not None:
+                    _add_token_audit(row, tokenizer, MODEL_NAME)
                 handles[cond].write(json.dumps(row, ensure_ascii=False) + "\n")
                 handles[cond].flush()
-            if i % 25 == 0 or i == len(dataset):
-                print(f"[OK] {i}/{len(dataset)} items", flush=True)
+            n_new += 1
+            total_complete = len(completed_ids) + n_new
+            if total_complete % 25 == 0 or total_complete == len(dataset):
+                print(f"[OK] {total_complete}/{len(dataset)} items", flush=True)
     finally:
         for h in handles.values():
             h.close()
 
-    print(f"[DONE] wrote {len(conditions)} condition file(s) to {out_dir}")
+    print(
+        f"[DONE] wrote {n_new} new item(s) across {len(conditions)} condition file(s) "
+        f"to {out_dir}"
+    )
     if "stepwise_no_history" in conditions:
-        print(f"[AUDIT] no_history step-5 == sequential_final identity failures: {n_leak_fail}/{len(dataset)}")
+        print(
+            "[AUDIT] no_history step-5 == sequential_final identity failures "
+            f"among newly processed items: {n_leak_fail}/{n_new}"
+        )
 
 
 if __name__ == "__main__":

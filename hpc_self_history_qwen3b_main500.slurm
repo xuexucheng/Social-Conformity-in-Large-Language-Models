@@ -61,6 +61,7 @@ export API_URL="http://127.0.0.1:8000/v1/chat/completions"
 export DATA_PATH="$DATA"
 export RESULT_DIR="results"
 export COMPUTE_TOKENS=1
+export TOKENIZER_PATH="$MODEL"
 
 echo "===== START VLLM ====="
 
@@ -105,7 +106,9 @@ echo
 echo "===== RUN FORMAL MAIN500 ====="
 
 python experiments/2026-08-26_self_history_ablation/run_ablation.py \
-  --run-name "qwen25_3b_cqa_main500_${SLURM_JOB_ID}"
+  --run-name "qwen25_3b_cqa_main500_${SLURM_JOB_ID}" \
+  --compute-tokens \
+  --tokenizer-path "$MODEL"
 
 echo "===== OUTPUT FILES ====="
 

@@ -1,46 +1,56 @@
 """Paired analysis for the Self-History Ablation.
 
-Dependency-free (stdlib only). Reuses the repo's exact McNemar helper. Works on
-both the new ablation JSONL schema and the archived Exp2/Exp3 schema.
+The primary mechanism family is evaluated on common-valid paired items:
 
-For each comparison it reports, on the COMMON-VALID paired subset:
-  * per-condition N, valid N, accuracy, harmful-conformity, target-distractor
-    adoption, flip(change) rate
-  * pairwise percentage-point differences
-  * exact two-sided McNemar p (on correctness and on distractor adoption)
-  * question-level paired bootstrap 95% CI (10,000 resamples; both conditions of
-    a question resampled together)
+  A  No-History vs Sequential-Final              harness/determinism check
+  B  Answer-History vs No-History                 assistant turns + answer content
+  C  Answer+Confidence vs Answer-History          added confidence line
+  D  Neutral-Turn vs Sequential-Final             turn/context structure
+  E  Answer+Confidence vs Neutral-Turn             history content beyond matched structure
+  F  Answer-History vs Neutral-Turn                answer-only diagnostic (not length matched)
 
-Standard comparisons when --run-dir is given:
-  A  stepwise_no_history            vs sequential_final          (harness/determinism check)
-  B  stepwise_answer_history        vs stepwise_no_history       (self-answer commitment)
-  C  stepwise_answer_confidence...  vs stepwise_answer_history   (self-reported confidence)
-  D  sequential_final_length_matched vs sequential_final         (turn/context structure)
-Optionally --exp2/--exp3 add the as-published reference (Exp3 vs Exp2).
-
-Usage:
-    python3 analyze_ablation.py --run-dir <run>/2026-08-26_self_history_ablation
-    python3 analyze_ablation.py --exp2 <exp2.jsonl> --exp3 <exp3.jsonl>   # as-published check
+For accuracy, target-distractor adoption, harmful conformity, and flip rate the
+script reports paired percentage-point differences, question-level paired
+bootstrap confidence intervals, exact McNemar tests, and Holm-adjusted p-values
+within each outcome across inferential comparisons B--F. Comparison A is an
+implementation identity check and is deliberately excluded from multiplicity
+correction. Optional archived Exp2/Exp3 results are descriptive references.
 """
 
 import argparse
 import json
 import os
 import random
+import statistics
 import sys
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.abspath(os.path.join(CURRENT_DIR, "..", ".."))
 sys.path.insert(0, os.path.join(PROJECT_DIR, "analysis"))
-from exact_mcnemar import exact_mcnemar_pvalue  # noqa: E402  (reuse tested helper)
+from exact_mcnemar import exact_mcnemar_pvalue  # noqa: E402
 
 OPTION_LABELS = ("A", "B", "C", "D", "E")
-N_BOOT = 10000
-BOOT_SEED = 12345
+DEFAULT_N_BOOT = 10000
+DEFAULT_BOOT_SEED = 12345
+
+NEW_CONDITION_NAMES = [
+    "sequential_final",
+    "stepwise_no_history",
+    "stepwise_answer_history",
+    "stepwise_answer_confidence_history",
+    "sequential_final_length_matched",
+]
+
+METRICS = [
+    ("accuracy", lambda r: r["is_correct"], lambda r: True),
+    ("distractor_adoption", lambda r: r["chose_distractor"], lambda r: True),
+    ("harmful_conformity", lambda r: r["chose_distractor"], lambda r: r["initial_correct"] is True),
+    ("flip_rate", lambda r: r["changed"], lambda r: r["changed"] is not None),
+]
 
 
 def normalize_row(row):
-    """Extract a schema-agnostic record from an ablation OR legacy Exp2/3 row."""
+    """Extract a schema-agnostic record from an ablation or legacy Exp2/3 row."""
     final = row.get("final_prediction", row.get("attack_prediction"))
     initial = row.get("initial_prediction")
     correct = row.get("correct_answer")
@@ -59,130 +69,401 @@ def normalize_row(row):
         "chose_distractor": final == distractor,
         "changed": (final != initial) if initial is not None else None,
         "initial_correct": (initial == correct) if initial is not None else None,
+        "question": row.get("question"),
+        "options": row.get("options"),
+        "agent_opinions": row.get("agent_opinions"),
+        "raw_initial_output": row.get("raw_initial_output"),
+        "step_outputs": row.get("step_outputs", row.get("attack_step_outputs", [])) or [],
+        "final_prompt_token_count": row.get("final_prompt_token_count"),
     }
 
 
 def load_condition(path):
     out = {}
     with open(path, encoding="utf-8") as f:
-        for line in f:
-            line = line.strip()
-            if not line:
+        for line_number, line in enumerate(f, start=1):
+            if not line.strip():
                 continue
-            r = normalize_row(json.loads(line))
-            out[r["id"]] = r
+            row = normalize_row(json.loads(line))
+            item_id = row["id"]
+            if item_id is None:
+                raise ValueError(f"missing item id in {path}:{line_number}")
+            if item_id in out:
+                raise ValueError(f"duplicate item id {item_id!r} in {path}:{line_number}")
+            out[item_id] = row
     return out
 
 
-def rate(records, metric):
-    vals = [metric(r) for r in records if metric(r) is not None]
-    return (sum(vals) / len(vals)) if vals else float("nan")
+def _rate(records, metric):
+    values = [metric(record) for record in records]
+    values = [value for value in values if value is not None]
+    return (sum(values) / len(values)) if values else float("nan")
 
 
-def harmful_conformity(records):
-    """Among items initially correct, fraction that end on the target distractor."""
-    denom = [r for r in records if r["initial_correct"]]
-    if not denom:
-        return float("nan"), 0
-    num = sum(1 for r in denom if r["chose_distractor"])
-    return num / len(denom), len(denom)
+def summarize_condition(name, condition):
+    records = list(condition.values())
+    valid = [record for record in records if record["valid"]]
+    initially_correct = [record for record in valid if record["initial_correct"] is True]
+    summary = {
+        "condition": name,
+        "n": len(records),
+        "valid_n": len(valid),
+        "invalid_n": len(records) - len(valid),
+        "accuracy": _rate(valid, lambda r: r["is_correct"]),
+        "distractor_adoption": _rate(valid, lambda r: r["chose_distractor"]),
+        "flip_rate": _rate(valid, lambda r: r["changed"]),
+        "harmful_conformity": _rate(initially_correct, lambda r: r["chose_distractor"]),
+        "harmful_conformity_n": len(initially_correct),
+    }
+    print(
+        f"  [{name}] N={summary['n']} valid={summary['valid_n']} "
+        f"invalid={summary['invalid_n']}"
+    )
+    print(
+        f"        accuracy={summary['accuracy']:.4f}  "
+        f"distractor_adoption={summary['distractor_adoption']:.4f}  "
+        f"flip_rate={summary['flip_rate']:.4f}  "
+        f"harmful_conformity={summary['harmful_conformity']:.4f} "
+        f"(den={summary['harmful_conformity_n']})"
+    )
+    return summary
 
 
-def summarize(name, cond):
-    recs = list(cond.values())
-    valid = [r for r in recs if r["valid"]]
-    hcr, hcr_n = harmful_conformity(valid)
-    print(f"  [{name}] N={len(recs)} valid={len(valid)} invalid={len(recs) - len(valid)}")
-    print(f"        accuracy={rate(valid, lambda r: r['is_correct']):.4f}  "
-          f"distractor_adoption={rate(valid, lambda r: r['chose_distractor']):.4f}  "
-          f"flip_rate={rate(valid, lambda r: r['changed']):.4f}  "
-          f"harmful_conformity={hcr:.4f} (den={hcr_n})")
+def audit_new_conditions(conditions):
+    """Reject ID or item-level metadata drift across the new ablation family."""
+    available = [name for name in NEW_CONDITION_NAMES if name in conditions]
+    if len(available) < 2:
+        return
+    reference_name = available[0]
+    reference = conditions[reference_name]
+    fields = [
+        "question",
+        "options",
+        "correct",
+        "distractor",
+        "agent_opinions",
+        "initial",
+        "raw_initial_output",
+    ]
+    for name in available[1:]:
+        current = conditions[name]
+        if set(current) != set(reference):
+            raise ValueError(
+                f"ID-set mismatch: {reference_name} has {len(reference)} IDs, "
+                f"{name} has {len(current)}"
+            )
+        mismatches = [
+            item_id
+            for item_id in reference
+            if any(reference[item_id][field] != current[item_id][field] for field in fields)
+        ]
+        if mismatches:
+            raise ValueError(
+                f"metadata mismatch between {reference_name} and {name} on "
+                f"{len(mismatches)} item(s); first={mismatches[0]!r}"
+            )
+    print(
+        f"INTEGRITY AUDIT: PASS ({len(reference)} identical IDs and item metadata "
+        f"across {len(available)} new conditions)"
+    )
 
 
-def paired_bootstrap_ci(ids, c1, c2, metric, n=N_BOOT, seed=BOOT_SEED):
+def _paired_ids(condition1, condition2, eligibility):
+    ids = sorted(set(condition1) & set(condition2))
+    return [
+        item_id
+        for item_id in ids
+        if condition1[item_id]["valid"]
+        and condition2[item_id]["valid"]
+        and eligibility(condition1[item_id])
+        and eligibility(condition2[item_id])
+    ]
+
+
+def paired_bootstrap_ci(ids, condition1, condition2, metric, n, seed):
+    values1 = [1.0 if metric(condition1[item_id]) else 0.0 for item_id in ids]
+    values2 = [1.0 if metric(condition2[item_id]) else 0.0 for item_id in ids]
+    sample_n = len(ids)
+    point = (sum(values1) - sum(values2)) / sample_n
     rng = random.Random(seed)
-    v1 = [1.0 if metric(c1[i]) else 0.0 for i in ids]
-    v2 = [1.0 if metric(c2[i]) else 0.0 for i in ids]
-    N = len(ids)
-    point = (sum(v1) - sum(v2)) / N
-    diffs = []
+    differences = []
     for _ in range(n):
-        s = [rng.randrange(N) for _ in range(N)]  # resample QUESTIONS (both conds together)
-        diffs.append((sum(v1[j] for j in s) - sum(v2[j] for j in s)) / N)
-    diffs.sort()
-    return point, diffs[int(0.025 * n)], diffs[min(n - 1, int(0.975 * n))]
+        sampled = [rng.randrange(sample_n) for _ in range(sample_n)]
+        differences.append(
+            (
+                sum(values1[index] for index in sampled)
+                - sum(values2[index] for index in sampled)
+            )
+            / sample_n
+        )
+    differences.sort()
+    return (
+        point,
+        differences[int(0.025 * n)],
+        differences[min(n - 1, int(0.975 * n))],
+    )
 
 
-def mcnemar(ids, c1, c2, metric):
-    b = sum(1 for i in ids if metric(c1[i]) and not metric(c2[i]))
-    c = sum(1 for i in ids if not metric(c1[i]) and metric(c2[i]))
+def mcnemar(ids, condition1, condition2, metric):
+    b = sum(
+        1
+        for item_id in ids
+        if metric(condition1[item_id]) and not metric(condition2[item_id])
+    )
+    c = sum(
+        1
+        for item_id in ids
+        if not metric(condition1[item_id]) and metric(condition2[item_id])
+    )
     return b, c, exact_mcnemar_pvalue(b, c)
 
 
-def compare(label, name1, cond1, name2, cond2):
-    ids = sorted(set(cond1) & set(cond2))
-    ids = [i for i in ids if cond1[i]["valid"] and cond2[i]["valid"]]
-    print(f"\n{'='*88}\n{label}:  {name1}  vs  {name2}\n{'='*88}")
-    print(f"  common-valid paired N = {len(ids)}")
-    if not ids:
-        print("  (no common-valid pairs)")
+def build_comparison(
+    label,
+    name1,
+    condition1,
+    name2,
+    condition2,
+    n_boot,
+    seed,
+    adjust,
+):
+    rows = []
+    for metric_name, metric, eligibility in METRICS:
+        ids = _paired_ids(condition1, condition2, eligibility)
+        if not ids:
+            continue
+        rate1 = sum(metric(condition1[item_id]) for item_id in ids) / len(ids)
+        rate2 = sum(metric(condition2[item_id]) for item_id in ids) / len(ids)
+        point, low, high = paired_bootstrap_ci(
+            ids, condition1, condition2, metric, n_boot, seed
+        )
+        b, c, p_value = mcnemar(ids, condition1, condition2, metric)
+        rows.append(
+            {
+                "comparison": label,
+                "condition1": name1,
+                "condition2": name2,
+                "metric": metric_name,
+                "paired_n": len(ids),
+                "rate1": rate1,
+                "rate2": rate2,
+                "delta": point,
+                "ci_low": low,
+                "ci_high": high,
+                "mcnemar_b": b,
+                "mcnemar_c": c,
+                "p_raw": p_value,
+                "p_holm": None,
+                "holm_family": "B-F within metric" if adjust else None,
+                "adjust": adjust,
+            }
+        )
+    return rows
+
+
+def holm_adjust(p_values):
+    """Return Holm step-down adjusted p-values in original order."""
+    count = len(p_values)
+    order = sorted(range(count), key=lambda index: p_values[index])
+    adjusted = [None] * count
+    running = 0.0
+    for rank, index in enumerate(order):
+        candidate = min(1.0, (count - rank) * p_values[index])
+        running = max(running, candidate)
+        adjusted[index] = running
+    return adjusted
+
+
+def apply_holm_within_metric(results):
+    for metric_name, _, _ in METRICS:
+        family = [
+            row
+            for row in results
+            if row["adjust"] and row["metric"] == metric_name
+        ]
+        adjusted = holm_adjust([row["p_raw"] for row in family])
+        for row, p_value in zip(family, adjusted):
+            row["p_holm"] = p_value
+
+
+def print_comparison(label, rows):
+    if not rows:
         return
-    for metric_name, metric in [("accuracy", lambda r: r["is_correct"]),
-                                ("distractor_adoption", lambda r: r["chose_distractor"])]:
-        r1 = sum(metric(cond1[i]) for i in ids) / len(ids)
-        r2 = sum(metric(cond2[i]) for i in ids) / len(ids)
-        point, lo, hi = paired_bootstrap_ci(ids, cond1, cond2, metric)
-        b, c, p = mcnemar(ids, cond1, cond2, metric)
-        print(f"  [{metric_name}] {name1}={r1:.4f}  {name2}={r2:.4f}  "
-              f"Δ={(r1 - r2) * 100:+.2f}pp  boot95%=[{lo*100:+.2f},{hi*100:+.2f}]pp  "
-              f"McNemar b={b} c={c} p={p:.4g}")
+    first = rows[0]
+    print(f"\n{'=' * 96}\n{label}:  {first['condition1']}  vs  {first['condition2']}\n{'=' * 96}")
+    for row in rows:
+        holm = f" Holm={row['p_holm']:.4g}" if row["p_holm"] is not None else ""
+        print(
+            f"  [{row['metric']}] paired_N={row['paired_n']}  "
+            f"{row['condition1']}={row['rate1']:.4f}  "
+            f"{row['condition2']}={row['rate2']:.4f}  "
+            f"delta={row['delta'] * 100:+.2f}pp  "
+            f"boot95%=[{row['ci_low'] * 100:+.2f},{row['ci_high'] * 100:+.2f}]pp  "
+            f"McNemar b={row['mcnemar_b']} c={row['mcnemar_c']} "
+            f"p={row['p_raw']:.4g}{holm}"
+        )
+
+
+def print_token_audit(name, condition):
+    counts = [
+        row["final_prompt_token_count"]
+        for row in condition.values()
+        if row["final_prompt_token_count"] is not None
+    ]
+    if not counts:
+        print(f"  [{name}] final prompt token counts: MISSING")
+        return
+    print(
+        f"  [{name}] final prompt tokens: n={len(counts)} "
+        f"min={min(counts)} median={statistics.median(counts):g} max={max(counts)}"
+    )
+
+
+def print_stepwise_trajectory(name, condition):
+    records = list(condition.values())
+    n_steps = max((len(record["step_outputs"]) for record in records), default=0)
+    if n_steps < 2:
+        return
+    print(f"  [{name}]")
+    for step_index in range(n_steps):
+        available = [
+            (record, record["step_outputs"][step_index])
+            for record in records
+            if len(record["step_outputs"]) > step_index
+            and record["step_outputs"][step_index].get("prediction") in OPTION_LABELS
+        ]
+        if not available:
+            continue
+        accuracy = sum(
+            step.get("prediction") == record["correct"] for record, step in available
+        ) / len(available)
+        adoption = sum(
+            step.get("prediction") == record["distractor"] for record, step in available
+        ) / len(available)
+        initially_correct = [
+            (record, step)
+            for record, step in available
+            if record["initial_correct"] is True
+        ]
+        harmful = (
+            sum(
+                step.get("prediction") == record["distractor"]
+                for record, step in initially_correct
+            )
+            / len(initially_correct)
+            if initially_correct
+            else float("nan")
+        )
+        logprob_covered = sum(
+            bool(step.get("option_logprobs"))
+            and any(value is not None for value in step["option_logprobs"].values())
+            for _, step in available
+        )
+        print(
+            f"        step={step_index + 1} valid={len(available)} "
+            f"accuracy={accuracy:.4f} distractor_adoption={adoption:.4f} "
+            f"harmful_conformity={harmful:.4f} logprob_coverage={logprob_covered}/{len(available)}"
+        )
 
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--run-dir", default=None, help="ablation run dir with {condition}.jsonl")
-    ap.add_argument("--exp2", default=None, help="archived Exp2 jsonl (as-published Sequential-Final)")
-    ap.add_argument("--exp3", default=None, help="archived Exp3 jsonl (as-published Stepwise)")
-    args = ap.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run-dir", default=None)
+    parser.add_argument("--exp2", default=None)
+    parser.add_argument("--exp3", default=None)
+    parser.add_argument("--bootstrap-reps", type=int, default=DEFAULT_N_BOOT)
+    parser.add_argument("--seed", type=int, default=DEFAULT_BOOT_SEED)
+    parser.add_argument("--output-json", default=None)
+    args = parser.parse_args()
+    if args.bootstrap_reps < 100:
+        raise SystemExit("--bootstrap-reps must be at least 100")
 
-    conds = {}
+    conditions = {}
     if args.run_dir:
-        for name in ["sequential_final", "stepwise_no_history", "stepwise_answer_history",
-                     "stepwise_answer_confidence_history", "sequential_final_length_matched"]:
-            p = os.path.join(args.run_dir, f"{name}.jsonl")
-            if os.path.exists(p):
-                conds[name] = load_condition(p)
+        for name in NEW_CONDITION_NAMES:
+            path = os.path.join(args.run_dir, f"{name}.jsonl")
+            if os.path.exists(path):
+                conditions[name] = load_condition(path)
     if args.exp2:
-        conds["as_published_sequential_final(exp2)"] = load_condition(args.exp2)
+        conditions["as_published_sequential_final(exp2)"] = load_condition(args.exp2)
     if args.exp3:
-        conds["as_published_stepwise(exp3)"] = load_condition(args.exp3)
+        conditions["as_published_stepwise(exp3)"] = load_condition(args.exp3)
+    if not conditions:
+        raise SystemExit("Nothing to analyze. Provide --run-dir and/or --exp2/--exp3.")
 
-    if not conds:
-        print("Nothing to analyze. Provide --run-dir and/or --exp2/--exp3.")
-        raise SystemExit(2)
-
-    print("PER-CONDITION SUMMARY")
-    for name, cond in conds.items():
-        summarize(name, cond)
+    audit_new_conditions(conditions)
+    print("\nPER-CONDITION SUMMARY")
+    summaries = [summarize_condition(name, condition) for name, condition in conditions.items()]
 
     def have(*names):
-        return all(n in conds for n in names)
+        return all(name in conditions for name in names)
 
+    specifications = []
     if have("stepwise_no_history", "sequential_final"):
-        compare("Comparison A", "stepwise_no_history", conds["stepwise_no_history"],
-                "sequential_final", conds["sequential_final"])
+        specifications.append(("Comparison A (harness)", "stepwise_no_history", "sequential_final", False))
     if have("stepwise_answer_history", "stepwise_no_history"):
-        compare("Comparison B", "stepwise_answer_history", conds["stepwise_answer_history"],
-                "stepwise_no_history", conds["stepwise_no_history"])
+        specifications.append(("Comparison B (answer turns + content)", "stepwise_answer_history", "stepwise_no_history", True))
     if have("stepwise_answer_confidence_history", "stepwise_answer_history"):
-        compare("Comparison C", "stepwise_answer_confidence_history", conds["stepwise_answer_confidence_history"],
-                "stepwise_answer_history", conds["stepwise_answer_history"])
+        specifications.append(("Comparison C (added confidence line)", "stepwise_answer_confidence_history", "stepwise_answer_history", True))
     if have("sequential_final_length_matched", "sequential_final"):
-        compare("Comparison D", "sequential_final_length_matched", conds["sequential_final_length_matched"],
-                "sequential_final", conds["sequential_final"])
+        specifications.append(("Comparison D (turn/context structure)", "sequential_final_length_matched", "sequential_final", True))
+    if have("stepwise_answer_confidence_history", "sequential_final_length_matched"):
+        specifications.append(("Comparison E (history content beyond matched structure)", "stepwise_answer_confidence_history", "sequential_final_length_matched", True))
+    if have("stepwise_answer_history", "sequential_final_length_matched"):
+        specifications.append(("Comparison F (answer-only diagnostic; length unmatched)", "stepwise_answer_history", "sequential_final_length_matched", True))
     if have("as_published_stepwise(exp3)", "as_published_sequential_final(exp2)"):
-        compare("As-published reference", "as_published_stepwise(exp3)", conds["as_published_stepwise(exp3)"],
-                "as_published_sequential_final(exp2)", conds["as_published_sequential_final(exp2)"])
+        specifications.append(("As-published reference", "as_published_stepwise(exp3)", "as_published_sequential_final(exp2)", False))
+
+    results = []
+    rows_by_label = {}
+    for label, name1, name2, adjust in specifications:
+        rows = build_comparison(
+            label,
+            name1,
+            conditions[name1],
+            name2,
+            conditions[name2],
+            args.bootstrap_reps,
+            args.seed,
+            adjust,
+        )
+        rows_by_label[label] = rows
+        results.extend(rows)
+    apply_holm_within_metric(results)
+    for label, _, _, _ in specifications:
+        print_comparison(label, rows_by_label[label])
+
+    if args.run_dir:
+        print("\nTOKEN AUDIT")
+        for name in NEW_CONDITION_NAMES:
+            if name in conditions:
+                print_token_audit(name, conditions[name])
+        print("\nSTEPWISE TRAJECTORIES")
+        for name in [
+            "stepwise_no_history",
+            "stepwise_answer_history",
+            "stepwise_answer_confidence_history",
+        ]:
+            if name in conditions:
+                print_stepwise_trajectory(name, conditions[name])
+
+    if args.output_json:
+        payload = {
+            "bootstrap_reps": args.bootstrap_reps,
+            "seed": args.seed,
+            "holm_family": "comparisons B-F, corrected separately within each metric",
+            "summaries": summaries,
+            "comparisons": [
+                {key: value for key, value in row.items() if key != "adjust"}
+                for row in results
+            ],
+        }
+        output_dir = os.path.dirname(os.path.abspath(args.output_json))
+        os.makedirs(output_dir, exist_ok=True)
+        with open(args.output_json, "w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False, indent=2)
+        print(f"\nWROTE {args.output_json}")
 
 
 if __name__ == "__main__":

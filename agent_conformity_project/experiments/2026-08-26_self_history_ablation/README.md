@@ -55,7 +55,10 @@ inserted *after* each `Agent i` for i < step; the request always ends with
 `stepwise_no_history` still calls the model at steps 1–4 (their outputs are saved
 for analysis) but never feeds them back — so, for a stateless greedy model,
 `No-History-final ≡ Sequential-Final` is a **mathematical identity / harness
-check**, and the real causal test is Answer(+Confidence)-History vs No-History.
+check**, not evidence that the discarded calls themselves have a persistent
+effect. Because Answer-History vs No-History changes both assistant-role turns
+and answer content, the key content test is Answer+Confidence-History vs the
+turn- and length-matched neutral condition.
 
 **Neutral turn (Length-Matched).** Qwen2.5-3B (confirmed):
 `Acknowledged. Message received. Proceeding to the next message.` — an exact
@@ -66,13 +69,17 @@ must be length-checked on their own tokenizers first (`compute_neutral_token_mat
 ## Comparisons (paired, common-valid subset)
 
 * **A** No-History vs Sequential-Final → harness/determinism check (expect ≡).
-* **B** Answer-History vs No-History → effect of accumulated self-answer commitment.
+* **B** Answer-History vs No-History → combined assistant-turn + answer-content effect.
 * **C** Answer+Confidence vs Answer-History → extra effect of self-reported confidence (NOT reasoning).
 * **D** Length-Matched vs Sequential-Final → effect of turn/context structure alone.
+* **E** Answer+Confidence vs Length-Matched → history content beyond matched turn/context structure (**key mechanism test**).
+* **F** Answer-History vs Length-Matched → answer-only diagnostic; interpret cautiously because token length is not matched.
 
 Report Accuracy, Harmful-Conformity Rate, target-distractor adoption, flip rate,
 valid/invalid N, pp differences, exact McNemar, and question-level paired
 bootstrap (10,000 resamples, both conditions of a question resampled together).
+Holm correction is applied separately within each outcome across comparisons
+B--F; A is a deterministic harness check and is excluded from inference.
 Archived Exp2/Exp3 are read directly for the paired comparison; archived Exp3 is
 kept only as the "as-published" reference.
 
@@ -99,13 +106,45 @@ python3 show_condition_diffs.py
 MODEL_NAME=Qwen/Qwen2.5-3B-Instruct \
 API_URL=http://127.0.0.1:8000/v1/chat/completions \
 DATA_PATH=data/dataset.json \
-python3 experiments/2026-08-26_self_history_ablation/run_ablation.py
+python3 experiments/2026-08-26_self_history_ablation/run_ablation.py \
+  --compute-tokens \
+  --tokenizer-path /local/path/to/the/exact/model-tokenizer
 ```
 
 Output → `results/runs/<run_name>/2026-08-26_self_history_ablation/{condition}.jsonl`
 plus `manifest.json` (model, decoding, dataset md5, git commit, conditions,
-neutral turn). The runner **refuses** to write under the legacy tree or to
-overwrite existing files (use `--force` only intentionally).
+neutral turn, tokenizer path/class, and neutral-turn token count). When token
+auditing is requested, tokenizer loading or tokenization failure is fatal rather
+than silently producing null counts. The runner **refuses** to write under the
+legacy tree or to overwrite existing files (use `--force` only intentionally).
+
+Resume an interrupted aligned run with:
+
+```bash
+python3 experiments/2026-08-26_self_history_ablation/run_ablation.py \
+  --run-name <existing-run-name> \
+  --resume \
+  --compute-tokens \
+  --tokenizer-path /same/local/model-tokenizer
+```
+
+Resume fails closed if condition files contain duplicate IDs, have unequal ID
+sets, or disagree with the existing manifest. This prevents mixing partial
+conditions or incompatible decoding/tokenizer settings.
+
+Analyze a completed run and write a machine-readable result summary:
+
+```bash
+python3 experiments/2026-08-26_self_history_ablation/analyze_ablation.py \
+  --run-dir results/runs/<run-name>/2026-08-26_self_history_ablation \
+  --bootstrap-reps 10000 \
+  --seed 12345 \
+  --output-json results/runs/<run-name>/self_history_analysis.json
+```
+
+The analyzer rejects duplicate IDs and cross-condition metadata drift, reports
+comparisons A--F, audits prompt-token coverage, and prints stepwise behavioral
+trajectories plus option-logprob coverage.
 
 ## Reproducibility invariants (asserted by tests)
 

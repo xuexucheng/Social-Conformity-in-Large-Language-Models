@@ -14,13 +14,15 @@ Covers the reviewer-facing invariants:
   Test 5  question / options / correct / distractor / peer sequence & order
           are identical across every condition
 plus: legacy-primitive byte-identity, legacy-logprob-helper identity,
-      decoding-config lock, No-History no-leakage at every step, output-path guard.
+      decoding-config lock, No-History no-leakage at every step, output-path guard,
+      step-logprob retention, token-audit fields, strict resume checkpoints, Holm.
 """
 
 import importlib.util
 import json
 import os
 import sys
+import tempfile
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.abspath(os.path.join(CURRENT_DIR, "..", ".."))
@@ -29,6 +31,7 @@ for p in (CURRENT_DIR, PROJECT_DIR):
         sys.path.insert(0, p)
 
 import conditions as C  # noqa: E402
+import analyze_ablation as A  # noqa: E402
 import run_ablation as R  # noqa: E402
 from src.config import MAX_TOKENS, TEMPERATURE  # noqa: E402
 
@@ -197,6 +200,93 @@ def test_answer_history_leakage_shape_all_steps():
 def test_output_path_guard():
     assert R.OUTPUT_SUBDIR != R.LEGACY_SUBDIR
     assert "2026-04-29" not in R.OUTPUT_SUBDIR
+
+
+def _logprob_stub(_messages):
+    top = [
+        {"token": "A", "logprob": -0.1},
+        {"token": "B", "logprob": -2.0},
+    ]
+    return {
+        "text": "ANSWER: A\nCONFIDENCE: 100",
+        "content_logprobs": [
+            {"token": "A", "logprob": -0.1, "top_logprobs": top}
+        ],
+        "raw": {},
+    }
+
+
+def test_step_records_retain_logprobs():
+    rows = R.run_item(
+        ITEM,
+        _logprob_stub,
+        ["stepwise_no_history"],
+        "Qwen/Qwen2.5-3B-Instruct",
+        "test-run",
+        "20260828_000000",
+        C.DEFAULT_NEUTRAL_TURN,
+    )
+    steps = rows["stepwise_no_history"]["step_outputs"]
+    assert len(steps) == 5
+    assert all(step["option_logprobs"]["A"] == -0.1 for step in steps)
+    assert all(step["selected_logprob"] == -0.1 for step in steps)
+
+
+class _FakeTokenizer:
+    def encode(self, text, add_special_tokens=False):
+        del add_special_tokens
+        return list(range(len((text or "").split())))
+
+    def apply_chat_template(self, messages, tokenize=True, add_generation_prompt=True):
+        assert tokenize and add_generation_prompt
+        token_count = sum(len((message.get("content") or "").split()) + 1 for message in messages)
+        return list(range(token_count))
+
+
+def test_token_audit_is_populated_when_requested():
+    rows = R.run_item(
+        ITEM,
+        _logprob_stub,
+        ["sequential_final_length_matched"],
+        "Qwen/Qwen2.5-3B-Instruct",
+        "test-run",
+        "20260828_000000",
+        C.DEFAULT_NEUTRAL_TURN,
+    )
+    row = rows["sequential_final_length_matched"]
+    R._add_token_audit(row, _FakeTokenizer(), "Qwen/Qwen2.5-3B-Instruct")
+    assert isinstance(row["final_prompt_token_count"], int)
+    step = row["step_outputs"][0]
+    assert len(step["history_inserted_token_counts"]) == 4
+    assert step["history_inserted_total_token_count"] == sum(
+        step["history_inserted_token_counts"]
+    )
+    assert isinstance(step["request_prompt_token_count"], int)
+
+
+def _write_test_jsonl(path, ids):
+    with open(path, "w", encoding="utf-8") as f:
+        for item_id in ids:
+            f.write(json.dumps({"id": item_id}) + "\n")
+
+
+def test_resume_requires_aligned_condition_ids():
+    with tempfile.TemporaryDirectory() as temp_dir:
+        _write_test_jsonl(os.path.join(temp_dir, "a.jsonl"), ["1", "2"])
+        _write_test_jsonl(os.path.join(temp_dir, "b.jsonl"), ["1", "2"])
+        assert R._resume_completed_ids(temp_dir, ["a", "b"]) == {"1", "2"}
+        _write_test_jsonl(os.path.join(temp_dir, "b.jsonl"), ["1"])
+        try:
+            R._resume_completed_ids(temp_dir, ["a", "b"])
+        except SystemExit as exc:
+            assert "unaligned checkpoint" in str(exc)
+        else:
+            raise AssertionError("unaligned resume checkpoint must fail closed")
+
+
+def test_holm_adjustment_step_down_monotonicity():
+    adjusted = A.holm_adjust([0.01, 0.04, 0.03])
+    assert adjusted == [0.03, 0.06, 0.06]
 
 
 # --- manual runner (no pytest needed) -----------------------------------------

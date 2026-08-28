@@ -156,7 +156,7 @@ def main():
         all_ok = all_ok and leak_ok
 
     print("\n" + "=" * 96)
-    print("SMOKE RESULT:", "ALL AUDITS PASSED ✓" if all_ok else "AUDIT FAILURES ✗")
+    print("SMOKE RESULT:", "ALL AUDITS PASSED" if all_ok else "AUDIT FAILURES")
     print("=" * 96)
     sys.exit(0 if all_ok else 1)
 
