@@ -1,0 +1,39 @@
+PER-CONDITION SUMMARY
+  [sequential_final] N=500 valid=500 invalid=0
+        accuracy=0.3300  distractor_adoption=0.6040  flip_rate=0.5560  harmful_conformity=0.5543 (den=368)
+  [stepwise_no_history] N=500 valid=500 invalid=0
+        accuracy=0.3300  distractor_adoption=0.6040  flip_rate=0.5560  harmful_conformity=0.5543 (den=368)
+  [stepwise_answer_history] N=500 valid=500 invalid=0
+        accuracy=0.5640  distractor_adoption=0.2560  flip_rate=0.2380  harmful_conformity=0.2092 (den=368)
+  [stepwise_answer_confidence_history] N=500 valid=500 invalid=0
+        accuracy=0.7040  distractor_adoption=0.1120  flip_rate=0.0840  harmful_conformity=0.0489 (den=368)
+  [sequential_final_length_matched] N=500 valid=500 invalid=0
+        accuracy=0.6800  distractor_adoption=0.1440  flip_rate=0.0900  harmful_conformity=0.0815 (den=368)
+
+========================================================================================
+Comparison A:  stepwise_no_history  vs  sequential_final
+========================================================================================
+  common-valid paired N = 500
+  [accuracy] stepwise_no_history=0.3300  sequential_final=0.3300  Δ=+0.00pp  boot95%=[+0.00,+0.00]pp  McNemar b=0 c=0 p=1
+  [distractor_adoption] stepwise_no_history=0.6040  sequential_final=0.6040  Δ=+0.00pp  boot95%=[+0.00,+0.00]pp  McNemar b=0 c=0 p=1
+
+========================================================================================
+Comparison B:  stepwise_answer_history  vs  stepwise_no_history
+========================================================================================
+  common-valid paired N = 500
+  [accuracy] stepwise_answer_history=0.5640  stepwise_no_history=0.3300  Δ=+23.40pp  boot95%=[+19.00,+27.80]pp  McNemar b=135 c=18 p=2.348e-23
+  [distractor_adoption] stepwise_answer_history=0.2560  stepwise_no_history=0.6040  Δ=-34.80pp  boot95%=[-39.60,-30.20]pp  McNemar b=14 c=188 p=4.577e-40
+
+========================================================================================
+Comparison C:  stepwise_answer_confidence_history  vs  stepwise_answer_history
+========================================================================================
+  common-valid paired N = 500
+  [accuracy] stepwise_answer_confidence_history=0.7040  stepwise_answer_history=0.5640  Δ=+14.00pp  boot95%=[+10.40,+17.60]pp  McNemar b=83 c=13 p=1.202e-13
+  [distractor_adoption] stepwise_answer_confidence_history=0.1120  stepwise_answer_history=0.2560  Δ=-14.40pp  boot95%=[-18.20,-10.80]pp  McNemar b=13 c=85 p=3.985e-14
+
+========================================================================================
+Comparison D:  sequential_final_length_matched  vs  sequential_final
+========================================================================================
+  common-valid paired N = 500
+  [accuracy] sequential_final_length_matched=0.6800  sequential_final=0.3300  Δ=+35.00pp  boot95%=[+30.80,+39.40]pp  McNemar b=180 c=5 p=7.171e-47
+  [distractor_adoption] sequential_final_length_matched=0.1440  sequential_final=0.6040  Δ=-46.00pp  boot95%=[-50.40,-41.60]pp  McNemar b=3 c=233 p=3.968e-65
