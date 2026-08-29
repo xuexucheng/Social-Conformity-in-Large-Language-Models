@@ -46,6 +46,8 @@ EXPLICIT_CANDIDATES = (
     "Message received. It has been noted. Continuing to the following message.",
     "The message has been received. Acknowledged. Proceeding to the next message.",
     "The message has been noted. Received. Moving to the following message.",
+    "Acknowledged. Proceeding directly to the next message now.",
+    "Message received. Proceeding directly to the next message now.",
 )
 
 FORBIDDEN_STANCE_TERMS = (

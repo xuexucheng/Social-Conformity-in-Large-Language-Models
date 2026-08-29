@@ -25,7 +25,7 @@ REPO="${REPO:-/gpfs/work/int/xuchengxue23/social_conformity_revision}"
 PROJECT="$REPO/agent_conformity_project"
 ENV_PATH="${ENV_PATH:-/gpfs/work/int/xuchengxue23/envs/self_history_vllm}"
 DATA_PATH_LOCAL="$PROJECT/data/datasets/commonsenseqa_five_wrong_guidance_refined_500.json"
-EXPECTED_MD5="cc5699972e9da35dd0fd2581b8bd2598"
+EXPECTED_MD5="94a7caf698a32bfbc3aed17443aebd80"
 RUN_NAME="clean_social_label_${RUN_TAG}_${SLURM_JOB_ID}"
 SELECTION_JSON="$PROJECT/results/runs/$RUN_NAME/neutral_label_selection.json"
 
