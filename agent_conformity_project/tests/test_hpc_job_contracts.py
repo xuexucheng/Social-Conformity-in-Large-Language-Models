@@ -15,7 +15,7 @@ def text(name):
 def test_qwen_mmlu_job_is_first500_and_seven_condition():
     script = text("hpc_self_history_qwen3b_mmlu500.slurm")
     assert "mmlu_all_validation.json" in script
-    assert 'EXPECTED_MD5="7be4bb95c4e8e12531d7004fea12f36d"' in script
+    assert 'EXPECTED_MD5="598fec26af1127bfd7bca06c39c1a159"' in script
     assert "--limit 500" in script
     assert "sequential_final_neutral_v2" in script
     assert "sequential_final_short_ack" in script
@@ -24,6 +24,7 @@ def test_qwen_mmlu_job_is_first500_and_seven_condition():
 
 def test_gemma_job_selects_controls_from_observed_history():
     script = text("hpc_self_history_gemma2b_cqa500.slurm")
+    assert 'EXPECTED_MD5="94a7caf698a32bfbc3aed17443aebd80"' in script
     history = script.index("STAGE 1: OBSERVED SELF-HISTORY CONDITIONS")
     selection = script.index("TOKENIZER-SPECIFIC NEUTRAL SELECTION")
     controls = script.index("STAGE 2: MATCHED NEUTRAL CONTROLS")
@@ -48,6 +49,7 @@ def test_slurm_files_do_not_duplicate_neutral_wording():
 
 def test_clean_label_job_requires_archived_reference():
     script = text("hpc_clean_social_label.slurm")
+    assert 'EXPECTED_MD5="94a7caf698a32bfbc3aed17443aebd80"' in script
     assert "REFERENCE_JSONL:?" in script
     assert "select_neutral_label.py" in script
     assert "test_conditions.py" in script
