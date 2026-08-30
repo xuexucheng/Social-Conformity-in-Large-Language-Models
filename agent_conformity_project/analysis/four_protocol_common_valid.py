@@ -247,7 +247,7 @@ def main():
     with (OUT / "four_protocol_common_valid_summary.csv").open(
         "w", encoding="utf-8", newline=""
     ) as f:
-        w = csv.DictWriter(f, fieldnames=fields)
+        w = csv.DictWriter(f, fieldnames=fields, lineterminator="\n")
         w.writeheader()
         w.writerows(result_rows)
 
@@ -296,7 +296,7 @@ def main():
         ]
 
     (OUT / "four_protocol_common_valid_summary.md").write_text(
-        "\n".join(lines) + "\n",
+        "\n".join(lines).rstrip() + "\n",
         encoding="utf-8",
     )
 
