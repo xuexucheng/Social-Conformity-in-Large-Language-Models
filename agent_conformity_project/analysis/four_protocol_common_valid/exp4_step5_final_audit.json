@@ -1,0 +1,50 @@
+[
+  {
+    "cell": "qwen_csqa",
+    "attempted_n": 500,
+    "malformed_n": 0,
+    "malformed": [],
+    "mismatch_n": 0,
+    "mismatches": []
+  },
+  {
+    "cell": "qwen_mmlu",
+    "attempted_n": 500,
+    "malformed_n": 0,
+    "malformed": [],
+    "mismatch_n": 0,
+    "mismatches": []
+  },
+  {
+    "cell": "phi_csqa",
+    "attempted_n": 500,
+    "malformed_n": 0,
+    "malformed": [],
+    "mismatch_n": 0,
+    "mismatches": []
+  },
+  {
+    "cell": "phi_mmlu",
+    "attempted_n": 500,
+    "malformed_n": 0,
+    "malformed": [],
+    "mismatch_n": 0,
+    "mismatches": []
+  },
+  {
+    "cell": "gemma_csqa",
+    "attempted_n": 500,
+    "malformed_n": 0,
+    "malformed": [],
+    "mismatch_n": 0,
+    "mismatches": []
+  },
+  {
+    "cell": "gemma_mmlu",
+    "attempted_n": 500,
+    "malformed_n": 0,
+    "malformed": [],
+    "mismatch_n": 0,
+    "mismatches": []
+  }
+]
