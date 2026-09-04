@@ -1,0 +1,5 @@
+run,condition,common_valid_n,cr_n,hcr_n,accuracy,adopt,cr,hcr
+Qwen7B-CSQA,Source,500,475,408,0.0,1.0,1.0,1.0
+Qwen7B-CSQA,Model,500,475,408,0.0,1.0,1.0,1.0
+Qwen7B-MMLU,Source,500,450,355,0.0,1.0,1.0,1.0
+Qwen7B-MMLU,Model,500,450,355,0.0,1.0,1.0,1.0

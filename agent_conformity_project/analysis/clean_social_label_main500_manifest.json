@@ -1,0 +1,25 @@
+{
+  "comparisons": [
+    ["neutral_source_label", "model_source_label"]
+  ],
+  "cells": [
+    {
+      "dataset": "CommonsenseQA",
+      "model": "Qwen/Qwen2.5-3B-Instruct",
+      "conditions": {
+        "neutral_source_label": "../results/runs/clean_social_label_qwen3b_2605241/2026-08-29_clean_social_label/neutral_source_label.jsonl",
+        "model_source_label": "../results/runs/clean_social_label_qwen3b_2605241/2026-08-29_clean_social_label/model_source_label.jsonl",
+        "unlabelled_numbered": "../results/runs/clean_social_label_qwen3b_2605241/2026-08-29_clean_social_label/unlabelled_numbered.jsonl"
+      }
+    },
+    {
+      "dataset": "CommonsenseQA",
+      "model": "google/gemma-2-2b-it",
+      "conditions": {
+        "neutral_source_label": "../results/runs/clean_social_label_gemma2b_2605240/2026-08-29_clean_social_label/neutral_source_label.jsonl",
+        "model_source_label": "../results/runs/clean_social_label_gemma2b_2605240/2026-08-29_clean_social_label/model_source_label.jsonl",
+        "unlabelled_numbered": "../results/runs/clean_social_label_gemma2b_2605240/2026-08-29_clean_social_label/unlabelled_numbered.jsonl"
+      }
+    }
+  ]
+}

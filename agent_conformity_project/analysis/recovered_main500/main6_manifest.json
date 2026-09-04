@@ -1,0 +1,68 @@
+{
+  "comparisons": [
+    ["exp1", "exp2"],
+    ["exp2", "exp3"]
+  ],
+  "cells": [
+    {
+      "dataset": "CommonsenseQA",
+      "model": "Qwen/Qwen2.5-3B-Instruct",
+      "conditions": {
+        "exp1": "qwen_csqa/exp1_all_at_once_final.jsonl",
+        "exp2": "qwen_csqa/exp2_sequential_context_final_only.jsonl",
+        "exp3": "qwen_csqa/exp3_sequential_answer_each_step.jsonl",
+        "exp4": "qwen_csqa/exp4_all_at_once_self_iter5.jsonl"
+      }
+    },
+    {
+      "dataset": "MMLU",
+      "model": "Qwen/Qwen2.5-3B-Instruct",
+      "conditions": {
+        "exp1": "qwen_mmlu/exp1_all_at_once_final.jsonl",
+        "exp2": "qwen_mmlu/exp2_sequential_context_final_only.jsonl",
+        "exp3": "qwen_mmlu/exp3_sequential_answer_each_step.jsonl",
+        "exp4": "qwen_mmlu/exp4_all_at_once_self_iter5.jsonl"
+      }
+    },
+    {
+      "dataset": "CommonsenseQA",
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "conditions": {
+        "exp1": "phi_csqa/exp1_all_at_once_final.jsonl",
+        "exp2": "phi_csqa/exp2_sequential_context_final_only.jsonl",
+        "exp3": "phi_csqa/exp3_sequential_answer_each_step.jsonl",
+        "exp4": "phi_csqa/exp4_all_at_once_self_iter5.jsonl"
+      }
+    },
+    {
+      "dataset": "MMLU",
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "conditions": {
+        "exp1": "phi_mmlu/exp1_all_at_once_final.jsonl",
+        "exp2": "phi_mmlu/exp2_sequential_context_final_only.jsonl",
+        "exp3": "phi_mmlu/exp3_sequential_answer_each_step.jsonl",
+        "exp4": "phi_mmlu/exp4_all_at_once_self_iter5.jsonl"
+      }
+    },
+    {
+      "dataset": "CommonsenseQA",
+      "model": "google/gemma-2-2b-it",
+      "conditions": {
+        "exp1": "gemma_csqa/exp1_all_at_once_final.jsonl",
+        "exp2": "gemma_csqa/exp2_sequential_context_final_only.jsonl",
+        "exp3": "gemma_csqa/exp3_sequential_answer_each_step.jsonl",
+        "exp4": "gemma_csqa/exp4_all_at_once_self_iter5.jsonl"
+      }
+    },
+    {
+      "dataset": "MMLU",
+      "model": "google/gemma-2-2b-it",
+      "conditions": {
+        "exp1": "gemma_mmlu/exp1_all_at_once_final.jsonl",
+        "exp2": "gemma_mmlu/exp2_sequential_context_final_only.jsonl",
+        "exp3": "gemma_mmlu/exp3_sequential_answer_each_step.jsonl",
+        "exp4": "gemma_mmlu/exp4_all_at_once_self_iter5.jsonl"
+      }
+    }
+  ]
+}

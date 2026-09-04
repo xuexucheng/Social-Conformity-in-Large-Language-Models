@@ -1,0 +1,18 @@
+{
+  "comparisons": [
+    ["exp1", "exp2"],
+    ["exp2", "exp3"]
+  ],
+  "cells": [
+    {
+      "dataset": "MMLU",
+      "model": "Qwen/Qwen2.5-3B-Instruct",
+      "conditions": {
+        "exp1": "qwen_mmlu/exp1_all_at_once_final.jsonl",
+        "exp2": "qwen_mmlu/exp2_sequential_context_final_only.jsonl",
+        "exp3": "qwen_mmlu/exp3_sequential_answer_each_step.jsonl",
+        "exp4": "qwen_mmlu/exp4_all_at_once_self_iter5.jsonl"
+      }
+    }
+  ]
+}
