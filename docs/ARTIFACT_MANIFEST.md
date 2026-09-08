@@ -13,7 +13,7 @@ This manifest separates public Git-tracked files from local-only artifacts.
 | `docs/ARTIFACT_MANIFEST.md` | Public manifest of included and excluded artifact files | yes |
 | `agent_conformity_project/src/` | Core code: prompts, parsing, API wrapper, metrics, and helper logic | yes |
 | `agent_conformity_project/scripts/` | Dataset and experiment runner scripts | yes |
-| `agent_conformity_project/analysis/` | Lightweight integrity and Exp5 analysis scripts | yes |
+| `agent_conformity_project/analysis/` | Paper-facing statistical, robustness, and integrity-check analysis scripts | yes |
 | `agent_conformity_project/analysis/exact_mcnemar.py` | Dependency-free exact McNemar test helper for paired counts | yes |
 | `agent_conformity_project/data/datasets/` | Processed reusable dataset files for CommonsenseQA and MMLU | yes |
 

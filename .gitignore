@@ -46,3 +46,11 @@ checkpoints/
 *_internal.md
 local_notes.md
 personal_notes.md
+
+# Paper-revision rendering / temporary working files
+tmp/
+manuscript_revision/
+env_repair_*/
+
+# Local one-off download helpers
+download_phi_shard1.py

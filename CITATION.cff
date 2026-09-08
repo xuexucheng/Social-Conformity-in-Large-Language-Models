@@ -1,7 +1,16 @@
 cff-version: 1.2.0
-message: "If you use this artifact, please cite the paper."
-title: "Protocol-Dependent Conformity in Large Language Models"
+message: "If you use this artifact, please cite the associated paper."
+title: "Protocol-Dependent Conformity in Open-Weight Large Language Models under Fixed Wrong-Peer Signals"
 authors:
+  - family-names: "Xu"
+    given-names: "Ling"
   - family-names: "Xue"
     given-names: "Xucheng"
+  - family-names: "Zhu"
+    given-names: "Ye"
+  - family-names: "Zhang"
+    given-names: "Junwen"
+  - family-names: "Xu"
+    given-names: "Dechang"
 year: 2026
+repository-code: "https://github.com/xuexucheng/Social-Conformity-in-Large-Language-Models"

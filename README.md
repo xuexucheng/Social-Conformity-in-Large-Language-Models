@@ -1,6 +1,6 @@
-# Protocol-Dependent Conformity in Large Language Models
+# Protocol-Dependent Conformity in Open-Weight Large Language Models under Fixed Wrong-Peer Signals
 
-This repository is the public artifact for the paper **Protocol-Dependent Conformity in Large Language Models** (also referred to as **Social Conformity in LLMs**).
+This repository is the public artifact for the paper **Protocol-Dependent Conformity in Open-Weight Large Language Models under Fixed Wrong-Peer Signals**.
 
 Its purpose is to make the paper's experiment code, dataset construction files, analysis utilities, and reproducibility documentation inspectable. Large raw model outputs, extracted runs, logs, model weights, generated reports, and compressed result packages are intentionally not committed to Git.
 
@@ -10,19 +10,20 @@ The main paper studies whether multiple-choice LLM answers change after exposure
 
 The four main protocols are:
 
-- **Exp1 - All-at-once majority**: five wrong peer signals are shown together, followed by one final answer.
-- **Exp2 - Sequential, final-only**: wrong peer signals are shown one by one, but only the final answer is observed.
-- **Exp3 - Sequential + intermediate commitments**: the model answers after each peer signal, so prior answers can become anchors.
-- **Exp4 - All-at-once + self-iteration**: all wrong peer signals are shown first, then the model self-iterates before the final answer.
+- **Exp1 - Batch-Single**: five fixed wrong-peer signals are shown in one user turn, followed by one post-exposure response.
+- **Exp2 - Sequential-Final**: the same five wrong-peer signals arrive in successive user turns, with one response only after the final peer.
+- **Exp3 - Sequential-Stepwise**: the model responds after each peer signal and prior assistant responses remain in conversational history.
+- **Exp4 - Batch-Self-Iterative**: all five wrong-peer signals arrive first, followed by five self-revision iterations; iteration 5 is the final analyzed response.
 
-The paper also includes:
+The revision additionally includes:
 
-- **Log-probability shift analysis** for correct and target-wrong options.
-- **Robustness checks** using non-overlapping 500-example subsets.
-- **Exact McNemar tests** for paired protocol comparisons.
-- **Exp5 social-label framing** on Gemma-2-2B-it, testing whether explicit peer labels add influence beyond repeated recommendation content.
-- **Self-history mechanism controls** that separate discarded intermediate calls, retained answer history, confidence-bearing history, neutral assistant turns, and short acknowledgements.
-- **A clean social-label add-on** whose primary pair changes only the source-label word and is prompt-token matched on the exact local tokenizer.
+- **Retained-history decomposition** with no-history, answer-history, answer-plus-confidence, token-matched neutral-history, and short-acknowledgement controls.
+- **Source-versus-Model lexical control** for Qwen2.5-3B and Gemma2-2B on both CommonsenseQA and MMLU.
+- **Paired inference** for Exp1-Exp2 and Exp2-Exp3 using bootstrap confidence intervals, exact McNemar tests, and Holm correction.
+- **Repeated aligned 500-item subset analysis** across 30 draws.
+- **Target-distractor plausibility analysis** based on pre-exposure option scores.
+- **Targeted exploratory generalization probes** involving Qwen2.5-3B versus Qwen2.5-7B checkpoints, 1/3/5 wrong-peer settings, and fixed generic-justification augmentation.
+- **Option-level log-probability analysis** for comparable Qwen and Gemma cells; Phi is excluded from the cross-protocol option-level comparison because archived top-20 truncation yields protocol-dependent missingness.
 
 ## Datasets And Models
 
@@ -36,6 +37,7 @@ Models:
 - `Qwen/Qwen2.5-3B-Instruct`
 - `microsoft/Phi-3.5-mini-instruct`
 - `google/gemma-2-2b-it`
+- `Qwen/Qwen2.5-7B-Instruct` (targeted exploratory checkpoint comparison)
 
 Reusable dataset files are under:
 
@@ -104,15 +106,8 @@ The experiment code expects an OpenAI-compatible chat completions endpoint when 
 Compile Python files:
 
 ```powershell
-python -m py_compile agent_conformity_project\analysis\analyze_exp5_label_attention.py
 python -m py_compile agent_conformity_project\analysis\check_jsonl_integrity.py
 python -m py_compile agent_conformity_project\analysis\exact_mcnemar.py
-```
-
-Regenerate the Exp5 summary if the corresponding local result JSONL is available:
-
-```powershell
-python agent_conformity_project\analysis\analyze_exp5_label_attention.py
 ```
 
 Run an exact McNemar test from paired discordant counts:

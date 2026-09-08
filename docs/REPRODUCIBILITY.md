@@ -38,7 +38,7 @@ The paper-facing protocol names are:
 
 - Exp1: all-at-once majority
 - Exp2: sequential, final-only
-- Exp3: sequential + intermediate commitments
+- Exp3: Sequential-Stepwise, with an assistant response after each peer signal and prior assistant responses retained in conversational history
 - Exp4: all-at-once + self-iteration
 
 The local result filenames use matching implementation names:
@@ -59,16 +59,11 @@ agent_conformity_project/results/
 These commands do not run models, start vLLM, or download data:
 
 ```powershell
-python -m py_compile agent_conformity_project\analysis\analyze_exp5_label_attention.py
 python -m py_compile agent_conformity_project\analysis\check_jsonl_integrity.py
 python -m py_compile agent_conformity_project\analysis\exact_mcnemar.py
 ```
 
-If the Exp5 JSONL is present locally, regenerate its summary with:
-
-```powershell
-python agent_conformity_project\analysis\analyze_exp5_label_attention.py
-```
+Paper-facing statistical and robustness analyses can be regenerated after the corresponding archived per-item outputs are restored locally.
 
 Generated Markdown validation reports are not committed to keep the repository lightweight. They can be regenerated locally from the analysis scripts when the corresponding raw result files are available.
 
